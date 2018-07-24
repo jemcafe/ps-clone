@@ -1,5 +1,10 @@
+.touch-overlay,
+.focus-overlay {
+  cursor: none;
+}
+
 .touch-overlay {
-  // z-index: 1;
+  z-index: 1;
   position: absolute;
   // background: rgba(0, 255, 255, 0.4);
   // outline: 1px solid gray;
@@ -13,5 +18,5 @@
   width: 100vw;
   height: 100vh;
   // background: #c0d9ff;
-  opacity: 0.5;
+  // opacity: 0.5;
 }
