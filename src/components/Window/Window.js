@@ -14,7 +14,6 @@ class Window extends Component {
 
   componentDidMount () {
     window.addEventListener("resize", this.updateDimensions);
-
     this.updateDimensions();
     this.initPosition();
   }
