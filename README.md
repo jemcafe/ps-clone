@@ -1,6 +1,6 @@
 ## Sketcher
 
-A simplified version of photoshop built with React, Redux and Sass.
+A photoshop clone for the web (not including every feature) built with React, Redux and Sass.
 
 ### Installed
 

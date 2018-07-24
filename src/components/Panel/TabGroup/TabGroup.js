@@ -31,7 +31,7 @@ class TabGroup extends Component {
       container: isCollapsed ? {
         position: 'absolute',
         minWidth: `${220}px`,
-        transform: `translate(-${222}px, 0)`
+        transform: `translate(-${222}px, 0)`  // plus 2 for the border
       } : {
         height: '100%'
       },

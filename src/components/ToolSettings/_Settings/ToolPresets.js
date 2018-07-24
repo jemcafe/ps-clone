@@ -6,6 +6,14 @@ class ToolPresets extends Component {
     this.state = { isHidden: true }
   }
 
+  toggleDropdown = (e) => {
+    this.setState(prev => ({ isHidden: !prev.isHidden }));
+  }
+
+  hideDropdown = () => {
+    this.setState({isHidden: true})
+  }
+
   render () {
     const { icon = '' } = this.props;
 
@@ -16,7 +24,7 @@ class ToolPresets extends Component {
 
     return (
       <li className="tool-presets">
-        <div className="tool-select" onClick={() => this.setState(prev =>({isHidden: !prev.isHidden}))}>
+        <div className="tool-select" tabindex="0" onClick={ this.toggleDropdown } onBlur={ this.hideDropdown }>
           <div className="icon"><i className={classNames.icon}></i></div>
           <div>
             <div className={classNames.button}>
@@ -25,7 +33,7 @@ class ToolPresets extends Component {
           </div>
         </div>
         { !this.state.isHidden && 
-        <div className="dropdown-container" onMouseLeave={() => this.setState({isHidden: true})}>
+        <div className="dropdown-container">
           PRESETS
         </div> }
       </li>

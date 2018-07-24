@@ -1,8 +1,9 @@
-#tool-settings > .settings > .tool-presets {
+.tool-settings > .settings > .tool-presets {
   .tool-select {
     display: flex;
     justify-content: space-between;
     width: 50px;
+    outline: none;  // tabIndex
 
     > div {   // tool and angle icon
       flex: 1;

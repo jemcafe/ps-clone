@@ -7,13 +7,22 @@ class ToolBarCntr extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      items: this.props.items || []
+      items: this.props.items,
+      isActive: false
     }
   }
 
+  toggleActive = () => {
+    this.setState(prev => ({ isActive: !prev.isActive }));
+  }
+
   render () {
+    console.log('isActive', this.state.isActive);
     return (
-      <ToolBar items={this.state.items} />
+      <ToolBar 
+        items={this.state.items}
+        isActive={this.state.isActive}
+        toggleActive={this.toggleActive} />
     );
   }
 }

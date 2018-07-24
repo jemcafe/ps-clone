@@ -1,8 +1,9 @@
-#tool-settings > .settings > .brush {
+.tool-settings > .settings > .brush {
   .brush-select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    outline: none;  // tabIndex
     
     > div:first-child { // radius number and brush image
       padding: 0 6px;

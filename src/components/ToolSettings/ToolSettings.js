@@ -16,7 +16,7 @@ function ToolSettings (props) {
   const { tools: t } = props;
 
   return (
-    <div id="tool-settings">
+    <div class="tool-settings">
       <ul className="settings">
         { t.move.selected        && <Move tool={t.move} {...props} /> }
         { t.eyedropper.selected  && <Eyedropper tool={t.eyedropper} {...props} /> }

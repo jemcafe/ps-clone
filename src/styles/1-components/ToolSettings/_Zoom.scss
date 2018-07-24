@@ -1,4 +1,4 @@
-#tool-settings > .settings > .zoom {
+.tool-settings > .settings > .zoom {
   > div {  // icons
     @extend %tool-menu-icon;
     &:hover { border: 1px solid lightgrey; }

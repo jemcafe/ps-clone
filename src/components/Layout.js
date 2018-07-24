@@ -21,7 +21,7 @@ function Layout () {
     <Aux>
     <div id="app-layout">
       <ToolBar items={toolbarItems}/>
-      <section>
+      <section id="tool-settings">
         <ToolSettings />
       </section>
       <div id="workspace">

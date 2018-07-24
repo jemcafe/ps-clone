@@ -13,6 +13,7 @@
       align-items: flex-end;
 
       > .item-name {
+        outline: none;
         padding: 6px 10px;
         &:active { background: $themeColor; }
       }

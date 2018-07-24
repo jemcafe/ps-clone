@@ -1,10 +1,13 @@
 import React, { Fragment as Aux } from 'react';
 import PropTypes from 'prop-types';
 
-function Toolbar ({ items = [] }) {
+function Toolbar (props) {
+  const { 
+    items = [], 
+    // toggleActive, 
+    // isActive 
+  } = props;
 
-  
-  
   // Recursion for displaying the options
   function displayOptions (options) {
     if ( Array.isArray(options) ) {
@@ -37,7 +40,7 @@ function Toolbar ({ items = [] }) {
                 { displayOptions(e.options) }
               </ul>
             </div>
-            <div className="item-name">
+            <div className="item-name" tabIndex={i}>
               { e.name }
             </div>
           </li>
