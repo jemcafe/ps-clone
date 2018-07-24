@@ -17,7 +17,7 @@ class ToolBarCntr extends Component {
   }
 
   render () {
-    console.log('isActive', this.state.isActive);
+    // console.log('isActive', this.state.isActive);
     return (
       <ToolBar 
         items={this.state.items}

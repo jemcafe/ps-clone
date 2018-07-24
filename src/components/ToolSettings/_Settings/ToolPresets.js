@@ -24,7 +24,7 @@ class ToolPresets extends Component {
 
     return (
       <li className="tool-presets">
-        <div className="tool-select" tabindex="0" onClick={ this.toggleDropdown } onBlur={ this.hideDropdown }>
+        <div className="tool-select" tabIndex="0" onClick={ this.toggleDropdown } onBlur={ this.hideDropdown }>
           <div className="icon"><i className={classNames.icon}></i></div>
           <div>
             <div className={classNames.button}>
