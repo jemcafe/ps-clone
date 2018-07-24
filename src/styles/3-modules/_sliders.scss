@@ -1,0 +1,35 @@
+#color-slider {
+  width: 36px;
+  // background: rgb(255, 255, 221);
+
+  input[type=range] {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    // width: 220px; /* Full-width */
+    height: 20px; /* Specified height */
+    border: 2px solid $darkgray;
+    border-radius: 20px;
+    background: colorGradient(270deg);
+    transform-origin: top left;
+    transform: rotate(90deg) translate(0, -30px);
+  
+    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 20px; /* Set a specific slider handle width */
+      height: 20px; /* Slider handle height */
+      border-radius: 50%;
+      background-image: radial-gradient(#ffffff 50%, #636363 90%);
+      cursor: pointer; /* Cursor on hover */
+    }
+  
+    &::-moz-range-thumb {
+      width: 20px; /* Set a specific slider handle width */
+      height: 20px; /* Slider handle height */
+      border-radius: 50%;
+      background-image: radial-gradient(#ffffff 50%, #636363 90%);
+      cursor: pointer; /* Cursor on hover */
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.hue-gradient {
+  flex: 1;
+  display: flex;
+  padding: 6px;
+
+  > .color-pair {
+    padding: 4px; 
+    width: 36px;
+    height: 36px;
+    @extend %center-content;
+    // background: pink;
+
+    > .color-block-wrapper {
+      position: absolute;
+      @extend %center-content;
+
+      .color-block {
+        border: 1px solid transparent;
+        padding: 1px;
+        // cursor: pointer;
+        > div {
+          border: 1px solid #000;
+          > div {  // color
+            width: 16px;
+            height: 16px;
+            border: 1px solid #fff;
+          }
+        }
+      }
+
+      &:last-child { transform: translate(-5px, -5px); }
+      &:first-child { transform: translate(5px, 5px); }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+#new-project {
+  position: absolute;
+  // left: 50vw;
+  // bottom: 50vh;
+  z-index: 1;
+  border-radius: 4px;
+  background: $gray;
+  // background: pink;
+  @extend %box-shadow;
+
+  > h5 {
+    color: #000;
+    font-weight: normal;
+    padding: 4px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid rgb(182, 182, 182);
+    border-radius: 4px 4px 0 0;
+    background: lightgray;
+    @include user-select(none);
+  }
+
+  > form {
+    padding: 8px;
+  }
+}

@@ -1,0 +1,99 @@
+$colorBlock1: 24px !default;                   // color block size
+$colorBlock2: 16px !default;                   // collapsed color block size
+$reset-swap-XY: $colorBlock1 * 0.75 !default;  // x and y coordinate value for reset and swap icons when collapsed
+
+@function colorBlockX($value) {
+  @return round($value / 3.4);
+}
+
+@function colorBlockY($value) {
+  @return round($value / 1.08);
+}
+
+#tool-menu {
+  color: #fff;
+  background: $gray;
+
+  .tools, 
+  .tools-collapsed {
+    padding: 4px;
+    box-sizing: border-box;
+
+    .tool {
+      @extend %tool-menu-icon;
+      &:hover { border-color: $lightgray; }
+    }
+
+    > .selected {  // selected tool
+      border-color: $lightgray;
+      background: $darkgray; 
+    }
+  }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    width: 72px;
+  }
+
+  .color, 
+  .color-collapsed {
+    > div:first-child {  // reset and swap container 
+      display: flex;
+      justify-content: space-around;
+
+      .reset, .swap {  // icons
+        @extend %center-content;
+        font-size: 10px; 
+        padding: 2px;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        &:hover { border-color: gray }
+      }
+    }
+
+    .colors {
+      width: 30px;
+      margin: 0 auto;
+      > .color-block {
+        width: $colorBlock2;
+        height: $colorBlock2;
+        margin: 0 auto;
+        border: 1px solid #000;
+        padding: 1px;
+        background: #fff;
+
+        &:last-child { transform: translate(colorBlockX(-$colorBlock2), colorBlockY(-$colorBlock2)); }
+        &:first-child { transform: translate(colorBlockX($colorBlock2), colorBlockY($colorBlock2)); }
+
+        > div {  // color
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .color {
+    @extend %center-content;
+    > div:first-child { 
+      @extend %center-content;
+      position: absolute;
+
+      .reset, .swap { position: absolute; }
+
+      .reset { transform: translate(-$reset-swap-XY, $reset-swap-XY); }
+      .swap { transform: translate($reset-swap-XY, -$reset-swap-XY); }
+    }
+
+    .colors {
+      width: 60px;
+      > .color-block {
+        width: $colorBlock1;
+        height: $colorBlock1;
+        &:last-child { transform: translate(colorBlockX(-$colorBlock1), colorBlockY(-$colorBlock1)); }
+        &:first-child { transform: translate(colorBlockX($colorBlock1), colorBlockY($colorBlock1)); }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+// Font Awesome
+%fas {
+  @include fa-icon;
+  @extend .fas;
+}
+%far {
+  @include fa-icon;
+  @extend .far;
+}
+
+//
+%center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%box-shadow {
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+// tool icon container style
+%tool-menu-icon {
+  @extend %center-content;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: $gray;
+  i { font-size: 16px; }
+}
+
+// Tabs
+%selected-tab {
+  border: 1px solid $darkergray;
+  background: $gray; 
+}
+
+%right-tab {
+  border-top: 1px solid $darkergray;
+  border-right: 1px solid $darkergray;
+  border-bottom: 1px solid $darkergray;
+  background: $darkgray;
+}
+
+%left-tab {
+  border-bottom: 1px solid $darkergray;
+  border-left: 1px solid $darkergray;
+  border-top: 1px solid $darkergray;
+  background: $darkgray;
+}

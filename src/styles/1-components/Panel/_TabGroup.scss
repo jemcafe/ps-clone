@@ -1,0 +1,96 @@
+.tab-group {
+  border-bottom: 2px solid $darkgray;
+  font-size: 12px;
+  color: #fff;
+  background: #ade6d3;
+  // background: $darkgray;
+
+  > .container {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 200px;
+    background: $gray;
+
+    > nav {
+      display: flex;
+      background: $darkgray;
+      // background: #d2afff;
+
+      .selected-tab { @extend %selected-tab; border-bottom: none; }
+      .right-tab { @extend %right-tab; }
+      .left-tab { @extend %left-tab; }
+
+      .tabs {
+        display: flex;
+
+        li {  // tab
+          @include user-select(none);
+          padding: 8px 10px;
+          white-space: nowrap;
+          &:active { background: $themeColor; }
+        }
+      }
+
+      > div {  // space for other nav content
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        @extend %right-tab;
+
+        .menu {
+          @extend %center-content;
+          margin: 0 8px;
+
+          > div:first-child {  // menu icon
+            @extend %center-content;
+          }
+
+          > select {  // overlaps the menu icon
+            position: absolute;
+            background: none;
+            border-color: transparent;
+            width: 20px;
+            text-indent: 10px;
+            text-overflow: '';
+            &:hover { border-color: gray; }
+            &:active { background: $darkgray; }
+          }
+        }
+      }
+    }
+
+    > .content {  // content
+      flex: 1;
+      display: flex;
+      overflow-x: hidden;
+      overflow-y: auto;
+      border-left: 1px solid $darkergray;
+      border-bottom: 1px solid $darkergray;
+      border-right: 1px solid $darkergray;
+      // background: lightblue;
+    }
+  }
+
+  > .icon-tabs {
+    padding: 2px;
+    background: $gray;
+
+    > div {
+      background: $darkgray;
+      height: 4px;
+    }
+    
+    > ul > li {  // icons
+      @extend %tool-menu-icon;
+      margin: 4px 0;
+      &:hover { border-color: $lightgray; }
+    }
+
+    > ul > .selected {  // selected icon
+      border-color: $lightgray;
+      background: $darkgray;
+    }
+  }
+}

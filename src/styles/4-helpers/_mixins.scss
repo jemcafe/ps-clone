@@ -1,0 +1,18 @@
+@mixin user-select ($value) {
+  -webkit-user-select: $value;  /* Chrome all / Safari all */
+  -moz-user-select: $value;     /* Firefox all */
+  -ms-user-select: $value;      /* IE 10+ */
+  user-select: $value;          /* Likely future */   
+}
+
+@mixin select ($value) {
+  -moz-appearance: $value;        /* Firefox */
+  -webkit-appearance: $value;     /* Chrome */
+  &::-ms-expand { 
+    display: $value; 
+  }
+  &:-moz-focusring {  // Removes dotted outline in Firefox broswer
+    color: transparent;
+    text-shadow: 0 0 0 #fff;
+  }
+}

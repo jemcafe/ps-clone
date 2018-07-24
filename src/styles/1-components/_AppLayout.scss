@@ -1,0 +1,31 @@
+#app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  > section {
+    background: #c0fffa;
+  }
+
+  #workspace {
+    display: flex;
+    justify-content: space-between;
+    background: #ebebeb;
+    height: 100%;
+    overflow: hidden;
+
+    > section {
+      display: flex;
+      background: lightblue;
+    }
+
+    #documents {
+      @extend %center-content;
+      width: 100%;
+      min-width: 40px;
+      color: #fff;
+      background: #dfffdf;
+      overflow: hidden;
+    }
+  }
+}

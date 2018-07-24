@@ -1,0 +1,11 @@
+#tool-settings > .settings > .zoom {
+  > div {  // icons
+    @extend %tool-menu-icon;
+    &:hover { border: 1px solid lightgrey; }
+  }
+
+  > .selected { 
+    border-color: $lightgray;
+    background: $darkgray; 
+  }
+}

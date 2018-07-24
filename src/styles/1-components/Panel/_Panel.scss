@@ -1,0 +1,32 @@
+.panel {  // panel group
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  > div:first-child {  // icon container
+    display: flex;
+    padding: 2px;
+    box-sizing: border-box;
+    background: $darkgray;
+
+    div {  // arrow icon
+      @extend %center-content;
+      margin: 0 2px 0 0;
+      &:active { color: gray; }
+    }
+  }
+
+  > .right { justify-content: flex-end; }
+  > .left { justify-content: flex-start; }
+
+  > .container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    height: 100%;
+    border-left: 2px solid $darkgray;
+    border-right: 2px solid $darkgray;
+    background: $gray;
+    // background: #ffe3af;
+  }
+}

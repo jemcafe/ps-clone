@@ -1,0 +1,23 @@
+#tool-settings > .settings > .brush {
+  .brush-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    > div:first-child { // radius number and brush image
+      padding: 0 6px;
+      box-sizing: border-box;
+      @include user-select(none);
+
+      .img {  // brush image
+        width: 15px;
+        height: 15px;
+        background: #969696;
+      }
+    }
+  }
+
+  > .dropdown-container {  // dropdown content container
+    transform: translate(0, 30px);
+  }
+}

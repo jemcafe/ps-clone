@@ -1,0 +1,73 @@
+#tool-settings {
+  display: flex;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 2px;
+  box-sizing: border-box;
+  color: #fff;
+  background: $gray;
+  overflow-x: hidden;
+
+  > ul {  // settings
+    display: flex;
+    font-size: 12px;
+    background: $gray;
+
+    > li {  // each setting
+      @extend %center-content;
+      padding: 0 10px;
+      border-right: 1px solid $darkgray;
+
+      .dropdown-container {  // dropdown content container
+        position: absolute;
+        padding: 6px;
+        box-sizing: border-box;
+        background: $gray;
+        font-size: 12px;
+        @extend %box-shadow;
+
+        > .range-container { // When the content is a range input
+          @extend %center-content;
+        }
+      }
+    }
+  }
+
+  .dropdown-btn,
+  .dropdown-btn-pressed {
+    width: 8px;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background: $gray;
+    color: #fff;
+  }
+  .dropdown-btn-pressed {
+    border-color: $lightgray;
+    background: $darkgray;
+  }
+
+  .text-input {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 8px;
+
+    > input {
+      width: 70px;
+      padding-right: 25px;
+    }
+
+    .dropdown-btn,
+    .dropdown-btn-pressed {
+      position: absolute;
+      transform: translate(55px, 0);
+      width: 14px;
+    }
+  }
+
+  .workspace-presets {
+    @extend %center-content;
+    padding: 0 6px;
+    box-sizing: border-box;
+  }
+}

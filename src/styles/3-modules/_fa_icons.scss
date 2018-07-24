@@ -1,0 +1,154 @@
+// Tools
+
+.icon-move {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-arrows-alt); }
+}
+.icon-eyedropper {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-eye-dropper); }
+}
+.icon-paint-brush {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-paint-brush); }
+}
+.icon-eraser {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-eraser); }
+}
+.icon-paint-bucket {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-fill-drip); }
+}
+.icon-pen {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-pen-nib); }
+}
+.icon-shape-circle {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-circle); }
+}
+.icon-magnify {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-search); } 
+}
+.icon-magnify-minus {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-search-minus); } 
+}
+.icon-magnify-plus {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-search-plus); } 
+}
+.icon-hand {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-hand-paper); } 
+}
+.icon-ellipsis {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-ellipsis-h); } 
+}
+
+.icon-swap {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-sync-alt); } 
+}
+.icon-undo {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-undo-alt); }
+}
+
+// Panel icons
+
+.icon-color {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-palette); } 
+}
+.icon-adjust {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-adjust); } 
+}
+.icon-swatches {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-swatchbook); } 
+}
+.icon-layers {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-clone); } 
+}
+.icon-history {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-history); } 
+}
+.icon-character {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-font); } 
+}
+.icon-paragraph {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-paragraph); } 
+}
+
+// other icons
+
+.icon-times {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-times); }
+  font-size: 12px;
+}
+
+.icon-bars {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-bars); }
+}
+
+.icon-angle-right {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-angle-right); }
+  font-size: 12px;
+}
+
+.icon-angle-down {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-angle-down); }
+  font-size: 12px;
+}
+
+.icon-angle-double-right {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-angle-double-right); }
+    font-size: 12px;
+}
+
+.icon-angle-double-left {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-angle-double-left); }
+    font-size: 12px;
+}

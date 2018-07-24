@@ -1,0 +1,17 @@
+.touch-overlay {
+  // z-index: 1;
+  position: absolute;
+  // background: rgba(0, 255, 255, 0.4);
+  // outline: 1px solid gray;
+}
+
+.focus-overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  // background: #c0d9ff;
+  opacity: 0.5;
+}

@@ -1,0 +1,29 @@
+#tool-settings > .settings > .shape-style {
+  white-space: nowrap;
+
+  .dropdown-container {
+    transform: translate(-55px, 5px);
+  }
+  
+  .color {
+    width: 30px;
+    height: 50%;
+    border: 1px solid $lightgray;
+    background: black;
+  }
+
+  // .stroke-width, .stroke-options {
+
+  // }
+
+  // .stroke-width { }
+
+  .stroke-options {
+    margin: 0 0 0 8px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: $darkgray;
+    padding: 4px 6px;
+    box-sizing: border-box;
+  }
+}

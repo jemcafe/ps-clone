@@ -1,0 +1,19 @@
+#tool-settings > .settings > .tool-presets {
+  .tool-select {
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+
+    > div {   // tool and angle icon
+      flex: 1;
+      &:first-child {  // tool icon
+        flex: 2;
+        font-size: 16px;
+      } 
+    }
+  }
+
+  > .dropdown-container {  // dropdown content container
+    transform: translate(0, 30px);
+  }
+}

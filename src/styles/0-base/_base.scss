@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+ 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+
+input {
+  outline: none;
+
+  &[type=text] {
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    padding: 4px 5px;
+    box-sizing: border-box;
+    background: transparent;
+    color: #fff;
+    text-shadow: 0 0 0 #fff;
+    -webkit-text-fill-color: transparent;
+    &:focus { border-color: $themeColor; }
+  }
+
+  // &[type=text]::-webkit-input-placeholder {  // Placeholder text of a form element
+  //   color: #fff;
+  //   text-shadow: none;
+  //   -webkit-text-fill-color: initial;
+  // }
+
+  &[type=range] {
+    padding: 0;
+    margin: 0;
+  }
+  &[type=range]:focus::-webkit-slider-thumb { outline: none; }
+  &[type=range]:focus::-moz-range-thumb { outline: none; }
+}
+
+select {
+  outline: none;
+  color: #fff;
+  padding: 2px 4px;
+  border: 1px solid $lightgray;
+  border-radius: 4px;
+  background: $darkgray;
+  // text-indent: 1px;
+  // text-overflow: '';
+  @include select(none);
+}

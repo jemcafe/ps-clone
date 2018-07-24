@@ -1,0 +1,22 @@
+.window {
+  position: absolute;
+  z-index: 1;
+  border-radius: 4px;
+  background: $gray;
+  @extend %box-shadow;
+
+  > h5 {
+    color: #000;
+    font-weight: normal;
+    padding: 4px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #a8a8a8;
+    border-radius: 4px 4px 0 0;
+    background: lightgray;
+    @include user-select(none);
+  }
+
+  > .container {
+    padding: 8px;
+  }
+}
