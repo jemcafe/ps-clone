@@ -14,7 +14,7 @@ function Toolbar (props) {
 
       return options.map((e, i) => (
         <li key={i} className="option">
-          <div className="option-name" onClick={() => !e.options ? console.log('OPTION CLICKED') : null}>{e.name}</div>
+          <div className="option-name" onClick={() => !e.options ? console.log(`${e.name} CLICKED`) : null}>{e.name}</div>
           { e.options && <Aux>
             <div className="arrow"><i className="icon-angle-right"></i></div>
             <div className="option-content">

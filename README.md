@@ -1,6 +1,6 @@
 ## Sketcher
 
-A photoshop clone (not including every feature) built with React, Redux and Sass.
+A graphics editor heavily based on photoshop (not including every feature) built with React, Redux and Sass. Not all options in the app are meant to function.
 
 ### Installed
 
