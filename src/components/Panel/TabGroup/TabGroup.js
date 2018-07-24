@@ -3,21 +3,16 @@ import PropTypes from 'prop-types';
 
 class TabGroup extends Component {
   componentDidMount () {
-    const { tab_group: t } = this.refs;
-    const { index, isCollapsed, updateOffset } = this.props;
-    let offset = {};
+    const { refs } = this;
+    const { tabGroup, updateOffset } = this.props;
+    window.addEventListener("resize", () => updateOffset({refs, tabGroup}));
+    updateOffset({refs, tabGroup})
+  }
 
-    if (index === 0) {
-      if (t && isCollapsed) {
-        console.log('height', t.offsetTop);
-        offset = { width: t.offsetLeft-222, height: t.offsetTop };
-        updateOffset(offset);
-      } else {
-        offset = { width: 0, height: 0 };
-        updateOffset(offset);
-      }
-      console.log('Tab Group offset: ', offset);
-    }
+  componentWillUnmount () {
+    const { refs } = this;
+    const { tabGroup, updateOffset } = this.props;
+    window.addEventListener("resize", () => updateOffset({refs, tabGroup}));
   }
 
   render () {

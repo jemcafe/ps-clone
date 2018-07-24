@@ -54,6 +54,22 @@ class PanelCntr extends Component {
     }));
   }
 
+  updateOffset = ({refs, tabGroup}) => {
+    const { tab_group: t } = refs;
+    const { isCollapsed } = this.state;
+    const { updateOffset } = this.props;
+
+    if ( tabGroup.id === 3 ) {
+      if (t && isCollapsed) {
+        // console.log('focusLayer offset', { width: t.offsetLeft-222, height: t.offsetTop });
+        updateOffset({ width: t.offsetLeft-222, height: t.offsetTop });
+      } else {
+        // console.log('focusLayer offset', { width: 0, height: 0 });
+        updateOffset({ width: 0, height: 0 });
+      }
+    }
+  }
+
   render () {
     return (
       <Panel
@@ -64,7 +80,7 @@ class PanelCntr extends Component {
         togglePanels={this.togglePanels}
         togglePanel={this.togglePanel}
         changeTab={this.changeTab}
-        updateOffset={this.props.updateOffset}/>
+        updateOffset={this.updateOffset}/>
     );
   }
 }

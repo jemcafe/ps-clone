@@ -31,7 +31,7 @@ export default {
   ],
   '2': [
     {
-      id: 1,
+      id: 3,
       tabs: [
         { name: 'Color', content: <Color />, menu: ['Hue Box'] },
         { name: 'Swatches', content: <Swatches />, menu: ['New Swatch...'] }
@@ -41,7 +41,7 @@ export default {
       isRemoved: false
     },
     {
-      id: 2,
+      id: 4,
       tabs: [
         { name: 'Layers', content: <Layers />, menu: ['New Layer...', 'Duplicate Layer', 'Delete Layer'] }
       ],

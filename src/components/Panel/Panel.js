@@ -20,7 +20,7 @@ function Panel (props) {
   const tabGroups = tg.length > 0 
     ? tg.map((tabGroup, i) => (
       <TabGroup 
-        key={tabGroup.id} 
+        key={tabGroup.id}
         index={i}
         tabGroup={tabGroup}
         isCollapsed={isCollapsed}

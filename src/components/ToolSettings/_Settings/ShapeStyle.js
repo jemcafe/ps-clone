@@ -38,19 +38,17 @@ class ShapeStyle extends Component {
     const { tool, updateStrokeWidth } = this.props;
     this.setState(prev =>{
       let input = prev.input;
-      let isValid = /^([0-9]){1,}([px]){0,2}$/;           // Valid characters
-      isValid = isValid.test(input);
-      isValid = isValid && (parseInt(input, 10) <= 500); // Less than or equal to 2000px
+      let isValid = /^([0-9]){1,}([px]){0,2}$/;           // Test for valid characters
+      isValid = isValid.test(input);                      // Input tested
+      isValid = isValid && (parseInt(input, 10) <= 500);  // The value must be less than or equal to 500
       const p = isValid && input.indexOf('p');            // First 'p' char
       const x = isValid && input.indexOf('x');            // First 'x' char
       isValid = isValid && (p !== 0 && ( x > p ));        // 'p' is not the first char or 'x' follows after 'p'
 
       if (isValid) {
-
         // Every character before the first 'px' are kept.
         input = input.substring(0, p !== -1 ? p+2 : input.length);
         input = `${parseInt(input, 10)}px`;
-
       } else {
         input = tool.strokeWidth;
       }

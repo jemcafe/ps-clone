@@ -33,7 +33,7 @@ export const updateBrushRadius = (value) => ({
       if (state[i].selected && state[i].radius) {
         property = i;
         state[i].radius = value;
-        console.log(property, state[i].radius);
+        // console.log(property, state[i].radius);
       }
     }
 
@@ -50,7 +50,7 @@ export const updateBrush = (value) => ({
       if (state[i].selected && state[i].brush) {
         property = i;
         state[i].brush = value;
-        console.log(property, state[i].brush);
+        // console.log(property, state[i].brush);
       }
     }
 
@@ -67,7 +67,7 @@ export const updateOpacity = (value) => ({
       if (state[i].selected && state[i].opacity) {
         property = i;
         state[i].opacity = value;
-        console.log(property, state[i].opacity);
+        // console.log(property, state[i].opacity);
       }
     }
 
@@ -87,7 +87,7 @@ export const updateStrokeWidth = (value) => ({
         newObj = state[i];
         state[i] = null;
         newObj.strokeWidth = value;
-        console.log( i, newObj.strokeWidth );
+        // console.log( i, newObj.strokeWidth );
       }
     }
     

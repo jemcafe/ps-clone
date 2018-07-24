@@ -11,8 +11,8 @@ import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
 import Panel from '../containers/PanelCntr';
 
-import NewProject from '../containers/NewProjectCntr';
-import HueGradient from '../containers/HueGradientCntr';
+// import NewProject from '../containers/NewProjectCntr';
+// import HueGradient from '../containers/HueGradientCntr';
 
 import FocusLayer from './FocusLayer/FocusLayer';
 

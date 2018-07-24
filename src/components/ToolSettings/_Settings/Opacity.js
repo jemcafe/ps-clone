@@ -68,9 +68,7 @@ class Opacity extends Component {
     const style = {
       container: isHidden ? { display: 'none' } : { display: 'block' } 
     }
-
-    console.log('isHidden', isHidden);
-
+    
     return (
       <li className="opacity">
         Opacity:
