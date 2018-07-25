@@ -42,10 +42,11 @@
     display: flex;
     justify-content: center;
     border-top: 1px solid $darkgray;
-    > div {  // icons
+    > button {  // icons
       @extend %tool-menu-icon;
       width: 24px;
       height: 24px;
+      border-radius: 0px;
       i { font-size: 12px; }
       &:hover { border-color: $lightgray; }
     }
