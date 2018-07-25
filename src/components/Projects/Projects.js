@@ -17,9 +17,11 @@ function Projects (props) {
     )
   };
 
-  const tabList = projects.map((e, i) => (
-    <li key={e.id} className={ classNames.tab(i) } onClick={() => changeTab(i)}>
-      <div onClick={() => removeProject(i)}><i className="icon-times"></i></div>{ e.name }
+  const tabList = projects.map((project, i) => (
+    <li key={project.id} className={ classNames.tab(i) } onClick={() => changeTab(i)}>
+      <div onClick={(e) => {e.stopPropagation(); removeProject(i);}}>
+        <i className="icon-times"></i>
+      </div>{ project.name }
     </li>
   ));
 

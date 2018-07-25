@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Window from '../Window';
+import Window from '../Window/Window';
 
 function NewProject (props) {
   const { 

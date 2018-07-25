@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewProject from '../components/Window/NewProject/NewProject';
+import NewProject from '../components/Windows/NewProject/NewProject';
 
 import { connect } from 'react-redux';
 import { createProject } from '../redux/reducer/projects/actions';
