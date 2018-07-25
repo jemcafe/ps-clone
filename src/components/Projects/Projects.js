@@ -4,6 +4,7 @@ import React from 'react';
 function Projects (props) {
   const {
     projects,
+    removeProject,
     tab,
     changeTab
   } = props;
@@ -18,11 +19,12 @@ function Projects (props) {
 
   const tabList = projects.map((e, i) => (
     <li key={e.id} className={ classNames.tab(i) } onClick={() => changeTab(i)}>
-      <div><i className="icon-times"></i></div>{ e.name }
+      <div onClick={() => removeProject(i)}><i className="icon-times"></i></div>{ e.name }
     </li>
   ));
 
-  const content = projects.length ? projects[tab].project : 'NO CONTENT';
+  // const content = projects.length ? projects[tab].project : 'NO CONTENT';
+  const content = 'NO CONTENT';
 
   return (
     <div className="projects">
@@ -41,7 +43,8 @@ function Projects (props) {
 }
 
 // Projects.propTypes = {
-//   projects: PropTypes.array.isRequired
+//   projects: PropTypes.array.isRequired,
+//   removeProject: PropTypes.func.isRequired,
 //   tab: PropTypes.number.isRequired
 //   changeTab: PropTypes.func.isRequired
 // }

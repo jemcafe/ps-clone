@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import NewProject from '../components/Window/NewProject/NewProject';
 
+import { connect } from 'react-redux';
+import { createProject } from '../redux/reducer/projects/actions';
+
 class NewProjectCntr extends Component {
   constructor (props) {
     super(props);
-    this.state = { 
+    this.state = {
       name: 'Untitled-1',
       width: { size: '1000', units: 'Pixels' },
       height: { size: '1000', units: 'Pixels' },
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
-      background: 'white',
-      isHidden: true
+      background: 'white'
     }
   }
   
@@ -29,15 +31,23 @@ class NewProjectCntr extends Component {
 
   createProject = (e) => {
     e.preventDefault();
+    const { name, width, height, resolution, colorMode, background } = this.state;
+    this.props.createProject({
+      name,
+      width,
+      height,
+      resolution,
+      colorMode,
+      background
+    });
   }
 
-  closeWindow = () => {
-    this.setState({ isHidden: true });
+  closeWindow = (e) => {
+    e.preventDefault();
+    console.log('CLOSE WINDOW');
   }
 
   render () {
-    console.log('state', this.state);
-    
     return (
       <NewProject 
         state={this.state}
@@ -48,4 +58,12 @@ class NewProjectCntr extends Component {
   }
 }
 
-export default NewProjectCntr;
+const mapStateToProps = (state) => ({
+  projects: state.projects
+});
+
+const mapDispatchToProps = {
+  createProject
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewProjectCntr);

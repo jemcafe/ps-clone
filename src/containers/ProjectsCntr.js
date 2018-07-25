@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Projects from '../components/Projects/Projects';
 
+import { connect } from 'react-redux';
+import { removeProject } from '../redux/reducer/projects/actions';
+
 class ProjectsCntr extends Component {
   constructor (props) {
     super(props);
     this.state = { 
-      projects: this.props.projects || [],
       tab: 0 
     }
   }
@@ -17,11 +19,20 @@ class ProjectsCntr extends Component {
   render () {
     return (
       <Projects 
-        projects={this.state.projects}
+        projects={this.props.projects.projects}
+        removeProject={this.props.removeProject}
         tab={this.state.tab} 
         changeTab={this.changeTab} />
     );
   }
 }
 
-export default ProjectsCntr;
+const mapStateToProps = (state) => ({
+  projects: state.projects
+});
+
+const mapDispatchToProps = { 
+  removeProject
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsCntr);

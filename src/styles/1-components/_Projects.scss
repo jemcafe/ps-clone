@@ -13,7 +13,7 @@
 
     > .tabs {  
       display: flex;
-      overflow-x: hidden;
+      overflow-x: auto;
       background: pink;
 
       > li {  // tab

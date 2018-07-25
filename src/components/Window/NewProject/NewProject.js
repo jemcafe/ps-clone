@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Window from '../Window';
 
 function NewProject (props) {
