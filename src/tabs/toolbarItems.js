@@ -1,7 +1,7 @@
 export default [
   { name: 'File', 
     options: [
-      { name: 'New Project' },
+      { name: 'New Project', window: 'newProject' },
       { name: 'Open' },
       { name: 'Save' },
       { name: 'Close' },

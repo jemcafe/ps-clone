@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { openWindow } from '../redux/reducer/windows/actions';
+
 import ToolBar from '../components/ToolBar/ToolBar';
 
 class ToolBarCntr extends Component {
@@ -18,12 +21,13 @@ class ToolBarCntr extends Component {
 
   render () {
     // console.log('isActive', this.state.isActive);
-    
+
     return (
       <ToolBar 
         items={this.state.items}
         isActive={this.state.isActive}
-        toggleActive={this.toggleActive} />
+        toggleActive={this.toggleActive}
+        openWindow={this.props.openWindow} />
     );
   }
 }
@@ -32,4 +36,12 @@ ToolBarCntr.propTypes =  {
   items: PropTypes.array
 }
 
-export default ToolBarCntr;
+const mapStateToProps = (state) => ({
+  windows: state.windows
+})
+
+const mapDispatchToProps = {
+  openWindow
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToolBarCntr);

@@ -1,6 +1,6 @@
 ## PS Clone
 
-A graphics editor heavily based on photoshop (not including every feature) built with React, Redux and Sass. Not all options in the app are meant to function.
+A photoshop clone project (not including every feature) built with React, Redux and Sass. Not all options in the app are meant to function, some are placeholders.
 
 ### Installed
 

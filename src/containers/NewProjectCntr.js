@@ -3,6 +3,7 @@ import NewProject from '../components/Windows/NewProject/NewProject';
 
 import { connect } from 'react-redux';
 import { createProject } from '../redux/reducer/projects/actions';
+import { closeWindow } from '../redux/reducer/windows/actions';
 
 class NewProjectCntr extends Component {
   constructor (props) {
@@ -17,9 +18,9 @@ class NewProjectCntr extends Component {
     }
   }
   
-  handleChange = ({p1, p2}, value) => {
-    // p is short for property
-    if ( p1 && p2 ) {
+  handleChange = (e, p1, p2) => { // p is short for property
+    const value = e.target.value;
+    if ( p2 ) {
       this.setState(prev => {
         prev[p1][p2] = value;
         return { [p1]: prev[p1] };
@@ -31,20 +32,15 @@ class NewProjectCntr extends Component {
 
   createProject = (e) => {
     e.preventDefault();
+    const { createProject } = this.props;
     const { name, width, height, resolution, colorMode, background } = this.state;
-    this.props.createProject({
-      name,
-      width,
-      height,
-      resolution,
-      colorMode,
-      background
-    });
+    createProject({ name, width, height, resolution, colorMode, background });
+    this.props.closeWindow('newProject');
   }
 
   closeWindow = (e) => {
     e.preventDefault();
-    console.log('CLOSE WINDOW');
+    this.props.closeWindow('newProject');
   }
 
   render () {
@@ -59,11 +55,13 @@ class NewProjectCntr extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  projects: state.projects
+  projects: state.projects,
+  windows: state.windows
 });
 
 const mapDispatchToProps = {
-  createProject
+  createProject,
+  closeWindow
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewProjectCntr);

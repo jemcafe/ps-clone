@@ -17,14 +17,14 @@ function NewProject (props) {
         <div className="fields-wrapper">
           <div className="field">
             <label>Name:</label>
-            <input autoFocus type="text" value={state.name} onChange={(e) => handleChange({p1:'name'}, e.target.value)}/>
+            <input autoFocus type="text" value={state.name} onChange={(e) => handleChange(e,'name')}/>
           </div>
           <div className="field-group">
             <div className="field">
               <label>Width:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.width.size} onChange={(e) => handleChange({p1:'width',p2:'size'}, e.target.value)}/>
-                <select value={state.width.units} onChange={(e) => handleChange({p1:'width',p2:'units'}, e.target.value)}>
+                <input type="text" value={state.width.size} onChange={(e) => handleChange(e,'width','size')}/>
+                <select value={state.width.units} onChange={(e) => handleChange(e,'width','units')}>
                   <option>Pixels</option>
                   <option>Inches</option>
                 </select>
@@ -34,8 +34,8 @@ function NewProject (props) {
             <div className="field">
               <label>Height:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.height.size} onChange={(e) => handleChange({p1:'height',p2:'size'}, e.target.value)}/>
-                <select value={state.height.units} onChange={(e) => handleChange({p1:'height',p2:'units'}, e.target.value)}>
+                <input type="text" value={state.height.size} onChange={(e) => handleChange(e,'height','size')}/>
+                <select value={state.height.units} onChange={(e) => handleChange(e,'height','units')}>
                   <option>Pixels</option>
                   <option>Inches</option>
                 </select>
@@ -45,8 +45,8 @@ function NewProject (props) {
             <div className="field">
               <label>Resolution:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.resolution.size} onChange={(e) => handleChange({p1:'resolution',p2:'size'}, e.target.value)}/>
-                <select defaultValue={state.resolution.units} onChange={(e) => handleChange({p1:'resolution',p2:'units'}, e.target.value)}>
+                <input type="text" value={state.resolution.size} onChange={(e) => handleChange(e,'resolution','size')}/>
+                <select defaultValue={state.resolution.units} onChange={(e) => handleChange(e,'resolution','units')}>
                   <option>Pixels/Inch</option>
                 </select>
               </div>
@@ -55,10 +55,10 @@ function NewProject (props) {
             <div className="field">
               <label>Color Mode:</label>
               <div className="input-wrapper">
-                <select value={state.colorMode.mode} onChange={(e) => handleChange({p1:'colorMode',p2:'mode'}, e.target.value)}>
+                <select value={state.colorMode.mode} onChange={(e) => handleChange(e,'colorMode','mode')}>
                   <option>RGB</option>
                 </select>
-                <select value={state.colorMode.bit} onChange={(e) => handleChange({p1:'colorMode',p2:'bit'}, e.target.value)}>
+                <select value={state.colorMode.bit} onChange={(e) => handleChange(e,'colorMode','bit')}>
                   <option>8 bit</option>
                 </select>
               </div>
@@ -67,7 +67,7 @@ function NewProject (props) {
             <div className="field">
               <label>Background:</label>
               <div className="input-wrapper">
-                <select value={state.background} onChange={(e) => handleChange({prop1:'background'}, e.target.value)}>
+                <select value={state.background} onChange={(e) => handleChange(e,'background')}>
                   <option>White</option>
                 </select>
               </div>
