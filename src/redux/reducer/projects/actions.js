@@ -14,6 +14,7 @@ export const createProject = (project) => ({
 
     // New properties
     project.id = projects.length + 1;
+    project.layer = 0;
     project.layers = [{ id: 1, name: 'Layer 1', locked: false }];
 
     // New array
@@ -56,10 +57,18 @@ export const changeTab = (tab) => ({
 export const addLayer = () => ({
   type: ADD_LAYER,
   payload: (state) => {
+    const { tab } = state;
     const projects = state.projects;
+    const id = projects[tab].layers.length + 1;
 
-    console.log('Add Layer');
-    // console.log('projects', projects);
+    projects[tab].layers.push({
+      id: id, 
+      name: `Layer ${id}`, 
+      locked: false
+    })
+
+    // console.log('Add Layer');
+    console.log('project layers', projects[tab].layers);
     return {...state, projects };
   }
 });

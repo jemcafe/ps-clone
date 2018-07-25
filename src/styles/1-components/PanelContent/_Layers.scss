@@ -49,6 +49,7 @@
       border-radius: 0px;
       i { font-size: 12px; }
       &:hover { border-color: $lightgray; }
+      &:active { background: $darkgray; }
     }
   }
 }

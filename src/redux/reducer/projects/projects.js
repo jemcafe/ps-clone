@@ -17,6 +17,7 @@ const initialState = {
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
       background: 'white',
+      layer: 0,
       layers: [
         { id: 1, name: 'Layer 1', locked: false },
         { id: 2, name: 'Layer 2', locked: false },
