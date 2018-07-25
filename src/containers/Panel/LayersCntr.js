@@ -8,14 +8,7 @@ function LayersCntr (props) {
   const { projects, tab } = props.projects;
 
   return (
-    <Layers 
-      project={projects[tab]}
-      addLayer={props.addLayer}
-      deleteLayer={props.deleteLayer}
-      selectLayer={props.selectLayer}
-      lockLayer={props.lockLayer}
-      unlockLayer={props.unlockLayer}
-      showLayer={props.showLayer} />
+    <Layers project={projects[tab]} {...props} />
   );
 }
 

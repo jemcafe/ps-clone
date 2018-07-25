@@ -5,7 +5,7 @@ function Layers (props) {
   const { 
     project:{ layer, layers = [] }, 
     addLayer,
-    // deleteLayer,
+    deleteLayer,
     selectLayer,
     lockLayer,
     unlockLayer,
@@ -20,12 +20,15 @@ function Layers (props) {
   return (
     <div className="layers">
       <header className="header">
-        Lock:&nbsp;<button onClick={() => lockLayer()}><i className="icon-lock"></i></button>
+        Lock:&nbsp;
+        <button title="Lock Layer" onClick={() => lockLayer()}>
+          <i className="icon-lock"></i>
+        </button>
       </header>
       <ul>
         { layers.map((e,i) => (
           <li key={e.id} className="layer">
-            <div className="eye-wrapper" onClick={() => showLayer(i)}>
+            <div className="eye-wrapper" title="Visibilty" onClick={() => showLayer(i)}>
               <div className="eye" style={style.eye(e.visible)}>
                 <i className="icon-eye"></i>
               </div>
@@ -46,6 +49,9 @@ function Layers (props) {
       <footer className="footer">
         <button title="New Layer" onClick={() => addLayer()}>
           <i className="icon-new-layer"></i>
+        </button>
+        <button title="Delete Layer" onClick={() => deleteLayer()}>
+          <i className="icon-trash"></i>
         </button>
       </footer>
     </div>

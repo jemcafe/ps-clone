@@ -103,12 +103,14 @@
   @include fa-var-icon($fa-var-eye);
   font-size: 12px;
 }
-
 .icon-new-layer {
   @include fa-var-icon($fa-var-file);
   font-size: 12px;
 }
-
+.icon-trash {
+  @include fa-var-icon($fa-var-trash);
+  font-size: 12px;
+}
 .icon-lock {
   @include fa-var-icon($fa-var-lock);
   font-size: 12px;
