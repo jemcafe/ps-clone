@@ -3,26 +3,42 @@ import PropTypes from 'prop-types';
 
 function Layers (props) {
   const { 
-    layers, 
+    project:{ layer, layers = [] }, 
     addLayer,
     // deleteLayer,
-    selectLayer
+    selectLayer,
+    lockLayer,
+    unlockLayer,
+    showLayer
   } = props;
+
+  const style = {
+    nameWrapper: (index) => layer === index ? { background:'gray' } : null,
+    eye: (visible) => !visible ? { visibility:'hidden' } : null
+  }
 
   return (
     <div className="layers">
       <header className="header">
-        Lock:&nbsp;<button><i className="icon-lock"></i></button>
+        Lock:&nbsp;<button onClick={() => lockLayer()}><i className="icon-lock"></i></button>
       </header>
       <ul>
         { layers.map((e,i) => (
           <li key={e.id} className="layer">
-            <div className="eye">
-              <div><i className="icon-eye"></i></div>
+            <div className="eye-wrapper" onClick={() => showLayer(i)}>
+              <div className="eye" style={style.eye(e.visible)}>
+                <i className="icon-eye"></i>
+              </div>
             </div>
-            <div className="canvas"></div>
-            <div className="name" onClick={() => selectLayer(i)}>
-              { e.name }
+            <div className="name-wrapper" style={style.nameWrapper(i)} onClick={() => selectLayer(i)}>
+              <div className="canvas"></div>
+              <div className="name">
+                { e.name }
+              </div>
+              { e.locked && 
+              <div className="lock" onClick={() => unlockLayer(i)}>
+                <i className="icon-lock"></i>
+              </div> }
             </div>
           </li>
         )) }
@@ -37,7 +53,7 @@ function Layers (props) {
 }
 
 Layers.propTypes = {
-  layers: PropTypes.array.isRequired
+  project: PropTypes.object.isRequired
 }
 
 export default Layers;

@@ -4,7 +4,10 @@ export const CREATE_PROJECT = 'CREATE_PROJECT',
              SELECT_TAB = 'SELECT_TAB',
              ADD_LAYER = 'ADD_LAYER',
              DELETE_LAYER = 'DELETE_LAYER',
-             SELECT_LAYER = 'SELECT_LAYER';
+             SELECT_LAYER = 'SELECT_LAYER',
+             LOCK_LAYER = 'LOCK_LAYER',
+             UNLOCK_LAYER = 'UNLOCK_LAYER',
+             SHOW_LAYER = 'SHOW_LAYER';
 
 // Action Creators
 export const createProject = (project) => ({
@@ -94,6 +97,45 @@ export const selectLayer = (index) => ({
     projects[tab].layer = index;
 
     console.log('Select Layer', projects[tab].layer);
-    return {...state, projects }
+    return {...state, projects };
+  }
+})
+
+export const lockLayer = () => ({
+  type: LOCK_LAYER,
+  payload: (state) => {
+    const { tab } = state;
+    const projects = state.projects;
+    const layer = projects[tab].layer;
+    const locked = projects[tab].layers[layer].locked;
+    projects[tab].layers[layer].locked = !locked;
+
+    console.log(`Lock layer ${layer}`, projects[tab].layers[layer].locked);
+    return {...state, projects };
+  }
+})
+
+export const unlockLayer = (index) => ({
+  type: UNLOCK_LAYER,
+  payload: (state) => {
+    const { tab } = state;
+    const projects = state.projects;
+    projects[tab].layers[index].locked = false;
+
+    console.log(`Unlock layer ${index}`, projects[tab].layers[index].locked);
+    return {...state, projects };
+  }
+})
+
+export const showLayer = (index) => ({
+  type: SHOW_LAYER,
+  payload: (state) => {
+    const { tab } = state;
+    const projects = state.projects;
+    const visible = projects[tab].layers[index].visible;
+    projects[tab].layers[index].visible = !visible;
+
+    console.log(`Show layer ${index}`, projects[tab].layers[index].visible);
+    return {...state, projects };
   }
 })

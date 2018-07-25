@@ -1,13 +1,3 @@
-// Font Awesome
-%fas {
-  @include fa-icon;
-  @extend .fas;
-}
-%far {
-  @include fa-icon;
-  @extend .far;
-}
-
 //
 %center-content {
   display: flex;

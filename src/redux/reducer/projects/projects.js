@@ -4,7 +4,10 @@ import {
   SELECT_TAB,
   ADD_LAYER,
   DELETE_LAYER,
-  SELECT_LAYER
+  SELECT_LAYER,
+  LOCK_LAYER,
+  UNLOCK_LAYER,
+  SHOW_LAYER
 } from './actions';
 
 const initialState = {
@@ -44,6 +47,12 @@ export default (state = initialState, action) => {
     case DELETE_LAYER:
       return payload(state);
     case SELECT_LAYER:
+      return payload(state);
+    case LOCK_LAYER:
+      return payload(state);
+    case UNLOCK_LAYER:
+      return payload(state);
+    case SHOW_LAYER:
       return payload(state);
     default:
       return state;

@@ -1,150 +1,119 @@
 // Tools
 
 .icon-move {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-arrows-alt); }
+  @include fa-var-icon($fa-var-arrows-alt);
 }
 .icon-eyedropper {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-eye-dropper); }
+  @include fa-var-icon($fa-var-eye-dropper);
 }
 .icon-paint-brush {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-paint-brush); }
+  @include fa-var-icon($fa-var-paint-brush);
 }
 .icon-eraser {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-eraser); }
+  @include fa-var-icon($fa-var-eraser);
 }
 .icon-paint-bucket {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-fill-drip); }
+  @include fa-var-icon($fa-var-fill-drip);
 }
 .icon-pen {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-pen-nib); }
+  @include fa-var-icon($fa-var-pen-nib);
 }
 .icon-shape-circle {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-circle); }
+  @include fa-var-icon($fa-var-circle)
 }
 .icon-magnify {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-search); } 
+  @include fa-var-icon($fa-var-search);
 }
 .icon-magnify-minus {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-search-minus); } 
+  @include fa-var-icon($fa-var-search-minus);
 }
 .icon-magnify-plus {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-search-plus); } 
+  @include fa-var-icon($fa-var-search-plus);
 }
 .icon-hand {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-hand-paper); } 
+  @include fa-var-icon($fa-var-hand-paper);
 }
 .icon-ellipsis {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-ellipsis-h); } 
+  @include fa-var-icon($fa-var-ellipsis-h);
 }
 
 .icon-swap {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-sync-alt); } 
+  @include fa-var-icon($fa-var-sync-alt);
 }
 .icon-undo {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-undo-alt); }
+  @include fa-var-icon($fa-var-undo-alt);
 }
 
 // Panel icons
 
 .icon-color {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-palette); } 
+  @include fa-var-icon($fa-var-palette);
 }
 .icon-adjust {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-adjust); } 
+  @include fa-var-icon($fa-var-adjust);
 }
 .icon-swatches {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-swatchbook); } 
+  @include fa-var-icon($fa-var-swatchbook);
 }
 .icon-layers {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-clone); } 
+  @include fa-var-icon($fa-var-clone);
 }
 .icon-history {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-history); } 
+  @include fa-var-icon($fa-var-history);
 }
 .icon-character {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-font); } 
+  @include fa-var-icon($fa-var-font);
 }
 .icon-paragraph {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-paragraph); } 
+  @include fa-var-icon($fa-var-paragraph);
 }
 
 // other icons
 
 .icon-times {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-times); }
+  @include fa-var-icon($fa-var-times);
   font-size: 12px;
 }
 
 .icon-bars {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-bars); }
+  @include fa-var-icon($fa-var-bars);
 }
 
 .icon-angle-right {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-angle-right); }
+  @include fa-var-icon($fa-var-angle-right);
   font-size: 12px;
 }
 
 .icon-angle-down {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-angle-down); }
+  @include fa-var-icon($fa-var-angle-down);
   font-size: 12px;
 }
 
 .icon-angle-double-right {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-angle-double-right); }
+  @include fa-var-icon($fa-var-angle-double-right);
   font-size: 12px;
 }
 
 .icon-angle-double-left {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-angle-double-left); }
+  @include fa-var-icon($fa-var-angle-double-left);
   font-size: 12px;
 }
 
 .icon-eye {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-eye); }
+  @include fa-var-icon($fa-var-eye);
   font-size: 12px;
 }
 
 .icon-new-layer {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-file); }
+  @include fa-var-icon($fa-var-file);
   font-size: 12px;
 }
 
 .icon-lock {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-lock); }
+  @include fa-var-icon($fa-var-lock);
   font-size: 12px;
 }
 .icon-lock-open {
-  @extend %fas;
-  &:before { content: fa-content($fa-var-lock-open); }
+  @include fa-var-icon($fa-var-lock-open);
   font-size: 12px;
 }

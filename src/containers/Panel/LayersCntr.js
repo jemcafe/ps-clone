@@ -2,18 +2,20 @@ import React from 'react';
 import Layers from '../../components/Panel/Layers/Layers';
 
 import { connect } from 'react-redux';
-import { addLayer, deleteLayer, selectLayer } from '../../redux/reducer/projects/actions';
+import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer } from '../../redux/reducer/projects/actions';
 
 function LayersCntr (props) {
   const { projects, tab } = props.projects;
-  const layers = projects.length ? projects[tab].layers : [];
 
   return (
     <Layers 
-      layers={layers}
+      project={projects[tab]}
       addLayer={props.addLayer}
       deleteLayer={props.deleteLayer}
-      selectLayer={props.selectLayer} />
+      selectLayer={props.selectLayer}
+      lockLayer={props.lockLayer}
+      unlockLayer={props.unlockLayer}
+      showLayer={props.showLayer} />
   );
 }
 
@@ -24,7 +26,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addLayer,
   deleteLayer,
-  selectLayer
+  selectLayer,
+  lockLayer,
+  unlockLayer,
+  showLayer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LayersCntr);

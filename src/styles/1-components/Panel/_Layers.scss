@@ -23,25 +23,38 @@
       border-bottom: 1px solid $darkgray;
       background: $gray;
       // background: pink;
-      .eye, .canvas, .name {
-        cursor: pointer;
-      }
-      .eye {
-        padding: 6px;
+      cursor: pointer;
+
+      > .eye-wrapper {
+        padding: 8px;
         border-right: 1px solid $darkgray;
-        > div { color: $lightgray; }  // icon
+        > .eye {  // icon
+          visibility: visible;
+          color: $lightgray; 
+        }
       }
-      .canvas {
-        min-width: 32px;
-        border: 1px dashed #fff;
-        // background: rgb(241, 255, 214);
-      }
-      .name {
+
+      > .name-wrapper {
         flex: 1;
         display: flex;
-        align-items: center;
-        padding: 0 0 0 8px;
-        @include user-select(none);
+
+        .canvas {
+          min-width: 32px;
+          border: 1px dashed #fff;
+          // background: rgb(241, 255, 214);
+        }
+        .name {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          padding: 0 0 0 8px;
+          @include user-select(none);
+        }
+        .lock {  // icon
+          align-self: center;
+          margin: 0 8px 0 0;
+          color: $lightgray; 
+        }
       }
     }
   }
@@ -50,7 +63,7 @@
     display: flex;
     justify-content: center;
     border-top: 1px solid $darkgray;
-    > button {  // icons
+    > button {  // icon
       @include tab-group-content-icon(#ffffff);
     }
   }
