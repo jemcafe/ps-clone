@@ -19,7 +19,12 @@ export const createProject = (project) => ({
     // New properties
     project.id = projects.length + 1;
     project.layer = 0;
-    project.layers = [{ id: 1, name: 'Layer 1', locked: false }];
+    project.layers = [{ 
+      id: 1, 
+      name: 'Layer 1', 
+      locked: false, 
+      visible: true 
+    }];
 
     // New array
     projects = [...projects, project];
@@ -73,8 +78,7 @@ export const addLayer = () => ({
       locked: false
     })
 
-    // console.log('Add Layer');
-    console.log('Add Layer', projects[tab].layers);
+    // console.log('Add Layer', projects[tab].layers);
     return {...state, projects };
   }
 });
@@ -86,8 +90,7 @@ export const deleteLayer = (index) => ({
     const projects = state.projects;
     const layer = projects[tab].layer;
 
-    console.log(`Delete Layer ${layer}`);
-    // console.log(`Delete Layer ${layer}`, projects[tab].layers);
+    console.log(`Delete Layer ${layer}`, projects[tab].layers);
     return {...state, projects };
   }
 });
@@ -99,7 +102,7 @@ export const selectLayer = (index) => ({
     const projects = state.projects;
     projects[tab].layer = index;
 
-    console.log('Select Layer', projects[tab].layer);
+    // console.log('Select Layer', projects[tab].layer);
     return {...state, projects };
   }
 })
@@ -113,7 +116,7 @@ export const lockLayer = () => ({
     const locked = projects[tab].layers[layer].locked;
     projects[tab].layers[layer].locked = !locked;
 
-    console.log(`Lock layer ${layer}`, projects[tab].layers[layer].locked);
+    // console.log(`Lock layer ${layer}`, projects[tab].layers[layer].locked);
     return {...state, projects };
   }
 })
@@ -125,7 +128,7 @@ export const unlockLayer = (index) => ({
     const projects = state.projects;
     projects[tab].layers[index].locked = false;
 
-    console.log(`Unlock layer ${index}`, projects[tab].layers[index].locked);
+    // console.log(`Unlock layer ${index}`, projects[tab].layers[index].locked);
     return {...state, projects };
   }
 })
@@ -138,7 +141,7 @@ export const showLayer = (index) => ({
     const visible = projects[tab].layers[index].visible;
     projects[tab].layers[index].visible = !visible;
 
-    console.log(`Show layer ${index}`, projects[tab].layers[index].visible);
+    // console.log(`Show layer ${index}`, projects[tab].layers[index].visible);
     return {...state, projects };
   }
 })
