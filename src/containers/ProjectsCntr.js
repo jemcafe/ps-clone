@@ -10,12 +10,17 @@ class ProjectsCntr extends Component {
     this.state = { }
   }
 
+  removeProject = (e, i) => {
+    e.stopPropagation();
+    this.props.removeProject(i);
+  }
+
   render () {
     return (
       <Projects 
         projects={this.props.projects.projects}
         tab={this.props.projects.tab}
-        removeProject={this.props.removeProject}
+        removeProject={this.removeProject}
         changeTab={this.props.changeTab} />
     );
   }

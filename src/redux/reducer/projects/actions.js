@@ -11,7 +11,7 @@ export const createProject = (project) => ({
     project.id = projects.length + 1; // Is given and id
     projects = [...projects, project];
 
-    console.log('Projects', projects);
+    // console.log('Projects', projects);
     return {...state, projects };
   }
 });
@@ -35,7 +35,7 @@ export const removeProject = (tab) => ({
     // The project ids are updated
     projects = projects.map((e, i) => { e.id = i + 1; return e; });
 
-    console.log('Projects', projects, 'tab', t);
+    // console.log('Projects', projects, 'tab', t);
     return {...state, projects, tab: t };
   }
 });
@@ -43,7 +43,7 @@ export const removeProject = (tab) => ({
 export const changeTab = (tab) => ({
   type: CHANGE_TAB,
   payload: (state) => {
-    console.log('tab', tab);
+    // console.log('tab', tab);
     return {...state, tab };
   }
 });

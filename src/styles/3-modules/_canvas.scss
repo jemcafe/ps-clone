@@ -6,8 +6,7 @@
 .touch-overlay {
   z-index: 1;
   position: absolute;
-  background: rgba(0, 255, 255, 0.4);
-  // outline: 1px solid gray;
+  background: rgba(0, 255, 255, 0.3);
 }
 
 .focus-overlay {
@@ -17,5 +16,5 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(193, 218, 254, 0.4);
+  background: rgba(193, 218, 254, 0.3);
 }

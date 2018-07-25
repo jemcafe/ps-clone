@@ -1,11 +1,11 @@
 import React from 'react';
 
-import History from '../containers/TabContent/HistoryCntr';
-import Character from '../containers/TabContent/CharacterCntr';
-import Paragraph from '../containers/TabContent/ParagraphCntr';
-import Color from '../containers/TabContent/ColorCntr';
-import Swatches from '../containers/TabContent/SwatchesCntr';
-import Layers from '../containers/TabContent/LayersCntr';
+import History from '../containers/Panel/HistoryCntr';
+import Character from '../containers/Panel/CharacterCntr';
+import Paragraph from '../containers/Panel/ParagraphCntr';
+import Color from '../containers/Panel/ColorCntr';
+import Swatches from '../containers/Panel/SwatchesCntr';
+import Layers from '../containers/Panel/LayersCntr';
 
 export default {
   '1': [

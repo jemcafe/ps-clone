@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import NewProject from '../components/Windows/NewProject/NewProject';
+import NewProject from '../../components/Windows/NewProject/NewProject';
 
 import { connect } from 'react-redux';
-import { createProject } from '../redux/reducer/projects/actions';
-import { closeWindow } from '../redux/reducer/windows/actions';
+import { createProject } from '../../redux/reducer/projects/actions';
+import { closeWindow } from '../../redux/reducer/windows/actions';
 
 class NewProjectCntr extends Component {
   constructor (props) {

@@ -9,17 +9,13 @@ function Toolbar (props) {
     openWindow
   } = props;
 
-  function a (option) {
-    return option.window ? openWindow(option.window) : !option.options ? console.log(`${option.name} CLICKED`) : null;
-  }
-
   // Recursion for displaying the options
   function displayOptions (options) {
     if ( Array.isArray(options) ) {
 
       return options.map((e, i) => (
         <li key={i} className="option">
-          <div className="option-name" onClick={() => a(e)}>{e.name}</div>
+          <div className="option-name" onClick={() => action(e)}>{e.name}</div>
           { e.options && <Aux>
             <div className="arrow"><i className="icon-angle-right"></i></div>
             <div className="option-content">
@@ -33,6 +29,10 @@ function Toolbar (props) {
     } else {
       return console.log('Toolbar: options not an array');
     }
+  }
+
+  function action (option) {
+    return option.window ? openWindow(option.window) : !option.options ? console.log(`${option.name} CLICKED`) : null;
   }
 
   return (

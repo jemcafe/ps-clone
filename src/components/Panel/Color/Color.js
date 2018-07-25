@@ -3,7 +3,7 @@ import HueGradient from '../../../containers/HueGradientCntr';
 
 function Color () {
   return (
-    <HueGradient />
+    <HueGradient colorPair={true} slider={true} />
   );
 }
 

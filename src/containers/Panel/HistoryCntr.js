@@ -1,5 +1,5 @@
 import React from 'react';
-import History from '../../components/Panel/TabContent/History';
+import History from '../../components/Panel/History/History';
 
 function HistoryCntr (props) {
   return (

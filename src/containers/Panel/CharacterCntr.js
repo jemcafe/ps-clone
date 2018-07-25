@@ -1,5 +1,5 @@
 import React from 'react';
-import Character from '../../components/Panel/TabContent/Character';
+import Character from '../../components/Panel/Character/Character';
 
 function CharacterCntr (props) {
   return (

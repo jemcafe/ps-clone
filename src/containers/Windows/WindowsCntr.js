@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import Windows from '../components/Windows/Windows';
+import Windows from '../../components/Windows/Windows';
 
 class WindowsCntr extends Component {
   constructor (props) {

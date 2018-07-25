@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function Projects (props) {
   const {
@@ -19,7 +19,7 @@ function Projects (props) {
 
   const tabList = projects.map((project, i) => (
     <li key={project.id} className={ classNames.tab(i) } onClick={() => changeTab(i)}>
-      <div onClick={(e) => {e.stopPropagation(); removeProject(i);}}>
+      <div onClick={(e) => removeProject(e, i)}>
         <i className="icon-times"></i>
       </div>{ project.name }
     </li>
@@ -44,11 +44,11 @@ function Projects (props) {
   );
 }
 
-// Projects.propTypes = {
-//   projects: PropTypes.array.isRequired,
-//   removeProject: PropTypes.func.isRequired,
-//   tab: PropTypes.number.isRequired
-//   changeTab: PropTypes.func.isRequired
-// }
+Projects.propTypes = {
+  projects: PropTypes.array.isRequired,
+  removeProject: PropTypes.func.isRequired,
+  tab: PropTypes.number.isRequired,
+  changeTab: PropTypes.func.isRequired
+}
 
 export default Projects;

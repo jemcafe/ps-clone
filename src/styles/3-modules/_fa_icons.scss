@@ -143,12 +143,19 @@
   @extend %fas;
   &:before { 
     content: fa-content($fa-var-angle-double-right); }
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .icon-angle-double-left {
   @extend %fas;
   &:before { 
     content: fa-content($fa-var-angle-double-left); }
-    font-size: 12px;
+  font-size: 12px;
+}
+
+.icon-eye {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-eye); }
+  font-size: 12px;
 }

@@ -212,8 +212,8 @@ class HueGradientCntr extends Component {
         focus={this.props.focusLayer.focus}
         initCanvas={ this.initCanvas }
         engage={ this.engage }
-        disengage={ this.disengage }
-        getColor={ this.getColor }
+        // disengage={ this.disengage }
+        // getColor={ this.getColor }
         changeHue={ this.changeHue }
         updateMousePosition={ this.updateMousePosition }
         detectCanvas={ this.detectCanvas }

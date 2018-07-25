@@ -18,7 +18,9 @@ class HueGradient extends Component {
 
   render () {
     const { 
-      state:{ mouse, inCanvas }, 
+      state:{ mouse, inCanvas },
+      colorPair = true, 
+      slider = true,
       focus,
       engage, 
       // disengage, 
@@ -37,10 +39,11 @@ class HueGradient extends Component {
 
     return (
       <div className="hue-gradient">
+        { colorPair &&
         <div className="color-pair">
           <div className="color-block-wrapper"><div className="color-block" style={style.color_2} onClick={() => selectColor(2)}><div><div style={{ background: color_2.hex }}></div></div></div></div>
           <div className="color-block-wrapper"><div className="color-block" style={style.color_1} onClick={() => selectColor(1)}><div><div style={{ background: color_1.hex }}></div></div></div></div>
-        </div>
+        </div> }
         
         <div ref="wrapper" className="gradient-wrapper" style={{flex:'1',display:'flex'}}>
           <canvas ref="canvas" className="color-canvas" style={{position: 'absolute'}}/>
@@ -54,7 +57,8 @@ class HueGradient extends Component {
             onMouseLeave={() => detectCanvas(false)}/>
         </div>
 
-        <Slider min={0} max={255 * 6} onChange={(value) => changeHue({canvas:this.refs.canvas, value})} />
+        { slider &&
+        <Slider min={0} max={255 * 6} onChange={(value) => changeHue({canvas:this.refs.canvas, value})} /> }
       </div>
     );
   }
@@ -64,8 +68,8 @@ HueGradient.propTypes = {
   state: PropTypes.object.isRequired,
   initCanvas: PropTypes.func.isRequired,
   engage: PropTypes.func.isRequired,
-  disengage: PropTypes.func.isRequired,
-  getColor: PropTypes.func.isRequired,
+  // disengage: PropTypes.func.isRequired,
+  // getColor: PropTypes.func.isRequired,
   changeHue: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired,
 }

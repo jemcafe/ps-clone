@@ -1,3 +1,44 @@
-// .layers {
-  
-// }
+.panels .tab-group .layers {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    border-bottom: 1px solid $darkgray;
+  }
+
+  > ul {   // layers
+    flex: 1;
+    overflow-y: auto;
+
+    > .layer {
+      display: flex;
+      border-bottom: 1px solid $darkgray;
+      background: $gray;
+      // background: pink;
+      .eye,.canvas,.name {
+        cursor: pointer;
+      }
+      .eye {
+        padding: 6px;
+        border-right: 1px solid $darkgray;
+        > div { color: $lightgray; }  // icon
+      }
+      .canvas {
+        min-width: 32px;
+        border: 1px dashed #fff;
+        // background: rgb(241, 255, 214);
+      }
+      .name {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 8px;
+      }
+    }
+  }
+
+  > footer {
+    border-top: 1px solid $darkgray;
+  }
+}

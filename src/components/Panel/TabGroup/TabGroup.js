@@ -26,7 +26,8 @@ class TabGroup extends Component {
 
     const styles = {
       panel: !isCollapsed ? {
-        flex: 1,
+        // flex: 1,
+        height: '50%',
       } : null,
       container: isCollapsed ? {
         position: 'absolute',

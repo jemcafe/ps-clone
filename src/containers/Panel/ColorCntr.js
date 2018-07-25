@@ -1,5 +1,5 @@
 import React from 'react';
-import Color from '../../components/Panel/TabContent/Color';
+import Color from '../../components/Panel/Color/Color';
 
 function ColorCntr (props) {
   return (

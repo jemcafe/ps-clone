@@ -11,7 +11,7 @@ import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
 import Panel from '../containers/PanelCntr';
 
-import Windows from '../containers/WindowsCntr';
+import Windows from '../containers/Windows/WindowsCntr';
 // import NewProject from '../containers/NewProjectCntr';
 // import HueGradient from '../containers/HueGradientCntr';
 

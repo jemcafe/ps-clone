@@ -1,13 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-import NewProject from '../../containers/NewProjectCntr';
+import NewProject from '../../containers/Windows/NewProjectCntr';
 
-function Windows (props) {
-  const {
-    windows: w
-  } = props;
-
+function Windows ({windows: w}) {
   return (
     <div className="windows">
       { w.newProject && <NewProject /> }
@@ -15,8 +11,8 @@ function Windows (props) {
   );
 }
 
-// Windows.propTypes = {
-//   windows: PropTypes.object.isRequired
-// }
+Windows.propTypes = {
+  windows: PropTypes.object.isRequired
+}
 
 export default Windows;
