@@ -7,7 +7,6 @@ export const FOCUS_CANVAS = 'FOCUS_CANVAS',
 export const focusCanvas = ({focus, onMouseMove, onMouseUp, onMouseLeave}) => ({
   type: FOCUS_CANVAS,
   payload: (state) => {
-    // console.log({focus, onMouseMove, onMouseUp, onMouseLeave});
     return {...state, focus, onMouseMove, onMouseUp, onMouseLeave };
   }
 });

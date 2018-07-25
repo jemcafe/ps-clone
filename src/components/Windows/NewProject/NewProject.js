@@ -68,7 +68,7 @@ function NewProject (props) {
               <label>Background:</label>
               <div className="input-wrapper">
                 <select value={state.background} onChange={(e) => handleChange(e,'background')}>
-                  <option>White</option>
+                  <option value="#ffffff">White</option>
                 </select>
               </div>
             </div>

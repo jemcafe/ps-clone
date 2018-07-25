@@ -39,6 +39,15 @@
   }
 
   > footer {
+    display: flex;
+    justify-content: center;
     border-top: 1px solid $darkgray;
+    > div {  // icons
+      @extend %tool-menu-icon;
+      width: 24px;
+      height: 24px;
+      i { font-size: 12px; }
+      &:hover { border-color: $lightgray; }
+    }
   }
 }

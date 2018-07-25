@@ -1,31 +1,19 @@
 import React from 'react';
 import Layers from '../../components/Panel/Layers/Layers';
 
+import { connect } from 'react-redux';
+
 function LayersCntr (props) {
-  const layers = [
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' },
-    { name: 'Layer' }
-  ];
+  const { projects, tab } = props.projects;
+  const layers = projects.length ? projects[tab].layers : [];
 
   return (
     <Layers layers={layers} />
   );
 }
 
-export default LayersCntr;
+const mapStateToProps = (state) => ({
+  projects: state.projects
+});
+
+export default connect(mapStateToProps)(LayersCntr);

@@ -28,6 +28,7 @@ class TabGroup extends Component {
       panel: !isCollapsed ? {
         // flex: 1,
         height: '50%',
+        minHeight: '100px'
       } : null,
       container: isCollapsed ? {
         position: 'absolute',

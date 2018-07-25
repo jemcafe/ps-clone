@@ -159,3 +159,10 @@
     content: fa-content($fa-var-eye); }
   font-size: 12px;
 }
+
+.icon-new-layer {
+  @extend %fas;
+  &:before { 
+    content: fa-content($fa-var-file); }
+  font-size: 12px;
+}

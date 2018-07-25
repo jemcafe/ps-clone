@@ -31,7 +31,7 @@ function ToolMenu (props) {
 
   const listOfTools = tools.map((e, i) => {
     const selected = t[e.name].selected ? ' selected' : '';
-    return <li key={i} className={`tool${selected}`} onClick={() => selectTool(e.name)}><i className={e.icon}></i></li>
+    return <li key={i} className={`tool${selected}`} title={e.name} onClick={() => selectTool(e.name)}><i className={e.icon}></i></li>
   });
 
   return (

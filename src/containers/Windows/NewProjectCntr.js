@@ -14,7 +14,7 @@ class NewProjectCntr extends Component {
       height: { size: '1000', units: 'Pixels' },
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
-      background: 'white'
+      background: '#ffffff'
     }
   }
   

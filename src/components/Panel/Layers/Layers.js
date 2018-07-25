@@ -9,15 +9,17 @@ function Layers (props) {
       </header>
       <ul>
         { props.layers.map((e,i) => (
-          <li key={i} className="layer">
-            <div className="eye"><div><i className="icon-eye"></i></div></div>
+          <li key={e.id} className="layer">
+            <div className="eye">
+              <div><i className="icon-eye"></i></div>
+            </div>
             <div className="canvas"></div>
-            <div className="name">{ e.name } { props.layers.length - i }</div>
+            <div className="name">{ e.name }</div>
           </li>
         )) }
       </ul>
       <footer className="footer">
-        FOOTER
+        <div title="New Layer"><i className="icon-new-layer"></i></div>
       </footer>
     </div>
   );

@@ -19,15 +19,25 @@ class ToolBarCntr extends Component {
     this.setState(prev => ({ isActive: !prev.isActive }));
   }
 
+  handleAction = (option) => {
+    if ( option.window ) {
+      this.props.openWindow(option.window);
+      this.toggleActive();
+    } else if ( !option.options ) {
+      console.log(`${option.name} CLICKED`);
+    };
+
+  }
+
   render () {
-    // console.log('isActive', this.state.isActive);
+    console.log('isActive', this.state.isActive);
 
     return (
       <ToolBar 
         items={this.state.items}
         isActive={this.state.isActive}
         toggleActive={this.toggleActive}
-        openWindow={this.props.openWindow} />
+        handleAction={this.handleAction} />
     );
   }
 }

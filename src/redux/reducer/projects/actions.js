@@ -1,18 +1,26 @@
 // Action Types
 export const CREATE_PROJECT = 'CREATE_PROJECT',
              REMOVE_PROJECT = 'REMOVE_PROJECT',
-             CHANGE_TAB = 'CHANGE_TAB';
+             CHANGE_TAB = 'CHANGE_TAB',
+             ADD_LAYER = 'ADD_LAYER',
+             DELETE_LAYER = 'DELETE_LAYER';
 
 // Action Creators
 export const createProject = (project) => ({
   type: CREATE_PROJECT,
   payload: (state) => {
     let projects = state.projects;
-    project.id = projects.length + 1; // Is given and id
+    const tab = projects.length; 
+
+    // New properties
+    project.id = projects.length + 1;
+    project.layers = [{ id: 1, name: 'Layer 1', locked: false }];
+
+    // New array
     projects = [...projects, project];
 
-    // console.log('Projects', projects);
-    return {...state, projects };
+    console.log('Projects', projects);
+    return {...state, projects, tab };
   }
 });
 
@@ -42,8 +50,27 @@ export const removeProject = (tab) => ({
 
 export const changeTab = (tab) => ({
   type: CHANGE_TAB,
+  payload: (state) => ({...state, tab })
+});
+
+export const addLayer = () => ({
+  type: ADD_LAYER,
   payload: (state) => {
-    // console.log('tab', tab);
-    return {...state, tab };
+    const projects = state.projects;
+
+    console.log('Add Layer');
+    // console.log('projects', projects);
+    return {...state, projects };
+  }
+});
+
+export const deleteLayer = () => ({
+  type: DELETE_LAYER,
+  payload: (state) => {
+    const projects = state.projects;
+
+    console.log('Delete Layer');
+    // console.log('projects', projects);
+    return {...state, projects };
   }
 });
