@@ -1,9 +1,10 @@
 // Action Types
 export const CREATE_PROJECT = 'CREATE_PROJECT',
              REMOVE_PROJECT = 'REMOVE_PROJECT',
-             CHANGE_TAB = 'CHANGE_TAB',
+             SELECT_TAB = 'SELECT_TAB',
              ADD_LAYER = 'ADD_LAYER',
-             DELETE_LAYER = 'DELETE_LAYER';
+             DELETE_LAYER = 'DELETE_LAYER',
+             SELECT_LAYER = 'SELECT_LAYER';
 
 // Action Creators
 export const createProject = (project) => ({
@@ -20,7 +21,7 @@ export const createProject = (project) => ({
     // New array
     projects = [...projects, project];
 
-    console.log('Projects', projects);
+    // console.log('Projects', projects);
     return {...state, projects, tab };
   }
 });
@@ -49,8 +50,8 @@ export const removeProject = (tab) => ({
   }
 });
 
-export const changeTab = (tab) => ({
-  type: CHANGE_TAB,
+export const selectTab = (tab) => ({
+  type: SELECT_TAB,
   payload: (state) => ({...state, tab })
 });
 
@@ -61,9 +62,10 @@ export const addLayer = () => ({
     const projects = state.projects;
     const id = projects[tab].layers.length + 1;
 
-    projects[tab].layers.push({
+    projects[tab].layers.unshift({
       id: id, 
       name: `Layer ${id}`, 
+      visible: true,
       locked: false
     })
 
@@ -79,7 +81,19 @@ export const deleteLayer = () => ({
     const projects = state.projects;
 
     console.log('Delete Layer');
-    // console.log('projects', projects);
+    // console.log('project layers', projects[tab].layers);
     return {...state, projects };
   }
 });
+
+export const selectLayer = (index) => ({
+  type: SELECT_LAYER,
+  payload: (state) => {
+    const { tab } = state;
+    const projects = state.projects;
+    projects[tab].layer = index;
+
+    console.log('Select Layer', projects[tab].layer);
+    return {...state, projects }
+  }
+})

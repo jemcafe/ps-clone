@@ -19,17 +19,6 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
-// tool icon container style
-%tool-menu-icon {
-  @extend %center-content;
-  color: #fff;
-  width: 30px;
-  height: 30px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background: $gray;
-  i { font-size: 16px; }
-}
 
 // Tabs
 %selected-tab {

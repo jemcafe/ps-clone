@@ -3,7 +3,6 @@ import React, { Fragment as Aux } from 'react';
 // data
 import toolbarItems from '../tabs/toolbarItems';
 import tabGroups from '../tabs/tabGroups';
-import projects from '../tabs/projects';
 
 // Components
 import ToolBar from '../containers/ToolBarCntr';
@@ -30,7 +29,7 @@ function Layout () {
           <Panel align={'L'} isTools={true} isCollapsed={true} />
         </section>
         <div id="documents">
-          <Projects projects={projects}/>
+          <Projects />
         </div>
         <section className="panels">
           <Panel align={'R'} tabGroups={tabGroups['1']} isCollapsed={true} />

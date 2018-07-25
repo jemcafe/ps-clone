@@ -1,9 +1,10 @@
 import { 
   CREATE_PROJECT,
   REMOVE_PROJECT,
-  CHANGE_TAB,
+  SELECT_TAB,
   ADD_LAYER,
-  DELETE_LAYER
+  DELETE_LAYER,
+  SELECT_LAYER
 } from './actions';
 
 const initialState = {
@@ -19,9 +20,9 @@ const initialState = {
       background: 'white',
       layer: 0,
       layers: [
-        { id: 1, name: 'Layer 1', locked: false },
-        { id: 2, name: 'Layer 2', locked: false },
-        { id: 3, name: 'Layer 3', locked: false }
+        { id: 3, name: 'Layer 3', visible: true, locked: false },
+        { id: 2, name: 'Layer 2', visible: true, locked: false },
+        { id: 1, name: 'Layer 1', visible: true, locked: false }
       ]
     }
   ]
@@ -36,11 +37,13 @@ export default (state = initialState, action) => {
       return payload(state);
     case REMOVE_PROJECT:
       return payload(state);
-    case CHANGE_TAB:
+    case SELECT_TAB:
       return payload(state);
     case ADD_LAYER:
       return payload(state);
     case DELETE_LAYER:
+      return payload(state);
+    case SELECT_LAYER:
       return payload(state);
     default:
       return state;

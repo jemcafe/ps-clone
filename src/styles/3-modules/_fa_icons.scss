@@ -2,167 +2,149 @@
 
 .icon-move {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-arrows-alt); }
+  &:before { content: fa-content($fa-var-arrows-alt); }
 }
 .icon-eyedropper {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-eye-dropper); }
+  &:before { content: fa-content($fa-var-eye-dropper); }
 }
 .icon-paint-brush {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-paint-brush); }
+  &:before { content: fa-content($fa-var-paint-brush); }
 }
 .icon-eraser {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-eraser); }
+  &:before { content: fa-content($fa-var-eraser); }
 }
 .icon-paint-bucket {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-fill-drip); }
+  &:before { content: fa-content($fa-var-fill-drip); }
 }
 .icon-pen {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-pen-nib); }
+  &:before { content: fa-content($fa-var-pen-nib); }
 }
 .icon-shape-circle {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-circle); }
+  &:before { content: fa-content($fa-var-circle); }
 }
 .icon-magnify {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-search); } 
+  &:before { content: fa-content($fa-var-search); } 
 }
 .icon-magnify-minus {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-search-minus); } 
+  &:before { content: fa-content($fa-var-search-minus); } 
 }
 .icon-magnify-plus {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-search-plus); } 
+  &:before { content: fa-content($fa-var-search-plus); } 
 }
 .icon-hand {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-hand-paper); } 
+  &:before { content: fa-content($fa-var-hand-paper); } 
 }
 .icon-ellipsis {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-ellipsis-h); } 
+  &:before { content: fa-content($fa-var-ellipsis-h); } 
 }
 
 .icon-swap {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-sync-alt); } 
+  &:before { content: fa-content($fa-var-sync-alt); } 
 }
 .icon-undo {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-undo-alt); }
+  &:before { content: fa-content($fa-var-undo-alt); }
 }
 
 // Panel icons
 
 .icon-color {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-palette); } 
+  &:before { content: fa-content($fa-var-palette); } 
 }
 .icon-adjust {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-adjust); } 
+  &:before { content: fa-content($fa-var-adjust); } 
 }
 .icon-swatches {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-swatchbook); } 
+  &:before { content: fa-content($fa-var-swatchbook); } 
 }
 .icon-layers {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-clone); } 
+  &:before { content: fa-content($fa-var-clone); } 
 }
 .icon-history {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-history); } 
+  &:before { content: fa-content($fa-var-history); } 
 }
 .icon-character {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-font); } 
+  &:before { content: fa-content($fa-var-font); } 
 }
 .icon-paragraph {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-paragraph); } 
+  &:before { content: fa-content($fa-var-paragraph); } 
 }
 
 // other icons
 
 .icon-times {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-times); }
+  &:before { content: fa-content($fa-var-times); }
   font-size: 12px;
 }
 
 .icon-bars {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-bars); }
+  &:before { content: fa-content($fa-var-bars); }
 }
 
 .icon-angle-right {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-angle-right); }
+  &:before { content: fa-content($fa-var-angle-right); }
   font-size: 12px;
 }
 
 .icon-angle-down {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-angle-down); }
+  &:before { content: fa-content($fa-var-angle-down); }
   font-size: 12px;
 }
 
 .icon-angle-double-right {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-angle-double-right); }
+  &:before { content: fa-content($fa-var-angle-double-right); }
   font-size: 12px;
 }
 
 .icon-angle-double-left {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-angle-double-left); }
+  &:before { content: fa-content($fa-var-angle-double-left); }
   font-size: 12px;
 }
 
 .icon-eye {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-eye); }
+  &:before { content: fa-content($fa-var-eye); }
   font-size: 12px;
 }
 
 .icon-new-layer {
   @extend %fas;
-  &:before { 
-    content: fa-content($fa-var-file); }
+  &:before { content: fa-content($fa-var-file); }
+  font-size: 12px;
+}
+
+.icon-lock {
+  @extend %fas;
+  &:before { content: fa-content($fa-var-lock); }
+  font-size: 12px;
+}
+.icon-lock-open {
+  @extend %fas;
+  &:before { content: fa-content($fa-var-lock-open); }
   font-size: 12px;
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Projects from '../components/Projects/Projects';
 
 import { connect } from 'react-redux';
-import { removeProject, changeTab } from '../redux/reducer/projects/actions';
+import { removeProject, selectTab } from '../redux/reducer/projects/actions';
 
 class ProjectsCntr extends Component {
   constructor (props) {
@@ -21,7 +21,7 @@ class ProjectsCntr extends Component {
         projects={this.props.projects.projects}
         tab={this.props.projects.tab}
         removeProject={this.removeProject}
-        changeTab={this.props.changeTab} />
+        selectTab={this.props.selectTab} />
     );
   }
 }
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { 
   removeProject,
-  changeTab
+  selectTab
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsCntr);

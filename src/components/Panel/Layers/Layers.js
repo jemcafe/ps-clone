@@ -5,13 +5,14 @@ function Layers (props) {
   const { 
     layers, 
     addLayer,
-    // deleteLayer 
+    // deleteLayer,
+    selectLayer
   } = props;
 
   return (
     <div className="layers">
       <header className="header">
-        HEADER
+        Lock:&nbsp;<button><i className="icon-lock"></i></button>
       </header>
       <ul>
         { layers.map((e,i) => (
@@ -20,7 +21,9 @@ function Layers (props) {
               <div><i className="icon-eye"></i></div>
             </div>
             <div className="canvas"></div>
-            <div className="name">{ e.name }</div>
+            <div className="name" onClick={() => selectLayer(i)}>
+              { e.name }
+            </div>
           </li>
         )) }
       </ul>

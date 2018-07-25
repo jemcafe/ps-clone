@@ -8,7 +8,8 @@ function ToolMenu (props) {
     color: c,
     selectTool,
     resetColors,
-    swapColors
+    swapColors,
+    openWindow
   } = props;
 
   const tools = [
@@ -45,8 +46,8 @@ function ToolMenu (props) {
           <div className="swap" onClick={ swapColors }><i className="icon-swap"></i></div>
         </div>
         <div className="colors">
-          <div className="color-block"><div style={{background: c.color_2.hex}} onClick={() => selectTool('eyedropper')}></div></div>
-          <div className="color-block"><div style={{background: c.color_1.hex}} onClick={() => selectTool('eyedropper')}></div></div>
+          <div className="color-block"><div style={{background: c.color_2.hex}} onClick={() => openWindow('colorPicker')}></div></div>
+          <div className="color-block"><div style={{background: c.color_1.hex}} onClick={() => openWindow('colorPicker')}></div></div>
         </div>
       </div>
     </div>
@@ -60,6 +61,7 @@ ToolMenu.propTypes = {
   selectTool: PropTypes.func.isRequired,
   resetColors: PropTypes.func.isRequired,
   swapColors: PropTypes.func.isRequired,
+  openWindow: PropTypes.func,
 }
 
 export default ToolMenu;

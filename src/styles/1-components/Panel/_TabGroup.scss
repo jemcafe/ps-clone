@@ -83,9 +83,8 @@
     }
     
     > ul > li {  // icons
-      @extend %tool-menu-icon;
+      @include tool-menu-icon(#ffffff);
       margin: 4px 0;
-      &:hover { border-color: $lightgray; }
     }
 
     > ul > .selected {  // selected icon

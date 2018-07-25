@@ -6,7 +6,7 @@ function Projects (props) {
     projects,
     removeProject,
     tab,
-    changeTab
+    selectTab
   } = props;
 
   const classNames = {
@@ -18,7 +18,7 @@ function Projects (props) {
   };
 
   const tabList = projects.map((project, i) => (
-    <li key={project.id} className={ classNames.tab(i) } onClick={() => changeTab(i)}>
+    <li key={project.id} className={ classNames.tab(i) } onClick={() => selectTab(i)}>
       <div onClick={(e) => removeProject(e, i)}>
         <i className="icon-times"></i>
       </div>{ project.name }
@@ -48,7 +48,7 @@ Projects.propTypes = {
   projects: PropTypes.array.isRequired,
   removeProject: PropTypes.func.isRequired,
   tab: PropTypes.number.isRequired,
-  changeTab: PropTypes.func.isRequired
+  selectTab: PropTypes.func.isRequired
 }
 
 export default Projects;

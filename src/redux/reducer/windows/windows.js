@@ -4,7 +4,8 @@ import {
 } from './actions';
 
 const initialState = {
-  newProject: false
+  newProject: false,
+  colorPicker: false
 };
 
 // Reducer

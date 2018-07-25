@@ -26,7 +26,7 @@ function NewProject (props) {
                 <input type="text" value={state.width.size} onChange={(e) => handleChange(e,'width','size')}/>
                 <select value={state.width.units} onChange={(e) => handleChange(e,'width','units')}>
                   <option>Pixels</option>
-                  <option>Inches</option>
+                  {/* <option>Inches</option> */}
                 </select>
               </div>
             </div>
@@ -37,7 +37,7 @@ function NewProject (props) {
                 <input type="text" value={state.height.size} onChange={(e) => handleChange(e,'height','size')}/>
                 <select value={state.height.units} onChange={(e) => handleChange(e,'height','units')}>
                   <option>Pixels</option>
-                  <option>Inches</option>
+                  {/* <option>Inches</option> */}
                 </select>
               </div>
             </div>
@@ -74,7 +74,7 @@ function NewProject (props) {
             </div>
           </div>
         </div>
-        <div className="confirmation-btns">
+        <div className="btns">
           <div className="submit-btn"><input type="submit" value="Open"/></div>
           <button className="btn" onClick={ closeWindow }>Cancel</button>
         </div>

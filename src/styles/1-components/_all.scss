@@ -2,7 +2,6 @@
 @import 'AppLayout';
 
 @import 'ToolBar';
-@import 'NewProject';
 
 @import 'Projects';
 @import 'MainCanvas';
@@ -22,14 +21,15 @@
 
 @import 'Panel/Panel';
 @import 'Panel/TabGroup';
-
-@import 'PanelContent/History';
-@import 'PanelContent/Character';
-@import 'PanelContent/Paragraph';
-@import 'PanelContent/Color';
-@import 'PanelContent/Swatches';
-@import 'PanelContent/Layers';
+@import 'Panel/History';
+@import 'Panel/Character';
+@import 'Panel/Paragraph';
+@import 'Panel/Color';
+@import 'Panel/Swatches';
+@import 'Panel/Layers';
 
 @import 'HueGradient';
 
-@import 'Window';
+@import 'Windows/Window';
+@import 'Windows/NewProject';
+@import 'Windows/ColorPicker';
