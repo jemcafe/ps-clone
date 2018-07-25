@@ -69,7 +69,14 @@ export const addLayer = () => ({
     const { tab } = state;
     const projects = state.projects;
     const layer = projects[tab].layer;
-    const id = projects[tab].layers.length + 1;
+    const layerIds = [...projects[tab].layers].map(e => e.id);
+    const newId = (ids) => {
+      ids.sort((a, b) => a - b);
+      for (let i = 0; i < ids.length; i++)
+        if (ids[i] !== i+1) return ids[i-1]+1;
+      return ids.length+1;
+    } 
+    const id = newId(layerIds);
 
     projects[tab].layers.splice(layer, 0, {
       id: id, 
@@ -78,17 +85,20 @@ export const addLayer = () => ({
       locked: false
     })
 
-    // console.log('Add Layer', projects[tab].layers);
+    console.log('Add Layer', projects[tab].layers);
     return {...state, projects };
   }
 });
 
-export const deleteLayer = (index) => ({
+export const deleteLayer = () => ({
   type: DELETE_LAYER,
   payload: (state) => {
     const { tab } = state;
     const projects = state.projects;
     const layer = projects[tab].layer;
+
+    // The layer is removed
+    projects[tab].layers.splice(layer, 1);
 
     console.log(`Delete Layer ${layer}`, projects[tab].layers);
     return {...state, projects };
