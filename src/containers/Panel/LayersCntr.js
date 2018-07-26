@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer } from '../../redux/reducer/projects/actions';
 
 function LayersCntr (props) {
-  const { projects, tab } = props.projects;
-  const project = projects.length ? projects[tab] : {};
+  const { projects: p, tab } = props.projects;
+  const project = p.length ? p[tab] : {};
 
   return (
     <Layers project={project} {...props} />
