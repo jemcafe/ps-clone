@@ -1,10 +1,11 @@
 // Action types
-export const SELECT_TOOL = 'SELECT_TOOL',
-             UPDATE_BRUSH_RADIUS = 'UPDATE_BRUSH_RADIUS',
-             UPDATE_BRUSH = 'UPDATE_BRUSH',
-             UPDATE_OPACITY = 'UPDATE_OPACITY',
-             UPDATE_STROKE_WIDTH = 'UPDATE_STROKE_WIDTH',
-             ZOOM = 'ZOOM';
+export const 
+  SELECT_TOOL = 'SELECT_TOOL',
+  UPDATE_BRUSH_RADIUS = 'UPDATE_BRUSH_RADIUS',
+  UPDATE_BRUSH = 'UPDATE_BRUSH',
+  UPDATE_OPACITY = 'UPDATE_OPACITY',
+  UPDATE_STROKE_WIDTH = 'UPDATE_STROKE_WIDTH',
+  ZOOM = 'ZOOM';
 
 // Action creators
 export const selectTool = (tool) => ({

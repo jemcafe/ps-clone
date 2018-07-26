@@ -1,7 +1,8 @@
 // Action Types
-export const FOCUS_CANVAS = 'FOCUS_CANVAS',
-             UNFOCUS_CANVAS = 'UNFOCUS_CANVAS',
-             UPDATE_OFFSET = 'UPDATE_OFFSET';
+export const 
+  FOCUS_CANVAS = 'FOCUS_CANVAS',
+  UNFOCUS_CANVAS = 'UNFOCUS_CANVAS',
+  UPDATE_OFFSET = 'UPDATE_OFFSET';
 
 // Action Creators
 export const focusCanvas = ({focus, onMouseMove, onMouseUp, onMouseLeave}) => ({

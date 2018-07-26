@@ -1,6 +1,7 @@
 // Action Types
-export const OPEN_WINDOW = 'OPEN_WINDOW',
-             CLOSE_WINDOW = 'CLOSE_WINDOW';
+export const 
+  OPEN_WINDOW = 'OPEN_WINDOW',
+  CLOSE_WINDOW = 'CLOSE_WINDOW';
 
 // Action Creators
 export const openWindow = (property) => ({

@@ -10,11 +10,12 @@ import {
 } from '../../../helpers/colorConversion';
 
 // Action Types
-export const SELECT_COLOR = 'SELECT_COLOR',
-             RESET_COLORS = 'RESET_COLORS',
-             SWAP_COLORS = 'SWAP_COLORS',
-             UPDATE_COLOR = 'UPDATE_COLOR',
-             UPDATE_COLOR_POSITION = 'UPDATE_COLOR_POSITION';
+export const 
+  SELECT_COLOR = 'SELECT_COLOR',
+  RESET_COLORS = 'RESET_COLORS',
+  SWAP_COLORS = 'SWAP_COLORS',
+  UPDATE_COLOR = 'UPDATE_COLOR',
+  UPDATE_COLOR_POSITION = 'UPDATE_COLOR_POSITION';
 
 // Action Creators
 export const selectColor = (num) => ({
