@@ -33,9 +33,9 @@ function Layers (props) {
                 <i className="icon-eye"></i>
               </div>
             </div>
-            <div className="name-wrapper" style={style.nameWrapper(i)} onClick={() => selectLayer(i)}>
-              <div className="canvas"></div>
-              <div className="name">
+            <div className="name-wrapper" style={style.nameWrapper(i)}>
+              <div className="canvas" onClick={() => selectLayer(i)}></div>
+              <div className="name" onClick={() => selectLayer(i)}>
                 { e.name }
               </div>
               { e.locked && 
