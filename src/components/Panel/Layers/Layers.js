@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Layers (props) {
   const { 
-    project:{ layer, layers }, 
+    project: p, 
     addLayer,
     deleteLayer,
     selectLayer,
@@ -13,7 +13,7 @@ function Layers (props) {
   } = props;
 
   const style = {
-    nameWrapper: (index) => layer === index ? { background:'gray' } : null,
+    nameWrapper: (index) => p.layer === index ? { background:'gray' } : null,
     eye: (visible) => !visible ? { visibility:'hidden' } : null
   }
 
@@ -26,7 +26,7 @@ function Layers (props) {
         </button>
       </header>
       <ul>
-        { layers && layers.map((e,i) => (
+        { p.id && p.layers.map((e, i) => (
           <li key={e.id} className="layer">
             <div className="eye-wrapper" title="Visibilty" onClick={() => showLayer(i)}>
               <div className="eye" style={style.eye(e.visible)}>

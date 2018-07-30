@@ -1,10 +1,12 @@
-.projects {
+#projects {
   width: 100%;
   height: 100%;
   font-size: 12px;
+  background: $darkergray;
 
   > nav {
     display: flex;
+    position: absolute;
     background: $darkgray;
 
     .selected-tab { @extend %selected-tab; }
@@ -44,8 +46,9 @@
   }
 
   .container {  // canvas space
-    @extend %center-content;
+    // @extend %center-content;
     height: 100%;
-    background: $darkergray;
+    // background: $darkergray;
+    background: rgb(84, 118, 124);
   }
 }

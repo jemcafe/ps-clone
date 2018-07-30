@@ -5,23 +5,26 @@ import { connect } from 'react-redux';
 import { removeProject, selectTab } from '../redux/reducer/projects/actions';
 
 class ProjectsCntr extends Component {
-  constructor (props) {
-    super(props);
-    this.state = { }
+  constructor () {
+    super();
+    this.state = { width: 0 }
   }
 
-  removeProject = (e, i) => {
-    e.stopPropagation();
-    this.props.removeProject(i);
+  updateDimensions = (refs) => {
+    const { wrapper: w } = refs;
+    if (w) this.setState({ width: w.clientWidth });
   }
 
   render () {
     return (
       <Projects 
+        width={this.state.width}
+        updateDimensions={this.updateDimensions}
         projects={this.props.projects.projects}
         tab={this.props.projects.tab}
-        removeProject={this.removeProject}
-        selectTab={this.props.selectTab} />
+        removeProject={this.props.removeProject}
+        selectTab={this.props.selectTab}
+        children={ this.props.children } />
     );
   }
 }

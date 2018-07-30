@@ -1,0 +1,12 @@
+#canvas-area .canvas-wrapper {
+  position: relative;
+  // display: flex;
+  // align-items: flex-start;
+  text-align: left;
+  padding: 100px;
+  background: rgb(158, 160, 255);
+
+  > canvas {
+    position: absolute;
+  }
+}

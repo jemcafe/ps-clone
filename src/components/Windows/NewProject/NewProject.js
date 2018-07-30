@@ -7,6 +7,7 @@ function NewProject (props) {
   const { 
     state,
     handleChange, 
+    confirmSize,
     createProject,
     closeWindow
   } = props;
@@ -23,7 +24,7 @@ function NewProject (props) {
             <div className="field">
               <label>Width:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.width.size} onChange={(e) => handleChange(e,'width','size')}/>
+                <input type="text" value={state.width.size} onChange={(e) => handleChange(e,'width','size')} onBlur={() => confirmSize('width')}/>
                 <select value={state.width.units} onChange={(e) => handleChange(e,'width','units')}>
                   <option>Pixels</option>
                   {/* <option>Inches</option> */}
@@ -34,7 +35,7 @@ function NewProject (props) {
             <div className="field">
               <label>Height:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.height.size} onChange={(e) => handleChange(e,'height','size')}/>
+                <input type="text" value={state.height.size} onChange={(e) => handleChange(e,'height','size')} onBlur={() => confirmSize('height')}/>
                 <select value={state.height.units} onChange={(e) => handleChange(e,'height','units')}>
                   <option>Pixels</option>
                   {/* <option>Inches</option> */}
@@ -45,7 +46,7 @@ function NewProject (props) {
             <div className="field">
               <label>Resolution:</label>
               <div className="input-wrapper">
-                <input type="text" value={state.resolution.size} onChange={(e) => handleChange(e,'resolution','size')}/>
+                <input type="text" value={state.resolution.size} onChange={(e) => handleChange(e,'resolution','size')} onBlur={() => confirmSize('resolution')}/>
                 <select defaultValue={state.resolution.units} onChange={(e) => handleChange(e,'resolution','units')}>
                   <option>Pixels/Inch</option>
                 </select>

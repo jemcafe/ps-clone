@@ -13,12 +13,17 @@ export const
   SHOW_LAYER = 'SHOW_LAYER';
 
 // Action Creators
+export const selectTab = (tab) => ({
+  type: SELECT_TAB,
+  payload: (state) => ({...state, tab })
+});
+
 export const createProject = (project) => ({
   type: CREATE_PROJECT,
   payload: (state) => {
     let projects = state.projects;
     const projectIds = [...projects].map(e => e.id);
-    const tab = projects.length;
+    let tab = projects.length;
     
     // New properties
     project.id = newId(projectIds);
@@ -29,9 +34,15 @@ export const createProject = (project) => ({
       locked: false, 
       visible: true 
     }];
+    projects.zoom = '50%'
 
     // New array
-    projects = [...projects, project];
+    if (!projects[0].id) {
+      tab = projects.length-1;
+      projects = [project];
+    } else {
+      projects = [...projects, project];
+    }
 
     // console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };
@@ -52,16 +63,15 @@ export const removeProject = (index) => ({
     }
 
     // The project is removed
-    projects.splice(index, 1);
+    if (projects.length === 1 ) {
+      projects = [{}];
+    } else {
+      projects.splice(index, 1);
+    }
 
     // console.log('Remove project', projects, 'index', index);
     return {...state, projects, tab };
   }
-});
-
-export const selectTab = (tab) => ({
-  type: SELECT_TAB,
-  payload: (state) => ({...state, tab })
 });
 
 export const addLayer = () => ({

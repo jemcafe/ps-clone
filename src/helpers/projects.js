@@ -2,7 +2,7 @@ export const newId = (ids) => {
   if ( Array.isArray(ids) ) {
     const array = [...ids];
 
-    if (!array.length) { 
+    if (!array.length || !array[0]) { 
 
       return 1;
 
@@ -18,7 +18,7 @@ export const newId = (ids) => {
       if (array[0] > 1) return 1;
 
       for (let i = 0; i < array.length; i++) {
-        if (array[i] !== (i + 1)) return array[i-1] + 1;
+        if (array[i] !== (i+1)) return array[i-1] + 1;
       }
 
       return array.length + 1;

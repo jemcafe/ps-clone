@@ -23,10 +23,11 @@ const initialState = {
       background: 'white',
       layer: 0,
       layers: [
-        { id: 3, name: 'Layer 3', visible: true, locked: false },
+        { id: 1, name: 'Layer 1', visible: true, locked: false },
         { id: 2, name: 'Layer 2', visible: true, locked: false },
-        { id: 1, name: 'Layer 1', visible: true, locked: false }
-      ]
+        { id: 3, name: 'Layer 3', visible: true, locked: false }
+      ],
+      zoom: '100%'
     }
   ]
 };

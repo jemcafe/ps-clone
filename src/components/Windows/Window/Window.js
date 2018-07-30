@@ -18,7 +18,7 @@ class Window extends Component {
     this.initPosition();
   }
 
-  componentWillUnmount() {  //  
+  componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
 

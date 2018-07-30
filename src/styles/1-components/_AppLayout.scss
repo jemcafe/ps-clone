@@ -12,7 +12,7 @@
     justify-content: space-between;
     background: #ebebeb;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 
     > section {
       display: flex;
@@ -24,8 +24,9 @@
       width: 100%;
       min-width: 40px;
       color: #fff;
+      // background: $darkergray;
       background: #dfffdf;
-      overflow: hidden;
+      // overflow: hidden;
     }
   }
 }

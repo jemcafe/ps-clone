@@ -38,11 +38,11 @@ class Opacity extends Component {
     const { tool, updateOpacity } = this.props;
     this.setState(prev => {
       let input = prev.input;
-      let isValid = /^([0-9]){1,}([%]){0,1}$/;           // Test for valid characters
-      isValid = isValid.test(input);                     // Input is tested
-      isValid = isValid && (parseInt(input, 10) <= 100); // The value must be less than or equal to 100%
-      const n = isValid && input.indexOf('%');           // First '%' char
-      isValid = isValid && n !== 0;                      // '%' is not the first char
+      let isValid = /^([0-9]){1,}([%]){0,1}$/;  // Test for valid characters
+      isValid = isValid.test(input);            // Input is tested
+      isValid = isValid && +input <= 100;       // The value must be less than or equal to 100%
+      const n = isValid && input.indexOf('%');  // First '%' char
+      isValid = isValid && n !== 0;             // '%' is not the first char
 
       if (isValid) {
         // Every character before the first '%' are kept.

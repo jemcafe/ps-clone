@@ -1,6 +1,6 @@
 import React, { Fragment as Aux } from 'react';
 
-// data
+// constants
 import toolbarItems from '../tabs/toolbarItems';
 import tabGroups from '../tabs/tabGroups';
 
@@ -8,6 +8,7 @@ import tabGroups from '../tabs/tabGroups';
 import ToolBar from '../containers/ToolBarCntr';
 import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
+import CanvasArea from '../containers/CanvasAreaCntr';
 import Panel from '../containers/PanelCntr';
 
 import Windows from '../containers/Windows/WindowsCntr';
@@ -29,7 +30,9 @@ function Layout () {
           <Panel align={'L'} isTools={true} isCollapsed={true} />
         </section>
         <div id="documents">
-          <Projects />
+          <Projects>
+            <CanvasArea />
+          </Projects>
         </div>
         <section className="panels">
           <Panel align={'R'} tabGroups={tabGroups['1']} isCollapsed={true} />
