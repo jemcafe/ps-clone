@@ -21,9 +21,10 @@ const initialState = {
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
       background: 'white',
+      canvasLayer: 3,
       layer: 0,
       layers: [
-        { id: 1, name: 'Layer 1', visible: true, locked: false },
+        { id: 1, name: 'Layer 1', visible: true, locked: false, background: '#ffffff' },
         { id: 2, name: 'Layer 2', visible: true, locked: false },
         { id: 3, name: 'Layer 3', visible: true, locked: false }
       ],

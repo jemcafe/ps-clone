@@ -51,16 +51,18 @@ class HueGradientCntr extends Component {
   engage = (canvas, e) => {
     this.setState({ dragging: true, inCanvas: true });
     this.getColor({canvas, e, fire: true});
+
     this.props.focusCanvas({
       focus: true, 
-      onMouseMove: (e) => { this.getColor({canvas, e}); },
-      onMouseUp: () => { this.disengage(); },
-      onMouseLeave: () => { this.disengage(); }
+      onMouseMove: (e) => this.getColor({canvas, e}),
+      onMouseUp: () => this.disengage(),
+      onMouseLeave: () => this.disengage()
     });
   }
 
   disengage = (canvas) => {
     this.setState({ dragging: false, inCanvas: false });
+    
     this.props.unfocusCanvas();
   }
 

@@ -20,6 +20,7 @@
 
       .dropdown-container {  // dropdown content container
         position: absolute;
+        z-index: 1;
         padding: 6px;
         box-sizing: border-box;
         background: $gray;

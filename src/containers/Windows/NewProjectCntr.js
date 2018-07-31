@@ -48,7 +48,7 @@ class NewProjectCntr extends Component {
   confirmSize = (p1) => {
     this.setState(prev => {
       const s = +prev[p1].size;
-      prev[p1].size = s < 1 ? '1' : s > '6000' ? '6000' : s;
+      prev[p1].size = s < 1 ? '1' : s > '6000' ? '6000' : `${s}`;
       return { [p1]: prev[p1] }
     });
   }

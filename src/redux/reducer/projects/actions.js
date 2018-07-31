@@ -21,20 +21,25 @@ export const selectTab = (tab) => ({
 export const createProject = (project) => ({
   type: CREATE_PROJECT,
   payload: (state) => {
-    let projects = state.projects;
-    const projectIds = [...projects].map(e => e.id);
+    let { projects } = state;
     let tab = projects.length;
-    
-    // New properties
-    project.id = newId(projectIds);
-    project.layer = 0;
-    project.layers = [{ 
-      id: 1, 
-      name: 'Layer 1', 
-      locked: false, 
-      visible: true 
-    }];
-    projects.zoom = '50%'
+    const id = newId([...projects].map(e => e.id));
+
+    // New Properties
+    project = {
+      ...project,
+      id: id,
+      canvasLayer: 1,
+      layer: 0,
+      layers: [{ 
+        id: 1, 
+        name: 'Layer 1',
+        visible: true, 
+        locked: false, 
+        background: project.background,
+      }],
+      zoom: '100%'
+    }
 
     // New array
     if (!projects[0].id) {
@@ -52,8 +57,7 @@ export const createProject = (project) => ({
 export const removeProject = (index) => ({
   type: REMOVE_PROJECT,
   payload: (state) => {
-    let projects = state.projects;
-    let tab = state.tab;
+    let { projects, tab } = state;
 
     // The selected tab changes
     if (tab !== 0) {
@@ -77,14 +81,13 @@ export const removeProject = (index) => ({
 export const addLayer = () => ({
   type: ADD_LAYER,
   payload: (state) => {
-    // Variables set to state values reference the value in state, unless set to a new object.
-    // Splicing layers changes projects since it's referencing state.
-    const { tab } = state;
-    const projects = state.projects;
-    const layer = projects[tab].layer;
-    const layers = projects[tab].layers;
-    const layerIds = [...layers].map(e => e.id);
-    const id = newId(layerIds);
+    // Variables set to state values reference the value in state, unless they're set to a new object.
+    // Splicing layers makes changes projects since they both reference state.
+    const { projects, tab } = state;
+    const project = state.projects[tab];
+    const layer = project.layer;
+    const layers = project.layers;
+    const id = newId([...layers].map(e => e.id));
 
     // New layer added
     layers.splice(layer, 0, { 
@@ -94,6 +97,9 @@ export const addLayer = () => ({
       locked: false
     });
 
+    // Canvas layer
+    project.canvasLayer = id;
+
     // console.log('Add Layer', projects[tab].layers);
     return {...state, projects };
   }
@@ -102,17 +108,17 @@ export const addLayer = () => ({
 export const deleteLayer = () => ({
   type: DELETE_LAYER,
   payload: (state) => {
-    const { tab } = state;
-    const projects = state.projects;
-    let layer = projects[tab].layer;
-    const layers = projects[tab].layers;
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layer = project.layer;
+    const layers = project.layers;
 
     // The layer is removed
     layers.splice(layer, 1);
 
     // If the last layer is the deleted the selcted layer changes
     if (layer > layers.length-1 && layer !== 0) {
-      projects[tab].layer = layers.length-1;
+      project.layer = layers.length-1;
     }
 
     // console.log(`Delete Layer ${layer}`, layers);
@@ -123,9 +129,15 @@ export const deleteLayer = () => ({
 export const selectLayer = (index) => ({
   type: SELECT_LAYER,
   payload: (state) => {
-    const { tab } = state;
-    const projects = state.projects;
-    projects[tab].layer = index;
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layers = project.layers;
+
+    // layer
+    project.layer = index;
+
+    // Canvas layer
+    project.canvasLayer = layers[index].id;
 
     // console.log('Select Layer', projects[tab].layer);
     return {...state, projects };
@@ -135,11 +147,10 @@ export const selectLayer = (index) => ({
 export const lockLayer = () => ({
   type: LOCK_LAYER,
   payload: (state) => {
-    const { tab } = state;
-    const projects = state.projects;
-    const layer = projects[tab].layer;
-    const locked = projects[tab].layers[layer].locked;
-    projects[tab].layers[layer].locked = !locked;
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layer = project.layers[project.layer];
+    layer.locked = !layer.locked;
 
     // console.log(`Lock layer ${layer}`, projects[tab].layers[layer].locked);
     return {...state, projects };
@@ -149,9 +160,10 @@ export const lockLayer = () => ({
 export const unlockLayer = (index) => ({
   type: UNLOCK_LAYER,
   payload: (state) => {
-    const { tab } = state;
-    const projects = state.projects;
-    projects[tab].layers[index].locked = false;
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layer = project.layers[index];
+    layer.locked = false;
 
     // console.log(`Unlock layer ${index}`, projects[tab].layers[index].locked);
     return {...state, projects };
@@ -161,10 +173,10 @@ export const unlockLayer = (index) => ({
 export const showLayer = (index) => ({
   type: SHOW_LAYER,
   payload: (state) => {
-    const { tab } = state;
-    const projects = state.projects;
-    const visible = projects[tab].layers[index].visible;
-    projects[tab].layers[index].visible = !visible;
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layer = project.layers[index];
+    layer.visible = !layer.visible;
 
     // console.log(`Show layer ${index}`, projects[tab].layers[index].visible);
     return {...state, projects };
