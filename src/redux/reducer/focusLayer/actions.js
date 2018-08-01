@@ -5,17 +5,24 @@ export const
   UPDATE_OFFSET = 'UPDATE_OFFSET';
 
 // Action Creators
-export const focusCanvas = ({focus, onMouseMove, onMouseUp, onMouseLeave}) => ({
+export const focusCanvas = ({ 
+  focus, 
+  onMouseMove, 
+  onMouseUp, 
+  onMouseLeave, 
+  offset = { width:0, height:0 } 
+}) => ({
   type: FOCUS_CANVAS,
   payload: (state) => {
-    return {...state, focus, onMouseMove, onMouseUp, onMouseLeave };
+    console.log('focusLayer offset', offset);
+    return {...state, focus, onMouseMove, onMouseUp, onMouseLeave, offset };
   }
 });
 
 export const unfocusCanvas = () => ({
   type: UNFOCUS_CANVAS,
   payload: (state) => {
-    return {...state, focus: false };
+    return {...state, focus: null };
   }
 });
 

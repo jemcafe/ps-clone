@@ -53,7 +53,7 @@ class HueGradientCntr extends Component {
     this.getColor({canvas, e, fire: true});
 
     this.props.focusCanvas({
-      focus: true, 
+      focus: 'hueGradient', 
       onMouseMove: (e) => this.getColor({canvas, e}),
       onMouseUp: () => this.disengage(),
       onMouseLeave: () => this.disengage()
@@ -62,7 +62,7 @@ class HueGradientCntr extends Component {
 
   disengage = (canvas) => {
     this.setState({ dragging: false, inCanvas: false });
-    
+
     this.props.unfocusCanvas();
   }
 

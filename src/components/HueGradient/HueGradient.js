@@ -48,7 +48,8 @@ class HueGradient extends Component {
         <div ref="wrapper" className="gradient-wrapper" style={{flex:'1',display:'flex'}}>
           <canvas ref="canvas" className="color-canvas" style={{position: 'absolute'}}/>
 
-          { (inCanvas || focus) && <Cursor mouse={mouse} zIndex={1} /> }
+          { (inCanvas || focus === 'hueGradient') && 
+            <Cursor mouse={mouse} zIndex={1} /> }
           
           <canvas ref="touch" className="touch-overlay"
             onMouseDown={(e) => engage(this.refs.canvas, e)}

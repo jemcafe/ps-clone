@@ -7,7 +7,7 @@ function Brush (props) {
   const stroke = '#000000';
   const strokeWidth = 1;
   const fill = 'transparent';
-  const r = radius;
+  const r = parseInt(radius, 10);
   const width = (r * 2) + (strokeWidth * 2);
   const height = (r * 2) + (strokeWidth * 2);
   const cx = r + strokeWidth;
@@ -33,7 +33,7 @@ function Brush (props) {
 
 Brush.propTypes = {
   mouse: PropTypes.object.isRequired,
-  radius: PropTypes.number.isRequired,
+  radius: PropTypes.string.isRequired,
   zIndex: PropTypes.number.isRequired,
 }
 

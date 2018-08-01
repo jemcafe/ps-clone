@@ -18,16 +18,16 @@ function ToolSettings (props) {
   return (
     <div className="tool-settings">
       <ul className="settings">
-        { t.move.selected        && <Move tool={t.move} {...props} /> }
-        { t.eyedropper.selected  && <Eyedropper tool={t.eyedropper} {...props} /> }
-        { t.paintBrush.selected  && <PaintBrush tool={t.paintBrush} {...props} /> }
-        { t.eraser.selected      && <Eraser tool={t.eraser} {...props} /> }
-        { t.paintBucket.selected && <PaintBucket tool={t.paintBucket} {...props} /> }
-        { t.pen.selected         && <Pen tool={t.pen} {...props} /> }
-        { t.shape.selected       && <Shape tool={t.shape} {...props} /> }
-        { t.magnify.selected     && <Magnify tool={t.magnify} {...props} /> }
-        { t.hand.selected        && <Hand tool={t.hand} {...props} /> }
-        { t.ellipsis.selected    && <Ellipsis tool={t.ellipsis} {...props} /> }
+        { t.tool === 'move'        && <Move tool={t.move} {...props} /> }
+        { t.tool === 'eyedropper'  && <Eyedropper tool={t.eyedropper} {...props} /> }
+        { t.tool === 'paintBrush'  && <PaintBrush tool={t.paintBrush} {...props} /> }
+        { t.tool === 'eraser'      && <Eraser tool={t.eraser} {...props} /> }
+        { t.tool === 'paintBucket' && <PaintBucket tool={t.paintBucket} {...props} /> }
+        { t.tool === 'pen'         && <Pen tool={t.pen} {...props} /> }
+        { t.tool === 'shape'       && <Shape tool={t.shape} {...props} /> }
+        { t.tool === 'magnify'     && <Magnify tool={t.magnify} {...props} /> }
+        { t.tool === 'hand'        && <Hand tool={t.hand} {...props} /> }
+        { t.tool === 'ellipsis'    && <Ellipsis tool={t.ellipsis} {...props} /> }
       </ul>
 
       <div className="workspace-presets">

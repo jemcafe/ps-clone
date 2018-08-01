@@ -5,27 +5,29 @@ import Cursor from './Cursor/Cursor';
 
 class Canvas extends Component {
   componentDidMount () {
-    // const { initCanvas } = this.props;
-    // window.addEventListener("resize", () => initCanvas(this.refs));
-    // initCanvas(this.refs);
-    console.log(this.refs);
+    const { initCanvas } = this.props;
+    window.addEventListener("resize", () => initCanvas(this.refs));
+    initCanvas(this.refs);
+    // console.log('Canvas offsetLeft', this.refs.canvasWrapper.offsetLeft);
+    // console.log('Canvas offsetLeft', this.refs.layer_1.offsetLeft);
   }
 
-  // componentWillUnmount() {
-  //   const { initCanvas } = this.props;
-  //   window.removeEventListener("resize", () => initCanvas(this.refs));
-  // }
+  componentWillUnmount() {
+    const { initCanvas } = this.props;
+    window.removeEventListener("resize", () => initCanvas(this.refs));
+  }
 
   render () {
     const { 
       project: p,
       layers,
       tools,
-      canvasIsBigger,
+      focus,
       mouse,
+      inCanvasArea,
+      canvasIsBigger,
       engage,
-      updateMousePosition,
-      inCanvasArea
+      updateMousePosition
     } = this.props;
 
     // styles
@@ -33,24 +35,30 @@ class Canvas extends Component {
       wrapper: {
         width: `${p.width.size}px`,
         height: `${p.height.size}px`,
-        padding: canvasIsBigger ? '100px' : null
-      }
+        // padding: canvasIsBigger ? '100px' : null
+      },
+      layer: (e) => ({
+        visibility: e.visible ? 'visible' : 'hidden'
+      })
     }
 
     return (
-      <div className="canvas-wrapper" style={style.wrapper}>
+      <div className="canvas-wrapper" ref="canvasWrapper" style={style.wrapper}>
 
         { layers.map((e, i) => (
           <canvas key={e.id} 
             ref={`layer_${e.id}`} 
             className={`layer-${e.id}`}
+            style={style.layer(e)}
             width={p.width.size} 
             height={p.height.size}/>
         )) }
 
-        {/* { (inCanvasArea) && <Cursor tools={tools} mouse={mouse} zIndex={1} /> } */}
+        { (inCanvasArea || focus === 'canvas') && 
+          <Cursor tools={tools} mouse={mouse} zIndex={1} /> }
 
-        <canvas className="touch-overlay" 
+        <canvas className="touch-overlay"
+          ref="touch" 
           width={p.width.size} 
           height={p.height.size}
           onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
@@ -64,6 +72,7 @@ class Canvas extends Component {
 Canvas.propTypes = {
   project: PropTypes.object.isRequired,
   layers: PropTypes.array.isRequired,
+  tools: PropTypes.object.isRequired,
   mouse: PropTypes.object.isRequired,
   engage: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired,

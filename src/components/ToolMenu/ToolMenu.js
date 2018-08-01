@@ -27,12 +27,12 @@ function ToolMenu (props) {
 
   const classNames = {
     tools: isCollapsed ? 'tools-collapsed' : 'tools',
+    tool: (e) => t.tool === e.name ? ' selected' : '',
     color: isCollapsed ? 'color-collapsed' : 'color'
   }
 
   const listOfTools = tools.map((e, i) => {
-    const selected = t[e.name].selected ? ' selected' : '';
-    return <li key={i} className={`tool${selected}`} title={e.name} onClick={() => selectTool(e.name)}><i className={e.icon}></i></li>
+    return <li key={i} className={`tool${classNames.tool(e)}`} title={e.name} onClick={() => selectTool(e.name)}><i className={e.icon}></i></li>
   });
 
   return (

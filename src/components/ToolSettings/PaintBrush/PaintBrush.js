@@ -11,7 +11,7 @@ function PaintBrush (props) {
   return (
     <Aux>
       <ToolPresets icon={'icon-paint-brush'} />
-      <Brush tool={tool} />
+      <Brush tool={tool} {...props}/>
       <Mode tool={tool} />
       <Opacity tool={tool} {...props} />
     </Aux>

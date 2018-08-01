@@ -16,11 +16,11 @@ const initialState = {
     {
       id: 1,
       name: 'Untitled-1',
-      width: { size: '1000', units: 'Pixels' },
-      height: { size: '1000', units: 'Pixels' },
+      width: { size: '400', units: 'Pixels' },
+      height: { size: '400', units: 'Pixels' },
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
-      background: 'white',
+      background: '#ffffff',
       canvasLayer: 3,
       layer: 0,
       layers: [

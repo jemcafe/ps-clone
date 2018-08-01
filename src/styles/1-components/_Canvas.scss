@@ -4,7 +4,8 @@
   // align-items: flex-start;
   text-align: left;
   // padding: 100px;
-  background: rgb(158, 160, 255);
+  background-image: url('../assets/images/canvas_bkgd_texture.png');
+  // background: rgb(158, 160, 255);
 
   > canvas {
     position: absolute;

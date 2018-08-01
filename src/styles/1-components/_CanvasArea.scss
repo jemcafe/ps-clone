@@ -5,4 +5,8 @@
   overflow: auto;
   background: $darkergray;
   // cursor: none;
+
+  .visible {
+    visibility: visible;
+  }
 }

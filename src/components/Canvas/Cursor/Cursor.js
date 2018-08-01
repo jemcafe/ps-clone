@@ -6,8 +6,8 @@ function Cursor (props) {
 
   return (
     <Aux>
-      { t.paintBrush.selected && <Brush radius={t.paintBrush.radius} {...props} /> }
-      { t.eraser.selected && <Brush radius={t.eraser.radius} {...props} /> }
+      { t.tool === 'paintBrush' && <Brush radius={t.paintBrush.radius} {...props} /> }
+      { t.tool === 'eraser'     && <Brush radius={t.eraser.radius} {...props} /> }
     </Aux>
   );
 }

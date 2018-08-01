@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { updateOpacity, updateStrokeWidth, zoom } from '../redux/reducer/tools/actions';
+import { updateBrushRadius, updateOpacity, updateStrokeWidth, zoom } from '../redux/reducer/tools/actions';
 
 import ToolSettings from '../components/ToolSettings/ToolSettings';
 
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  updateBrushRadius,
   updateOpacity,
   updateStrokeWidth,
   zoom

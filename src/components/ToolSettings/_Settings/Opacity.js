@@ -88,7 +88,7 @@ class Opacity extends Component {
           <div className="range-wrapper">
             <input ref={input => input && input.focus()} 
               type="range" min="0" max="100" 
-              value={parseInt(tool.opacity, 10)} 
+              value={ parseInt(tool.opacity, 10) } 
               onChange={ this.handleRangeChange }
               onBlur={ this.hideDropdown }/>
           </div>

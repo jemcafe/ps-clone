@@ -16,41 +16,46 @@ class CanvasArea extends Component {
   }
 
   render () {
-    const { 
-      project,
+    const {
+      hasLayers,
+      focus,
+      mouse,
+      inCanvasArea,
       canvasIsBigger,
-      updateMousePosition,
-      detectCanvasArea
+      updateMousePosition
     } = this.props;
 
     const style = {
       canvasArea: !canvasIsBigger ? {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center'
       } : null
     }
 
     return (
       <div ref="canvasArea" id="canvas-area" 
         style={style.canvasArea}
-        onMouseMove={(e) => updateMousePosition(e)}
-        onMouseOver={() => detectCanvasArea(true)}
-        onMouseLeave={() => detectCanvasArea(false)}>
+        onMouseMove={(e) => updateMousePosition(e)}>
 
-        { project.layers.length > 0 && 
-          <Canvas {...this.props} /> }
+        { hasLayers && 
+          <Canvas 
+            focus={ focus }
+            mouse={ mouse }
+            inCanvasArea={ inCanvasArea }
+            canvasIsBigger={ canvasIsBigger }
+            updateMousePosition={ updateMousePosition } /> }
       </div>
     );
   }
 }
 
 CanvasArea.propTypes = {
-  project: PropTypes.object.isRequired,
-  updateDimensions: PropTypes.func.isRequired,
-  updateMousePosition: PropTypes.func.isRequired,
+  mouse: PropTypes.object.isRequired,
+  inCanvasArea: PropTypes.bool.isRequired,
   canvasIsBigger: PropTypes.bool,
-  detectCanvasArea: PropTypes.func.isRequired
+  updateDimensions: PropTypes.func.isRequired,
+  updateMousePosition: PropTypes.func.isRequired
 };
 
 export default CanvasArea;

@@ -5,7 +5,7 @@ import {
 } from './actions';
 
 const initialState = {
-  focus: false,
+  focus: null,
   onMouseMove: null,
   onMouseUp: null,
   onMouseLeave: null,

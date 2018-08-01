@@ -11,7 +11,7 @@ function Eraser (props) {
   return (
     <Aux>
       <ToolPresets icon={'icon-eraser'} />
-      <Brush />
+      <Brush tool={tool} {...props}/>
       <Mode />
       <Opacity tool={tool} {...props} />
     </Aux>

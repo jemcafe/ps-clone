@@ -6,8 +6,11 @@
     outline: none;  // tabIndex
     
     > div:first-child { // radius number and brush image
-      padding: 0 6px;
-      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 20px;
+      margin: 0 10px 0 6px;
       @include user-select(none);
 
       .img {  // brush image

@@ -8,52 +8,45 @@ import {
 } from './actions';
 
 const initialState = {
+  tool: 'paintBrush',
   move: {
-    selected: false,
     select: 'Layer'
   },
   eyedropper: {
-    selected: false,
     sampleSize: 'Point Sample'
   },
   paintBrush: {
-    selected: true,
     brush: 'Hard Round',
-    radius: 10,
+    radius: '10px',
     opacity: '100%',
     mode: 'Normal'
   },
   eraser: {
-    selected: false,
     brush: 'Hard Round',
-    radius: 10,
+    radius: '10px',
     opacity: '100%',
     mode: 'Brush'
   },
   paintBucket: {
-    selected: false,
     opacity: '100%'
   },
   pen: {
-    selected: false,
     type: 'Path',
     strokeWidth: '1px'
   },
   shape: {
-    selected: false,
     type: 'Path',
     strokeWidth: '1px'
   },
   magnify: {
-    selected: false,
     in: true, 
     out: false
   },
   hand: {
-    selected: false
+    
   },
   ellipsis: {
-    selected: false
+
   }
 };
 
