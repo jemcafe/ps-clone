@@ -7,23 +7,32 @@ import { removeProject, selectTab } from '../redux/reducer/projects/actions';
 class ProjectsCntr extends Component {
   constructor () {
     super();
-    this.state = { width: 0 }
+    this.state = { height: 0 }
   }
 
   updateDimensions = (refs) => {
-    const { wrapper: w } = refs;
-    if (w) this.setState({ width: w.clientWidth });
+    const { wrapper: w, nav: n } = refs;
+    if (w && n) {
+      this.setState({ 
+        height: w.clientHeight - n.offsetHeight
+      });
+    }
+  }
+
+  removeProject = (e, i) => {
+    e.stopPropagation(); 
+    this.props.removeProject(i);
   }
 
   render () {
     return (
       <Projects 
-        width={this.state.width}
-        updateDimensions={this.updateDimensions}
-        projects={this.props.projects.projects}
-        tab={this.props.projects.tab}
-        removeProject={this.props.removeProject}
-        selectTab={this.props.selectTab}
+        height={ this.state.height }
+        updateDimensions={ this.updateDimensions }
+        projects={ this.props.projects.projects }
+        tab={ this.props.projects.tab }
+        removeProject={ this.removeProject }
+        selectTab={ this.props.selectTab }
         children={ this.props.children } />
     );
   }

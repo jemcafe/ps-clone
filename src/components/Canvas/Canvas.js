@@ -5,16 +5,14 @@ import Cursor from './Cursor/Cursor';
 
 class Canvas extends Component {
   componentDidMount () {
-    const { initCanvas } = this.props;
-    window.addEventListener("resize", () => initCanvas(this.refs));
+    const { initCanvas, updateDimensions } = this.props;
+    window.addEventListener("resize", () => updateDimensions(this.refs));
     initCanvas(this.refs);
-    // console.log('Canvas offsetLeft', this.refs.canvasWrapper.offsetLeft);
-    // console.log('Canvas offsetLeft', this.refs.layer_1.offsetLeft);
   }
 
   componentWillUnmount() {
-    const { initCanvas } = this.props;
-    window.removeEventListener("resize", () => initCanvas(this.refs));
+    const { updateDimensions } = this.props;
+    window.removeEventListener("resize", () => updateDimensions(this.refs));
   }
 
   render () {
@@ -35,7 +33,7 @@ class Canvas extends Component {
       wrapper: {
         width: `${p.width.size}px`,
         height: `${p.height.size}px`,
-        // padding: canvasIsBigger ? '100px' : null
+        margin: 'auto',
       },
       layer: (e) => ({
         visibility: e.visible ? 'visible' : 'hidden'
@@ -43,7 +41,7 @@ class Canvas extends Component {
     }
 
     return (
-      <div className="canvas-wrapper" ref="canvasWrapper" style={style.wrapper}>
+      <div ref="canvasWrapper" className="canvas-wrapper" style={style.wrapper}>
 
         { layers.map((e, i) => (
           <canvas key={e.id} 
@@ -54,7 +52,7 @@ class Canvas extends Component {
             height={p.height.size}/>
         )) }
 
-        { (inCanvasArea || focus === 'canvas') && 
+        { (focus === 'canvas') && 
           <Cursor tools={tools} mouse={mouse} zIndex={1} /> }
 
         <canvas className="touch-overlay"
@@ -62,7 +60,7 @@ class Canvas extends Component {
           width={p.width.size} 
           height={p.height.size}
           onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
-          onMouseMove={(e) => updateMousePosition(e)}/>
+          onMouseMove={(e) => updateMousePosition(e, this.refs)}/>
 
       </div>
     );

@@ -18,11 +18,12 @@ class CanvasArea extends Component {
   render () {
     const {
       hasLayers,
-      focus,
       mouse,
       inCanvasArea,
       canvasIsBigger,
-      updateMousePosition
+      updateDimensions,
+      updateMousePosition,
+      detectCanvasArea
     } = this.props;
 
     const style = {
@@ -34,16 +35,20 @@ class CanvasArea extends Component {
     }
 
     return (
-      <div ref="canvasArea" id="canvas-area" 
+      <div ref="canvasArea" 
+        id="canvas-area" 
         style={style.canvasArea}
-        onMouseMove={(e) => updateMousePosition(e)}>
-
+        onScroll={() => updateDimensions(this.refs)}
+        onMouseMove={(e) => updateMousePosition(e)}
+        onMouseOver={() => detectCanvasArea(true)}
+        onMouseLeave={() => detectCanvasArea(false)}>
+        
         { hasLayers && 
-          <Canvas 
-            focus={ focus }
+          <Canvas
             mouse={ mouse }
             inCanvasArea={ inCanvasArea }
             canvasIsBigger={ canvasIsBigger }
+            updateDimensions={ updateDimensions }
             updateMousePosition={ updateMousePosition } /> }
       </div>
     );

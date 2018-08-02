@@ -15,7 +15,7 @@ class Projects extends Component {
 
   render () {
     const {
-      width,
+      height,
       projects: p,
       removeProject,
       tab,
@@ -32,17 +32,15 @@ class Projects extends Component {
 
     const style = {
       container: p[0].id ? {
-        paddingTop: '34px',
-        boxSizing: 'border-box'
-      } : null,
-      nav: p[0].id ? {
-        width: `${width}px`
-      } : null
+        height: `${height}px`
+      } : {
+        height: '100%'
+      }
     }
 
     const tabList = p[0].id && p.map((project, i) => (
       <li key={project.id} className={ classNames.tab(i) } onClick={() => selectTab(i)}>
-        <div onClick={(e) => {e.stopPropagation(); removeProject(i);}}><i className="icon-times"></i></div>
+        <div onClick={(e) => removeProject(e, i)}><i className="icon-times"></i></div>
         { project.name }
       </li>
     ));
@@ -54,7 +52,7 @@ class Projects extends Component {
       <div ref="wrapper" id="projects">
         { p[0].id && 
         <Aux>
-          <nav style={style.nav}>
+          <nav ref="nav" style={style.nav}>
             <ul className="tabs">{ tabList }</ul>
             <div>
               <div className="double-angle-btn">

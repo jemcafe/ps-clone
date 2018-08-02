@@ -7,11 +7,10 @@ import CanvasArea from '../components/CanvasArea/CanvasArea';
 class CanvasAreaCntr extends Component {
   constructor () {
     super();
-    this.state = { 
-      width: 0,
-      height: 0,
-      offset: { top: 0, left: 0, height: 0, width: 0 },
+    this.state = {
       mouse: { x: 0, y: 0 },
+      canvasMouse: { x: 0, y: 0 },
+      canvasMouseOffset: { x: 0, y: 0 },
       hasLayers: false,
       canvasIsBigger: false,
       inCanvasArea: false
@@ -31,39 +30,42 @@ class CanvasAreaCntr extends Component {
   }
 
   updateDimensions = (refs) => {
-    const { canvasArea: ca } = refs;
-    if (ca) {
-      this.setState(prev => ({ 
-        width: ca.clientWidth,
-        height: ca.clientHeight,
-        offset: { 
-          top: ca.offsetTop, 
-          left: ca.offsetLeft,
-          height: ca.offsetHeight + ca.offsetTop,
-          width: ca.offsetWidth + ca.offsetLeft
-        }
-      }));
-    }
+    const { canvasArea, canvasWrapper } = refs;
+
+    this.setState(prev => {
+      const canvasMouseOffset = {
+        x: prev.canvasMouseOffset.x,
+        y: prev.canvasMouseOffset.y,
+      };
+
+      if (canvasWrapper && canvasArea) {
+        console.log('scrollLeft', canvasArea.scrollLeft);
+        canvasMouseOffset.x = canvasWrapper.offsetLeft + canvasArea.scrollLeft;
+        canvasMouseOffset.y = canvasWrapper.offsetTop + canvasArea.scrollTop;
+      }
+
+      return { canvasMouseOffset };
+    });
   }
 
   updateMousePosition = ({ nativeEvent: e }) => {
     if (e) {
-      this.setState(prev => { 
-        const outCanvasArea = 
-          e.clientY < prev.offset.top ||
-          e.clientX < prev.offset.left ||
-          e.clientY > prev.offset.height ||
-          e.clientX > prev.offset.width;
-
-        return {
-          mouse: { 
-            x: e.clientX + window.pageXOffset, 
-            y: e.clientY + window.pageYOffset
-          },
-          inCanvasArea: outCanvasArea ? false : true
-        }
+      this.setState(prev => {
+        const mouse = {
+          x: e.clientX + window.pageXOffset,
+          y: e.clientY + window.pageYOffset
+        };
+        const canvasMouse = {
+          x: mouse.x + prev.canvasMouseOffset.x,
+          y: mouse.y + prev.canvasMouseOffset.y
+        };
+        return { mouse, canvasMouse };
       });
     }
+  }
+
+  detectCanvasArea = (bool) => {
+    this.setState({ inCanvasArea: bool });
   }
 
   render() {
@@ -75,24 +77,26 @@ class CanvasAreaCntr extends Component {
     // console.log('CanvasArea inCanvasArea:', this.state.inCanvasArea);
     // console.log('CanvasArea hasLayers:', this.state.hasLayers);
     // console.log('CanvasArea mouse:', this.state.mouse);
+    console.log('CanvasArea canvasMouse:', this.state.canvasMouse);
+    console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
 
     return (
       <CanvasArea 
         project={projects[tab]}
-        focus={this.props.focusLayer.focus}
         mouse={this.state.mouse}
+        canvasMouse={this.state.canvasMouse}
         hasLayers={this.state.hasLayers}
         canvasIsBigger={this.state.canvasIsBigger}
         inCanvasArea={this.state.inCanvasArea}
         updateDimensions={this.updateDimensions}
-        updateMousePosition={this.updateMousePosition}  />
+        updateMousePosition={this.updateMousePosition}
+        detectCanvasArea={this.detectCanvasArea} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  projects: state.projects,
-  focusLayer: state.focusLayer
+  projects: state.projects
 });
 
 // const mapDispatchToProps = { }

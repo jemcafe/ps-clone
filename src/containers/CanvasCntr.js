@@ -13,7 +13,7 @@ class CanvasCntr extends Component {
     this.state = { 
       project: projects[tab],
       layers: projects[tab].layers.reverse(),
-      // mouse: { x: 0, y: 0 },
+      mouse: { x: 0, y: 0 },
       offset: { top: 0, left: 0 },
       // inCanvas: false,
       dragging: false,
@@ -33,9 +33,8 @@ class CanvasCntr extends Component {
   }
 
   initCanvas = (refs) => {
-    const { canvasWrapper, layer_1 } = refs;
-
-    if (canvasWrapper) this.updateOffset(canvasWrapper);
+    const { layer_1 } = refs;
+    this.updateOffset(refs);
     if (layer_1) this.setCanvasColor(layer_1);
   }
 
@@ -108,7 +107,7 @@ class CanvasCntr extends Component {
       this.saveBrushPoints(mouse);
 
       // The mouse position is updated
-      this.props.updateMousePosition(e, true);
+      this.props.updateMousePosition(e);
     }
   }
 
@@ -129,11 +128,14 @@ class CanvasCntr extends Component {
     context.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  updateOffset = (canvasWrapper) => {
-    this.setState({ offset: {
-      top: canvasWrapper.offsetTop, 
-      left: canvasWrapper.offsetLeft
-    }});
+  updateOffset = (refs) => {
+    const { canvasWrapper } = refs;
+    if (canvasWrapper) {
+      this.setState({ offset: {
+        top: canvasWrapper.offsetTop, 
+        left: canvasWrapper.offsetLeft
+      }});
+    }
   }
 
   canvasMousePosition = (canvas, e) => {
@@ -159,10 +161,12 @@ class CanvasCntr extends Component {
       <Canvas 
         project={ this.state.project }
         layers={ this.state.layers } 
+        focus={ this.props.focusLayer.focus }
         // inCanvas={ this.state.inCanvas }
         initCanvas={ this.initCanvas }
         engage={ this.engage }
         // detectCanvas={ this.detectCanvas }
+        updateOffset={ this.updateOffset }
         {...this.props} />
     );
   }
@@ -171,7 +175,8 @@ class CanvasCntr extends Component {
 const mapStateToProps = (state) => ({
   projects: state.projects,
   tools: state.tools,
-  color: state.color
+  color: state.color,
+  focusLayer: state.focusLayer
 });
 
 const mapDispatchToProps = {
