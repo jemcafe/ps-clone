@@ -150,10 +150,10 @@ class CanvasAreaCntr extends Component {
     }
   }
 
-  saveBrushPoints = (mouse) => {
+  saveBrushPoints = (canvasMouse) => {
     this.setState(prev => {
       const brushPoints = prev.brushPoints;
-      prev.brushPoints.push(mouse);
+      prev.brushPoints.push(canvasMouse);
       return { brushPoints };
     });
   }
@@ -180,7 +180,7 @@ class CanvasAreaCntr extends Component {
     // console.log('CanvasArea hasLayers:', this.state.hasLayers);
     // console.log('CanvasArea mouse:', this.state.mouse);
     // console.log('CanvasArea canvasMouse:', this.state.canvasMouse);
-    console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
+    // console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
 
     return (
       <CanvasArea 
@@ -189,7 +189,7 @@ class CanvasAreaCntr extends Component {
         hasLayers={ this.state.layers.length > 0 }
         mouse={ this.state.mouse }
         canvasMouse={ this.state.canvasMouse }
-        canvasIsBigger={ this.state.canvasIsBigger }
+        // canvasIsBigger={ this.state.canvasIsBigger }
         inCanvas={ this.state.inCanvas}
         initCanvas={ this.initCanvas }
         updateDimensions={ this.updateDimensions }

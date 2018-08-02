@@ -20,6 +20,6 @@ class WindowsCntr extends Component {
 
 const mapStateToProps = (state) => ({
   windows: state.windows
-})
+});
 
 export default connect(mapStateToProps)(WindowsCntr);

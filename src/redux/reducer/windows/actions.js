@@ -8,7 +8,7 @@ export const openWindow = (property) => ({
   type: OPEN_WINDOW,
   payload: (state) => {
     // console.log(property, 'open');
-    return {...state, [property]: true };
+    return {...state, isOpen: true, [property]: true };
   }
 });
 
@@ -16,6 +16,6 @@ export const closeWindow = (property) => ({
   type: CLOSE_WINDOW,
   payload: (state) => {
     // console.log(property, 'closed');
-    return {...state, [property]: false };
+    return {...state, isOpen: false, [property]: false };
   }
 });

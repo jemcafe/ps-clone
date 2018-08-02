@@ -24,7 +24,7 @@ class CanvasArea extends Component {
       hasLayers,
       mouse,
       inCanvas,
-      canvasIsBigger,
+      // canvasIsBigger,
       updateDimensions,
       updateMousePosition,
       engage,
@@ -50,9 +50,7 @@ class CanvasArea extends Component {
         onMouseMove={(e) => updateMousePosition(e)}>
         
         { hasLayers && 
-          <div ref="canvasWrapper" 
-            className="canvas-wrapper" 
-            style={style.canvasWrapper}>
+          <div ref="canvasWrapper" className="canvas-wrapper" style={style.canvasWrapper}>
 
             { layers.map((e, i) => (
               <canvas key={e.id} 
@@ -64,7 +62,7 @@ class CanvasArea extends Component {
             )) }
 
             { (inCanvas || focus === 'canvas') && 
-              <Cursor tools={tools} mouse={mouse} zIndex={1} /> }
+              <Cursor tools={tools} mouse={mouse} zIndex={0} /> }
 
             <canvas className="touch-overlay"
               ref="touch" 

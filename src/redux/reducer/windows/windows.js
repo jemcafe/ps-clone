@@ -4,6 +4,7 @@ import {
 } from './actions';
 
 const initialState = {
+  isOpen: false,
   newProject: false,
   colorPicker: false
 };
