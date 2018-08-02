@@ -9,13 +9,11 @@ export const focusCanvas = ({
   focus, 
   onMouseMove, 
   onMouseUp, 
-  onMouseLeave, 
-  offset = { width:0, height:0 } 
+  onMouseLeave
 }) => ({
   type: FOCUS_CANVAS,
   payload: (state) => {
-    console.log('focusLayer offset', offset);
-    return {...state, focus, onMouseMove, onMouseUp, onMouseLeave, offset };
+    return {...state, focus, onMouseMove, onMouseUp, onMouseLeave };
   }
 });
 

@@ -39,7 +39,12 @@ class Brush extends Component {
     return (
       <li className="brush">
         <div className="brush-select" tabIndex="0" onClick={ this.toggleDropdown }>
-          <div><div className="img"></div>{ parseInt(tool.radius, 10) }</div>
+          <div>
+            <div className="img">
+              <div style={{background:'#ffffff',borderRadius:'50%',width:'100%',height:'100%'}}></div>
+            </div>
+            { parseInt(tool.radius, 10) }
+          </div>
 
           <div className={classNames.button}>
             <i className="icon-angle-down"></i>

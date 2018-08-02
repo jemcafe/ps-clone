@@ -6,7 +6,7 @@ class TabGroup extends Component {
     const { refs } = this;
     const { tabGroup, updateOffset } = this.props;
     window.addEventListener("resize", () => updateOffset({refs, tabGroup}));
-    updateOffset({refs, tabGroup})
+    updateOffset({refs, tabGroup});
   }
 
   componentWillUnmount () {

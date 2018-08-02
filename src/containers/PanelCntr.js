@@ -73,14 +73,14 @@ class PanelCntr extends Component {
   render () {
     return (
       <Panel
-        align={this.props.align}
-        isTools={this.props.isTools}
-        isCollapsed={this.state.isCollapsed}
-        tabGroups={this.state.tabGroups} 
-        togglePanels={this.togglePanels}
-        togglePanel={this.togglePanel}
-        changeTab={this.changeTab}
-        updateOffset={this.updateOffset}/>
+        align={ this.props.align }
+        isTools={ this.props.isTools }
+        isCollapsed={ this.state.isCollapsed }
+        tabGroups={ this.state.tabGroups } 
+        togglePanels={ this.togglePanels }
+        togglePanel={ this.togglePanel }
+        changeTab={ this.changeTab }
+        updateOffset={ this.updateOffset }/>
     );
   }
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Canvas from '../../containers/CanvasCntr';
+import Cursor from './Cursor/Cursor';
 
 class CanvasArea extends Component {
   componentDidMount () {
-    const { updateDimensions } = this.props;
+    const { initCanvas, updateDimensions } = this.props;
     window.addEventListener("resize", () => updateDimensions(this.refs));
-    updateDimensions(this.refs);
+    initCanvas(this.refs);
   }
 
   componentWillUnmount () {
@@ -17,47 +17,76 @@ class CanvasArea extends Component {
 
   render () {
     const {
+      project: p,
+      layers,
+      tools,
+      focus,
       hasLayers,
       mouse,
-      inCanvasArea,
+      inCanvas,
       canvasIsBigger,
       updateDimensions,
       updateMousePosition,
-      detectCanvasArea
+      engage,
+      detectCanvas
     } = this.props;
 
     const style = {
-      canvasArea: !canvasIsBigger ? {
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center'
-      } : null
+      canvasWrapper: {
+        width: `${p.width.size}px`,
+        height: `${p.height.size}px`,
+        margin: 'auto',
+      },
+      layer: (e) => ({
+        visibility: e.visible ? 'visible' : 'hidden'
+      })
     }
 
     return (
       <div ref="canvasArea" 
-        id="canvas-area" 
-        style={style.canvasArea}
+        id="canvas-area"
         onScroll={() => updateDimensions(this.refs)}
-        onMouseMove={(e) => updateMousePosition(e)}
-        onMouseOver={() => detectCanvasArea(true)}
-        onMouseLeave={() => detectCanvasArea(false)}>
+        onMouseOver={() => updateDimensions(this.refs)}
+        onMouseMove={(e) => updateMousePosition(e)}>
         
         { hasLayers && 
-          <Canvas
-            mouse={ mouse }
-            inCanvasArea={ inCanvasArea }
-            canvasIsBigger={ canvasIsBigger }
-            updateDimensions={ updateDimensions }
-            updateMousePosition={ updateMousePosition } /> }
+          <div ref="canvasWrapper" 
+            className="canvas-wrapper" 
+            style={style.canvasWrapper}>
+
+            { layers.map((e, i) => (
+              <canvas key={e.id} 
+                ref={`layer_${e.id}`} 
+                className={`layer-${e.id}`}
+                style={style.layer(e)}
+                width={p.width.size} 
+                height={p.height.size}/>
+            )) }
+
+            { (inCanvas || focus === 'canvas') && 
+              <Cursor tools={tools} mouse={mouse} zIndex={1} /> }
+
+            <canvas className="touch-overlay"
+              ref="touch" 
+              width={p.width.size} 
+              height={p.height.size}
+              onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
+              onMouseMove={(e) => updateMousePosition(e, this.refs)}
+              onMouseOver={() => detectCanvas(true)}
+              onMouseLeave={() => detectCanvas(false)}/>
+
+          </div> }
       </div>
     );
   }
 }
 
 CanvasArea.propTypes = {
+  project: PropTypes.object.isRequired,
+  layers: PropTypes.array.isRequired,
+  tools: PropTypes.object.isRequired,
   mouse: PropTypes.object.isRequired,
-  inCanvasArea: PropTypes.bool.isRequired,
+  inCanvas: PropTypes.bool.isRequired,
   canvasIsBigger: PropTypes.bool,
   updateDimensions: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired
