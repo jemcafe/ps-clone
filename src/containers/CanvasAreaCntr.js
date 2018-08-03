@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import { saveImageData } from '../redux/reducer/projects/actions';
 import { focusCanvas, unfocusCanvas } from '../redux/reducer/focusLayer/actions';
 
 import CanvasArea from '../components/CanvasArea/CanvasArea';
@@ -81,10 +82,13 @@ class CanvasAreaCntr extends Component {
   }
 
   engage = (canvas, e) => {
+    const { focusCanvas } = this.props;
+
     this.setState({ dragging: true });
+
     this.putPoint(canvas, e, true);  // A point is drawn
 
-    this.props.focusCanvas({
+    focusCanvas({
       focus: 'canvas', 
       onMouseMove: (e) => this.putPoint(canvas, e),
       onMouseUp: () => this.disengage(canvas),
@@ -93,10 +97,15 @@ class CanvasAreaCntr extends Component {
   }
 
   disengage = (canvas) => {
-    this.setState({ dragging: false, brushPoints: [] });
-    canvas.getContext('2d').beginPath();  // The path is reset, so the paths aren't connected
+    const { unfocusCanvas, saveImageData } = this.props;
+    const ctx = canvas.getContext('2d');
 
-    this.props.unfocusCanvas();
+    this.setState({ dragging: false, brushPoints: [] });
+
+    ctx.beginPath(); // The path is reset, so the paths aren't connected
+
+    unfocusCanvas();
+    saveImageData(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
   }
 
   putPoint = (canvas, e, fire) => {
@@ -153,18 +162,18 @@ class CanvasAreaCntr extends Component {
   saveBrushPoints = (canvasMouse) => {
     this.setState(prev => {
       const brushPoints = prev.brushPoints;
-      prev.brushPoints.push(canvasMouse);
+      brushPoints.push(canvasMouse);
       return { brushPoints };
     });
   }
 
   setCanvasColor = (canvas) => { 
-    const context = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     const { background } = this.state.project;
     
     // layer color
-    context.fillStyle = background;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   detectCanvas = (bool) => {
@@ -210,6 +219,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  saveImageData,
   focusCanvas,
   unfocusCanvas
 };

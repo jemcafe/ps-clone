@@ -10,7 +10,8 @@ export const
   SELECT_LAYER = 'SELECT_LAYER',
   LOCK_LAYER = 'LOCK_LAYER',
   UNLOCK_LAYER = 'UNLOCK_LAYER',
-  SHOW_LAYER = 'SHOW_LAYER';
+  SHOW_LAYER = 'SHOW_LAYER',
+  SAVE_IMAGE_DATA = 'SAVE_IMAGE_DATA';
 
 // Action Creators
 export const selectTab = (tab) => ({
@@ -36,7 +37,7 @@ export const createProject = (project) => ({
         name: 'Layer 1',
         visible: true, 
         locked: false, 
-        background: project.background,
+        imageData: null
       }],
       zoom: '100%'
     }
@@ -179,6 +180,19 @@ export const showLayer = (index) => ({
     layer.visible = !layer.visible;
 
     // console.log(`Show layer ${index}`, projects[tab].layers[index].visible);
+    return {...state, projects };
+  }
+})
+
+export const saveImageData = (imgData) => ({
+  type: SHOW_LAYER,
+  payload: (state) => {
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const { layers, layer } = project;
+    layers[layer].imgData = imgData;
+
+    console.log(`Save image data`, projects[tab].layers[layer].imgData);
     return {...state, projects };
   }
 })

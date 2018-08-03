@@ -7,7 +7,8 @@ import {
   SELECT_LAYER,
   LOCK_LAYER,
   UNLOCK_LAYER,
-  SHOW_LAYER
+  SHOW_LAYER,
+  SAVE_IMAGE_DATA
 } from './actions';
 
 const initialState = {
@@ -24,9 +25,9 @@ const initialState = {
       canvasLayer: 3,
       layer: 0,
       layers: [
-        { id: 1, name: 'Layer 1', visible: true, locked: false },
-        { id: 2, name: 'Layer 2', visible: true, locked: false },
-        { id: 3, name: 'Layer 3', visible: true, locked: false }
+        { id: 1, name: 'Layer 1', visible: true, locked: false, imgData: null },
+        { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null },
+        { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null }
       ],
       zoom: '100%'
     }
@@ -55,6 +56,8 @@ export default (state = initialState, action) => {
     case UNLOCK_LAYER:
       return payload(state);
     case SHOW_LAYER:
+      return payload(state);
+    case SAVE_IMAGE_DATA:
       return payload(state);
     default:
       return state;
