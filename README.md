@@ -10,3 +10,5 @@ A photoshop clone project (not including every feature) built with React, Redux 
 * npm-run-all
 
 ...in progress
+
+[Demo](https://jemcafe.github.io/ps-clone/)

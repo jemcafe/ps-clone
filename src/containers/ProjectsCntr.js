@@ -13,7 +13,6 @@ class ProjectsCntr extends Component {
   updateDimensions = (refs) => {
     const { wrapper: w, nav: n } = refs;
     if (w && n) {
-      console.log('Wrapper, Nav', w.clientHeight, n.offsetHeight);
       this.setState({ height: w.clientHeight - n.offsetHeight });
     }
   }
