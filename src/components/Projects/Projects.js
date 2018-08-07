@@ -1,4 +1,4 @@
-import React, { Component, Fragment as Aux } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import CanvasArea from '../../containers/CanvasAreaCntr';
@@ -19,7 +19,6 @@ class Projects extends Component {
     const {
       height,
       projects: p,
-      hasProjects,
       tab,
       removeProject,
       selectTab
@@ -34,42 +33,33 @@ class Projects extends Component {
     };
 
     const style = {
-      container: hasProjects ? {
+      container: {
         height: `${height}px`
-      } : {
-        height: '100%'
       }
     }
 
-    const tabList = hasProjects && p.map((project, i) => (
+    const tabList = p.map((project, i) => (
       <li key={project.id} className={ classNames.tab(i) } onClick={() => selectTab(i)}>
         <div onClick={(e) => removeProject(e, i)}><i className="icon-times"></i></div>
         { project.name }
       </li>
     ));
 
-    // canvas area
-    // const content = this.props.children;
-
     return (
       <div ref="wrapper" id="projects">
-        { hasProjects && 
-        <Aux>
-          <nav ref="nav" style={style.nav}>
-            <ul className="tabs">{ tabList }</ul>
-            <div>
-              <div className="double-angle-btn">
-                <i className="icon-angle-double-right"></i>
-              </div>
+        <nav ref="nav" style={style.nav}>
+          <ul className="tabs">{ tabList }</ul>
+          <div>
+            <div className="double-angle-btn">
+              <i className="icon-angle-double-right"></i>
             </div>
-          </nav>
-          <div className="container" style={style.container}>
-            {/* { content } */}
-            { p.map((e, i) => {
-              return tab === i ? <CanvasArea key={e.id} /> : null
-            }) }
           </div>
-        </Aux> }
+        </nav>
+        <div className="container" style={style.container}>
+          { p.map((e, i) => {
+            return tab === i ? <CanvasArea key={e.id} /> : null
+          }) }
+        </div>
       </div>
     );
   }

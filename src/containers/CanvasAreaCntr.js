@@ -22,7 +22,7 @@ class CanvasAreaCntr extends Component {
       canvasMouseOffset: { x: 0, y: 0 },
       dragging: false,
       brushPoints: [],
-      canvasIsBigger: false,
+      // canvasIsBigger: false,
       inCanvas: false
     }
   }
@@ -36,7 +36,7 @@ class CanvasAreaCntr extends Component {
     return {
       project: {...p},
       layers: [...p.layers].reverse(),
-      canvasIsBigger: (+p.width.size > prevState.width || +p.height.size > prevState.height)
+      // canvasIsBigger: (+p.width.size > prevState.width || +p.height.size > prevState.height)
     };
   }
 
@@ -58,7 +58,7 @@ class CanvasAreaCntr extends Component {
         canvasMouseOffset: {
           x: ca.scrollLeft - cw.offsetLeft,
           y: ca.scrollTop - cw.offsetTop
-        },
+        }
       }));
       updateScroll({ 
         x: ca.scrollLeft, 
@@ -232,7 +232,7 @@ class CanvasAreaCntr extends Component {
         hasLayers={ this.state.layers.length > 0 }
         mouse={ this.state.mouse }
         canvasMouse={ this.state.canvasMouse }
-        canvasIsBigger={ this.state.canvasIsBigger }
+        // canvasIsBigger={ this.state.canvasIsBigger }
         inCanvas={ this.state.inCanvas}
         initCanvas={ this.initCanvas }
         updateCanvasArea={ this.updateCanvasArea }

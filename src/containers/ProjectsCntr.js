@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment as Aux } from 'react';
 import Projects from '../components/Projects/Projects';
 
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ class ProjectsCntr extends Component {
   updateDimensions = (refs) => {
     const { wrapper: w, nav: n } = refs;
     if (w && n) {
+      console.log('Wrapper, Nav', w.clientHeight, n.offsetHeight);
       this.setState({ height: w.clientHeight - n.offsetHeight });
     }
   }
@@ -23,16 +24,20 @@ class ProjectsCntr extends Component {
   }
 
   render () {
+    const { projects } = this.props.projects;
+
     return (
-      <Projects 
-        projects={ this.props.projects.projects }
-        hasProjects={ this.props.projects.projects.length > 0 }
-        tab={ this.props.projects.tab }
-        height={ this.state.height }
-        updateDimensions={ this.updateDimensions }
-        removeProject={ this.removeProject }
-        selectTab={ this.props.selectTab }
-        children={ this.props.children } />
+      <Aux>
+        { projects.length > 0 &&  
+        <Projects 
+          projects={ this.props.projects.projects }
+          tab={ this.props.projects.tab }
+          height={ this.state.height }
+          updateDimensions={ this.updateDimensions }
+          removeProject={ this.removeProject }
+          selectTab={ this.props.selectTab }
+          children={ this.props.children } /> }
+      </Aux>
     );
   }
 }

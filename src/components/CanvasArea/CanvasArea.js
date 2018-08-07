@@ -24,7 +24,7 @@ class CanvasArea extends Component {
       hasLayers,
       mouse,
       inCanvas,
-      canvasIsBigger,
+      // canvasIsBigger,
       updateCanvasArea,
       updateMousePosition,
       engage,
@@ -32,10 +32,10 @@ class CanvasArea extends Component {
     } = this.props;
 
     const style = {
-      canvasArea: !canvasIsBigger ? {
+      canvasArea: {
         display: 'flex',
         alignItems: 'center'
-      } : null,
+      },
       canvasWrapper: {
         width: `${p.width.size}px`,
         height: `${p.height.size}px`,
@@ -90,7 +90,7 @@ CanvasArea.propTypes = {
   tools: PropTypes.object.isRequired,
   mouse: PropTypes.object.isRequired,
   inCanvas: PropTypes.bool.isRequired,
-  canvasIsBigger: PropTypes.bool,
+  // canvasIsBigger: PropTypes.bool,
   updateCanvasArea: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired
 };

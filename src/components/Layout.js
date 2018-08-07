@@ -1,4 +1,4 @@
-import React, { Fragment as Aux } from 'react';
+import React from 'react';
 
 // constants
 import toolbarItems from '../tabs/toolbarItems';
@@ -8,7 +8,7 @@ import tabGroups from '../tabs/tabGroups';
 import ToolBar from '../containers/ToolBarCntr';
 import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
-import CanvasArea from '../containers/CanvasAreaCntr';
+// import CanvasArea from '../containers/CanvasAreaCntr';
 import Panel from '../containers/PanelCntr';
 
 import Windows from '../containers/Windows/WindowsCntr';
@@ -19,9 +19,8 @@ import FocusLayer from './FocusLayer/FocusLayer';
 
 function Layout () {
   return (
-    <Aux>
     <div id="app-layout">
-      <ToolBar items={toolbarItems}/>
+      <ToolBar items={toolbarItems} />
       <section id="tool-settings">
         <ToolSettings />
       </section>
@@ -30,9 +29,7 @@ function Layout () {
           <Panel align={'L'} isTools={true} isCollapsed={true} />
         </section>
         <div id="documents">
-          <Projects>
-            <CanvasArea />
-          </Projects>
+          <Projects />
         </div>
         <section className="panels">
           <Panel align={'R'} tabGroups={tabGroups['1']} isCollapsed={true} />
@@ -40,10 +37,8 @@ function Layout () {
         </section>
       </div>
       <Windows />
-      {/* <NewProject /> */}
       <FocusLayer />
     </div>
-    </Aux>
   );
 }
 

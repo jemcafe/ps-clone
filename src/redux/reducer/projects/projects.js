@@ -15,24 +15,24 @@ import {
 const initialState = {
   tab: 0,
   projects: [
-    {
-      id: 1,
-      name: 'Untitled-1',
-      width: { size: '400', units: 'Pixels' },
-      height: { size: '400', units: 'Pixels' },
-      resolution: { size: '300', units: 'Pixels' },
-      colorMode: { mode: 'RGB' , bit: '8 bit' },
-      background: '#ffffff',
-      canvasLayer: 3,
-      layer: 0,
-      layers: [
-        { id: 1, name: 'Layer 1', visible: true, locked: false, imgData: null },
-        { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null },
-        { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null }
-      ],
-      zoom: '100%',
-      scroll: { x: 0, y: 0 }
-    }
+    // {
+    //   id: 1,
+    //   name: 'Untitled-1',
+    //   width: { size: '400', units: 'Pixels' },
+    //   height: { size: '400', units: 'Pixels' },
+    //   resolution: { size: '300', units: 'Pixels' },
+    //   colorMode: { mode: 'RGB' , bit: '8 bit' },
+    //   background: '#ffffff',
+    //   canvasLayer: 3,
+    //   layer: 0,
+    //   layers: [
+    //     { id: 1, name: 'Layer 1', visible: true, locked: false, imgData: null },
+    //     { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null },
+    //     { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null }
+    //   ],
+    //   zoom: '100%',
+    //   scroll: { x: 0, y: 0 }
+    // }
   ]
 };
 
