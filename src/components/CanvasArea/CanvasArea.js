@@ -30,7 +30,6 @@ class CanvasArea extends Component {
       engage,
       detectCanvas
     } = this.props;
-    console.log('is bigger', canvasIsBigger);
 
     const style = {
       canvasArea: !canvasIsBigger ? {
