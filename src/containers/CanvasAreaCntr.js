@@ -36,50 +36,59 @@ class CanvasAreaCntr extends Component {
     return {
       project: {...p},
       layers: [...p.layers].reverse(),
-      canvasIsBigger: (p.width.size > prevState.width || p.height.size > prevState.height)
+      canvasIsBigger: (+p.width.size > prevState.width || +p.height.size > prevState.height)
     };
   }
 
   initCanvas = (refs) => {
-    this.updateDimensions(refs);
+    this.updateCanvasArea(refs);
     this.updateScroll(refs);
     this.putCanvasColor(refs);
     this.putLayerImageData(refs);
   }
 
-  updateDimensions = (refs) => {
+  updateCanvasArea = (refs) => {
     const { canvasArea: ca, canvasWrapper: cw } = refs;
     const { updateScroll } = this.props;
     
-    if (cw && ca) {
+    if (ca && cw) {
       this.setState(prev => ({ 
         width: ca.clientWidth, 
         height: ca.clientHeight, 
         canvasMouseOffset: {
           x: ca.scrollLeft - cw.offsetLeft,
           y: ca.scrollTop - cw.offsetTop
-        }
+        },
       }));
-      updateScroll({ x: ca.scrollLeft, y: ca.scrollTop });
+      updateScroll({ 
+        x: ca.scrollLeft, 
+        y: ca.scrollTop 
+      });
     }
   }
 
   updateScroll = (refs) => {
-    const { canvasArea: ca, canvasWrapper: cw } = refs;
-
-    if (cw && ca) {
+    const { canvasArea: ca } = refs;
+    if (ca) {
       ca.scrollLeft = this.state.project.scroll.x;
       ca.scrollTop = this.state.project.scroll.y;
     }
   }
 
   putCanvasColor = (refs) => { 
-    const { background } = this.state.project;
+    const { width, height, layer, layers, background } = this.state.project;
+    const { saveImageData } = this.props;
     const { layer_1: canvas } = refs;
     const ctx = canvas.getContext('2d');
+    let imgData = null;
 
-    ctx.fillStyle = background;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // The first layer's initial background color
+    if (layer === 0 && !layers[0].imgData) {
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, width.size, height.size);
+      imgData = ctx.getImageData(0, 0, width.size, height.size);
+      saveImageData(imgData);
+    }
   }
 
   putLayerImageData = (refs) => {
@@ -213,6 +222,8 @@ class CanvasAreaCntr extends Component {
     // console.log('CanvasArea mouse:', this.state.mouse);
     // console.log('CanvasArea canvasMouse:', this.state.canvasMouse);
     // console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
+    // console.log('Width', this.state.project.width.size, this.state.width);
+    // console.log('Height', this.state.project.height.size, this.state.height);
 
     return (
       <CanvasArea 
@@ -221,10 +232,10 @@ class CanvasAreaCntr extends Component {
         hasLayers={ this.state.layers.length > 0 }
         mouse={ this.state.mouse }
         canvasMouse={ this.state.canvasMouse }
-        // canvasIsBigger={ this.state.canvasIsBigger }
+        canvasIsBigger={ this.state.canvasIsBigger }
         inCanvas={ this.state.inCanvas}
         initCanvas={ this.initCanvas }
-        updateDimensions={ this.updateDimensions }
+        updateCanvasArea={ this.updateCanvasArea }
         updateMousePosition={ this.updateMousePosition }
         engage={ this.engage }
         detectCanvas={ this.detectCanvas }

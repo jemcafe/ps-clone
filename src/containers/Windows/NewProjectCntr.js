@@ -10,8 +10,8 @@ class NewProjectCntr extends Component {
     super(props);
     this.state = {
       name: 'Untitled-1',
-      width: { size: '1000', units: 'Pixels' },
-      height: { size: '1000', units: 'Pixels' },
+      width: { size: '500', units: 'Pixels' },
+      height: { size: '500', units: 'Pixels' },
       resolution: { size: '300', units: 'Pixels' },
       colorMode: { mode: 'RGB' , bit: '8 bit' },
       background: '#ffffff'
@@ -69,11 +69,11 @@ class NewProjectCntr extends Component {
   render () {
     return (
       <NewProject 
-        state={this.state}
-        handleChange={this.handleChange}
-        confirmSize={this.confirmSize}
-        createProject={this.createProject}
-        closeWindow={this.closeWindow} />
+        state={ this.state }
+        handleChange={ this.handleChange }
+        confirmSize={ this.confirmSize }
+        createProject={ this.createProject }
+        closeWindow={ this.closeWindow } />
     );
   }
 }

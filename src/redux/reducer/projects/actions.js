@@ -197,7 +197,7 @@ export const updateScroll = (scroll) => ({
     const project = projects[tab];
     project.scroll = scroll;
 
-    console.log(`Update scroll`, projects[tab].scroll);
+    // console.log(`Update scroll`, projects[tab].scroll);
     return {...state, projects };
   }
 })

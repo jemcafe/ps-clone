@@ -5,14 +5,14 @@ import Cursor from './Cursor/Cursor';
 
 class CanvasArea extends Component {
   componentDidMount () {
-    const { initCanvas, updateDimensions } = this.props;
-    window.addEventListener("resize", () => updateDimensions(this.refs));
+    const { initCanvas, updateCanvasArea } = this.props;
+    window.addEventListener("resize", () => updateCanvasArea(this.refs));
     initCanvas(this.refs);
   }
 
   componentWillUnmount () {
-    const { updateDimensions } = this.props;
-    window.addEventListener("resize", () => updateDimensions(this.refs));
+    const { updateCanvasArea } = this.props;
+    window.addEventListener("resize", () => updateCanvasArea(this.refs));
   }
 
   render () {
@@ -24,14 +24,19 @@ class CanvasArea extends Component {
       hasLayers,
       mouse,
       inCanvas,
-      // canvasIsBigger,
-      updateDimensions,
+      canvasIsBigger,
+      updateCanvasArea,
       updateMousePosition,
       engage,
       detectCanvas
     } = this.props;
+    console.log('is bigger', canvasIsBigger);
 
     const style = {
+      canvasArea: !canvasIsBigger ? {
+        display: 'flex',
+        alignItems: 'center'
+      } : null,
       canvasWrapper: {
         width: `${p.width.size}px`,
         height: `${p.height.size}px`,
@@ -45,8 +50,9 @@ class CanvasArea extends Component {
     return (
       <div ref="canvasArea" 
         id="canvas-area"
-        onScroll={() => updateDimensions(this.refs)}
-        onMouseOver={() => updateDimensions(this.refs)}
+        style={style.canvasArea}
+        onScroll={() => updateCanvasArea(this.refs)}
+        onMouseOver={() => updateCanvasArea(this.refs)}
         onMouseMove={(e) => updateMousePosition(e)}>
         
         { hasLayers && 
@@ -86,7 +92,7 @@ CanvasArea.propTypes = {
   mouse: PropTypes.object.isRequired,
   inCanvas: PropTypes.bool.isRequired,
   canvasIsBigger: PropTypes.bool,
-  updateDimensions: PropTypes.func.isRequired,
+  updateCanvasArea: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired
 };
 

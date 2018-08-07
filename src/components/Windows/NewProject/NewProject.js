@@ -70,6 +70,7 @@ function NewProject (props) {
               <div className="input-wrapper">
                 <select value={state.background} onChange={(e) => handleChange(e,'background')}>
                   <option value="#ffffff">White</option>
+                  <option value="transparent">Transparent</option>
                 </select>
               </div>
             </div>
