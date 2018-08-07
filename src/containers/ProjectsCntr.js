@@ -13,9 +13,7 @@ class ProjectsCntr extends Component {
   updateDimensions = (refs) => {
     const { wrapper: w, nav: n } = refs;
     if (w && n) {
-      this.setState({ 
-        height: w.clientHeight - n.offsetHeight
-      });
+      this.setState({ height: w.clientHeight - n.offsetHeight });
     }
   }
 
@@ -27,10 +25,11 @@ class ProjectsCntr extends Component {
   render () {
     return (
       <Projects 
+        projects={ this.props.projects.projects }
+        hasProjects={ this.props.projects.projects.length > 0 }
+        tab={ this.props.projects.tab }
         height={ this.state.height }
         updateDimensions={ this.updateDimensions }
-        projects={ this.props.projects.projects }
-        tab={ this.props.projects.tab }
         removeProject={ this.removeProject }
         selectTab={ this.props.selectTab }
         children={ this.props.children } />

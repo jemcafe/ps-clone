@@ -8,7 +8,8 @@ import {
   LOCK_LAYER,
   UNLOCK_LAYER,
   SHOW_LAYER,
-  SAVE_IMAGE_DATA
+  SAVE_IMAGE_DATA,
+  UPDATE_SCROLL
 } from './actions';
 
 const initialState = {
@@ -29,7 +30,8 @@ const initialState = {
         { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null },
         { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null }
       ],
-      zoom: '100%'
+      zoom: '100%',
+      scroll: { x: 0, y: 0 }
     }
   ]
 };
@@ -58,6 +60,8 @@ export default (state = initialState, action) => {
     case SHOW_LAYER:
       return payload(state);
     case SAVE_IMAGE_DATA:
+      return payload(state);
+    case UPDATE_SCROLL:
       return payload(state);
     default:
       return state;

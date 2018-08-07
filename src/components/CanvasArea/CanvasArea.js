@@ -64,8 +64,8 @@ class CanvasArea extends Component {
             { (inCanvas || focus === 'canvas') && 
               <Cursor tools={tools} mouse={mouse} zIndex={0} /> }
 
-            <canvas className="touch-overlay"
-              ref="touch" 
+            <canvas ref="touch" 
+              className="touch-overlay"
               width={p.width.size} 
               height={p.height.size}
               onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}

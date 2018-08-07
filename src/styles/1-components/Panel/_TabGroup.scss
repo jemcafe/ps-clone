@@ -18,9 +18,7 @@
       background: $darkgray;
       // background: #d2afff;
 
-      .selected-tab { @extend %selected-tab; border-bottom: none; }
-      .right-tab { @extend %right-tab; }
-      .left-tab { @extend %left-tab; }
+      .selected-tab { border-bottom: none; }
 
       .tabs {
         display: flex;

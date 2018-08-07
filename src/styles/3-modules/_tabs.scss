@@ -1,0 +1,19 @@
+// Tabs
+.selected-tab {
+  border: 1px solid $darkergray;
+  background: $gray; 
+}
+
+.right-tab {
+  border-top: 1px solid $darkergray;
+  border-right: 1px solid $darkergray;
+  border-bottom: 1px solid $darkergray;
+  background: $darkgray;
+}
+
+.left-tab {
+  border-bottom: 1px solid $darkergray;
+  border-left: 1px solid $darkergray;
+  border-top: 1px solid $darkergray;
+  background: $darkgray;
+}

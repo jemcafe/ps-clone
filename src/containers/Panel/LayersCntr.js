@@ -6,10 +6,13 @@ import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer }
 
 function LayersCntr (props) {
   const { projects, tab } = props.projects;
-  const project = projects[tab];
+  const project = projects[tab] || {};
 
   return (
-    <Layers project={project} {...props} />
+    <Layers 
+      project={project} 
+      hasProjects={projects.length > 0}
+      {...props} />
   );
 }
 

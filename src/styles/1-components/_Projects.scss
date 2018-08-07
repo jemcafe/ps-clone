@@ -8,10 +8,6 @@
     display: flex;
     background: $darkgray;
 
-    .selected-tab { @extend %selected-tab; }
-    .right-tab { @extend %right-tab; }
-    .left-tab { @extend %left-tab; }
-
     > .tabs {  
       display: flex;
       overflow-x: auto;

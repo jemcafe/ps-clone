@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { saveImageData } from '../redux/reducer/projects/actions';
+import { saveImageData, updateScroll } from '../redux/reducer/projects/actions';
 import { focusCanvas, unfocusCanvas } from '../redux/reducer/focusLayer/actions';
 
 import CanvasArea from '../components/CanvasArea/CanvasArea';
@@ -9,13 +9,12 @@ import CanvasArea from '../components/CanvasArea/CanvasArea';
 class CanvasAreaCntr extends Component {
   constructor (props) {
     super(props);
-
     const { projects, tab } = this.props.projects;
-    const p = projects[tab];
+    const project = projects[tab];
 
     this.state = {
-      project: p,
-      layers: p.layers.reverse(),
+      project: project,
+      layers: project.layers.reverse(),
       width: 0,
       height: 0,
       mouse: { x: 0, y: 0 },
@@ -43,26 +42,58 @@ class CanvasAreaCntr extends Component {
 
   initCanvas = (refs) => {
     this.updateDimensions(refs);
-    if (refs.layer_1) this.setCanvasColor(refs.layer_1);
+    this.updateScroll(refs);
+    this.putCanvasColor(refs);
+    this.putLayerImageData(refs);
   }
 
   updateDimensions = (refs) => {
     const { canvasArea: ca, canvasWrapper: cw } = refs;
+    const { updateScroll } = this.props;
     
-    this.setState(prev => {
-      let width = prev.width;
-      let height = prev.height;
-      const canvasMouseOffset = {...prev.canvasMouseOffset};
+    if (cw && ca) {
+      this.setState(prev => ({ 
+        width: ca.clientWidth, 
+        height: ca.clientHeight, 
+        canvasMouseOffset: {
+          x: ca.scrollLeft - cw.offsetLeft,
+          y: ca.scrollTop - cw.offsetTop
+        }
+      }));
+      updateScroll({ x: ca.scrollLeft, y: ca.scrollTop });
+    }
+  }
 
-      if (cw && ca) {
-        width = ca.clientWidth;
-        height = ca.clientHeight;
-        canvasMouseOffset.x = ca.scrollLeft - cw.offsetLeft;
-        canvasMouseOffset.y = ca.scrollTop - cw.offsetTop;
+  updateScroll = (refs) => {
+    const { canvasArea: ca, canvasWrapper: cw } = refs;
+
+    if (cw && ca) {
+      ca.scrollLeft = this.state.project.scroll.x;
+      ca.scrollTop = this.state.project.scroll.y;
+    }
+  }
+
+  putCanvasColor = (refs) => { 
+    const { background } = this.state.project;
+    const { layer_1: canvas } = refs;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  putLayerImageData = (refs) => {
+    const { layers } = this.state;
+
+    for (let i = 0; i < layers.length; i++) {
+      const canvas = refs[`layer_${i+1}`];
+      const ctx = canvas.getContext('2d');
+      const layer = layers[i];
+
+      if (layer.imgData) {
+        ctx.putImageData(layer.imgData, 0, 0);
       }
-
-      return { width, height, canvasMouseOffset };
-    });
+    }
   }
 
   updateMousePosition = ({ nativeEvent: e }) => {
@@ -99,20 +130,21 @@ class CanvasAreaCntr extends Component {
   disengage = (canvas) => {
     const { unfocusCanvas, saveImageData } = this.props;
     const ctx = canvas.getContext('2d');
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
     this.setState({ dragging: false, brushPoints: [] });
 
     ctx.beginPath(); // The path is reset, so the paths aren't connected
 
     unfocusCanvas();
-    saveImageData(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
+    saveImageData(imgData);
   }
 
   putPoint = (canvas, e, fire) => {
-    const context = canvas.getContext('2d');
     const { canvasMouse, dragging, brushPoints } = this.state;
     const { tool: t, paintBrush, eraser } = this.props.tools;
     const { color_1, color_2 } = this.props.color;
+    const context = canvas.getContext('2d');
 
     let tool = null
     let color = null;
@@ -167,15 +199,6 @@ class CanvasAreaCntr extends Component {
     });
   }
 
-  setCanvasColor = (canvas) => { 
-    const ctx = canvas.getContext('2d');
-    const { background } = this.state.project;
-    
-    // layer color
-    ctx.fillStyle = background;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-
   detectCanvas = (bool) => {
     this.setState({ inCanvas: bool });
   }
@@ -220,6 +243,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   saveImageData,
+  updateScroll,
   focusCanvas,
   unfocusCanvas
 };

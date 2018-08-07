@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 function Layers (props) {
   const { 
     project: p, 
+    hasProjects,
     addLayer,
     deleteLayer,
     selectLayer,
@@ -26,7 +27,7 @@ function Layers (props) {
         </button>
       </header>
       <ul>
-        { p.id && p.layers.map((e, i) => (
+        { hasProjects && p.layers.map((e, i) => (
           <li key={e.id} className="layer">
             <div className="eye-wrapper" title="Visibilty" onClick={() => showLayer(i)}>
               <div className="eye" style={style.eye(e.visible)}>

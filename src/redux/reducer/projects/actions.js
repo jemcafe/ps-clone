@@ -11,7 +11,8 @@ export const
   LOCK_LAYER = 'LOCK_LAYER',
   UNLOCK_LAYER = 'UNLOCK_LAYER',
   SHOW_LAYER = 'SHOW_LAYER',
-  SAVE_IMAGE_DATA = 'SAVE_IMAGE_DATA';
+  SAVE_IMAGE_DATA = 'SAVE_IMAGE_DATA',
+  UPDATE_SCROLL = 'UPDATE_SCROLL';
 
 // Action Creators
 export const selectTab = (tab) => ({
@@ -37,20 +38,16 @@ export const createProject = (project) => ({
         name: 'Layer 1',
         visible: true, 
         locked: false, 
-        imageData: null
+        imgData: null
       }],
-      zoom: '100%'
+      zoom: '100%',
+      scroll: { x: 0, y: 0 }
     }
 
     // New array
-    if (!projects[0].id) {
-      tab = projects.length-1;
-      projects = [project];
-    } else {
-      projects = [...projects, project];
-    }
+    projects = [...projects, project];
 
-    // console.log('Create project', projects, 'id', project.id);
+    console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };
   }
 });
@@ -68,13 +65,9 @@ export const removeProject = (index) => ({
     }
 
     // The project is removed
-    if (projects.length === 1 ) {
-      projects = [{}];
-    } else {
-      projects.splice(index, 1);
-    }
+    projects.splice(index, 1);
 
-    // console.log('Remove project', projects, 'index', index);
+    console.log('Remove project', projects, 'index', index);
     return {...state, projects, tab };
   }
 });
@@ -192,7 +185,19 @@ export const saveImageData = (imgData) => ({
     const { layers, layer } = project;
     layers[layer].imgData = imgData;
 
-    console.log(`Save image data`, projects[tab].layers[layer].imgData);
+    // console.log(`Save image data`, projects[tab].layers[layer].imgData);
+    return {...state, projects };
+  }
+})
+
+export const updateScroll = (scroll) => ({
+  type: UPDATE_SCROLL,
+  payload: (state) => {
+    const { projects, tab } = state;
+    const project = projects[tab];
+    project.scroll = scroll;
+
+    console.log(`Update scroll`, projects[tab].scroll);
     return {...state, projects };
   }
 })
