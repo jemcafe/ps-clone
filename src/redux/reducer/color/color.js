@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 const initialState = {
-  color_1: {
+  color1: {
     hex: '#000000',
     rgb: { r: 0, g: 0, b: 0 },
     cmyk:{ c: 0, m: 100, y: 100, k: 0 },
@@ -17,7 +17,7 @@ const initialState = {
     y: 0,
     selected: true
   },
-  color_2: {
+  color2: {
     hex: '#ffffff',
     rgb: { r: 255, g: 255, b: 255 },
     cmyk:{ c: 0, m: 100, y: 100, k: 100 },

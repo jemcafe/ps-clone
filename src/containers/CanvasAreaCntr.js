@@ -121,7 +121,6 @@ class CanvasAreaCntr extends Component {
 
   engage = (canvas, e) => {
     const { layer, layers } = this.state.project;
-    const { focusCanvas } = this.props;
     const l = layers[layer];
 
     if (!l.locked) {
@@ -129,7 +128,7 @@ class CanvasAreaCntr extends Component {
 
       this.putPoint(canvas, e, true);  // A point is drawn
 
-      focusCanvas({
+      this.props.focusCanvas({
         focus: 'canvas', 
         onMouseMove: (e) => this.putPoint(canvas, e),
         onMouseUp: () => this.disengage(canvas),
@@ -141,7 +140,6 @@ class CanvasAreaCntr extends Component {
   }
 
   disengage = (canvas) => {
-    const { unfocusCanvas, saveImageData } = this.props;
     const ctx = canvas.getContext('2d');
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
@@ -149,18 +147,17 @@ class CanvasAreaCntr extends Component {
 
     ctx.beginPath(); // The path is reset, so the paths aren't connected
 
-    unfocusCanvas();
-    saveImageData(imgData);
+    this.props.unfocusCanvas();
+    this.props.saveImageData(imgData);
   }
 
   putPoint = (canvas, e, fire) => {
     const { canvasMouse, dragging, brushPoints } = this.state;
     const { tool: t, paintBrush, eraser } = this.props.tools;
-    const { color_1: c1, color_2: c2 } = this.props.color;
+    const { color1: c1, color2: c2 } = this.props.color;
     const context = canvas.getContext('2d');
     let tool = null
     let color = null;
-    let alpha = null;
 
     // Mouse position updated
     this.updateMousePosition(e);
@@ -230,7 +227,7 @@ class CanvasAreaCntr extends Component {
     // console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
     // console.log('Width', this.state.project.width.size, this.state.width);
     // console.log('Height', this.state.project.height.size, this.state.height);
-    // console.log('color', this.props.color.color_1);
+    // console.log('color', this.props.color.color1);
     // console.log('tool', this.props.tools.paintBrush);
 
     return (

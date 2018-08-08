@@ -28,21 +28,21 @@ class HueGradient extends Component {
       changeHue,
       updateMousePosition,
       detectCanvas,
-      color:{ color_1, color_2 },
+      color:{ color1, color2 },
       selectColor
     } = this.props;
 
     const style = {
-      color_1: color_1.selected ? { borderColor: '#d3d3d3' } : null,
-      color_2: color_2.selected ? { borderColor: '#d3d3d3' } : null
+      color1: color1.selected ? { borderColor: '#d3d3d3' } : null,
+      color2: color2.selected ? { borderColor: '#d3d3d3' } : null
     }
 
     return (
       <div className="hue-gradient">
         { colorPair &&
         <div className="color-pair">
-          <div className="color-block-wrapper"><div className="color-block" style={style.color_2} onClick={() => selectColor(2)}><div><div style={{ background: color_2.hex }}></div></div></div></div>
-          <div className="color-block-wrapper"><div className="color-block" style={style.color_1} onClick={() => selectColor(1)}><div><div style={{ background: color_1.hex }}></div></div></div></div>
+          <div className="color-block-wrapper"><div className="color-block" style={style.color2} onClick={() => selectColor(2)}><div><div style={{ background: color2.hex }}></div></div></div></div>
+          <div className="color-block-wrapper"><div className="color-block" style={style.color1} onClick={() => selectColor(1)}><div><div style={{ background: color1.hex }}></div></div></div></div>
         </div> }
         
         <div ref="wrapper" className="gradient-wrapper" style={{flex:'1',display:'flex'}}>

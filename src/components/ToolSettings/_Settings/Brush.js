@@ -29,7 +29,7 @@ class Brush extends Component {
   }
 
   render () {
-    const { radius, isHidden } = this.state;
+    const { isHidden } = this.state;
     const { tool } = this.props;
 
     const classNames = {

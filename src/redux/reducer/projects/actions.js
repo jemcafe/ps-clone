@@ -24,7 +24,7 @@ export const createProject = (project) => ({
   type: CREATE_PROJECT,
   payload: (state) => {
     let { projects } = state;
-    let tab = projects.length;
+    const tab = projects.length;
     const id = newId([...projects].map(e => e.id));
 
     // New Properties
@@ -38,7 +38,8 @@ export const createProject = (project) => ({
         name: 'Layer 1',
         visible: true, 
         locked: false, 
-        imgData: null
+        imgData: null,
+        opacity: '100%'
       }],
       zoom: '100%',
       scroll: { x: 0, y: 0 }

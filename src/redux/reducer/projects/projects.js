@@ -26,9 +26,9 @@ const initialState = {
     //   canvasLayer: 3,
     //   layer: 0,
     //   layers: [
-    //     { id: 1, name: 'Layer 1', visible: true, locked: false, imgData: null },
-    //     { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null },
-    //     { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null }
+    //     { id: 1, name: 'Layer 1', visible: true, locked: false, imgData: null, opacity: '100%' },
+    //     { id: 2, name: 'Layer 2', visible: true, locked: false, imgData: null, opacity: '100%' },
+    //     { id: 3, name: 'Layer 3', visible: true, locked: false, imgData: null, opacity: '100%' }
     //   ],
     //   zoom: '100%',
     //   scroll: { x: 0, y: 0 }

@@ -21,8 +21,8 @@ export const
 export const selectColor = (num) => ({
   type: SELECT_COLOR,
   payload: (state) => {
-    const property = `color_${num}`;
-    const { color_1, color_2 } = state;
+    const property = `color${num}`;
+    const { color1, color2 } = state;
 
     for (let i in state) {
       if (i === property) {
@@ -32,18 +32,18 @@ export const selectColor = (num) => ({
       }
     }
     
-    return {...state, color_1, color_2 }
+    return {...state, color1, color2 }
   }
 });
 
 export const resetColors = () => ({
   type: RESET_COLORS,
   payload: (state) => {
-    const { color_1, color_2 } = state;
+    const { color1, color2 } = state;
     let rgb = null;
 
     for (let i in state) {
-      rgb = i === 'color_1' ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
+      rgb = i === 'color1' ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
       state[i].rgb = rgb;
       state[i].hex = RGBtoHex(rgb.r, rgb.g, rgb.b);
       state[i].cmyk = RGBtoCMYK(rgb.r, rgb.g, rgb.b);
@@ -53,20 +53,20 @@ export const resetColors = () => ({
       state[i].y = 0;
     }
 
-    return {...state, color_1, color_2 }
+    return {...state, color1, color2 }
   }
 });
 
 export const swapColors = () => ({
   type: SWAP_COLORS,
   payload: (state) => {
-    const { color_1, color_2 } = state;
+    const { color1, color2 } = state;
 
-    const temp = color_1.selected;
-    color_1.selected = color_2.selected;
-    color_2.selected = temp;
+    const temp = color1.selected;
+    color1.selected = color2.selected;
+    color2.selected = temp;
     
-    return {...state, color_1: color_2, color_2: color_1};
+    return {...state, color1: color2, color2: color1};
   }
 });
 

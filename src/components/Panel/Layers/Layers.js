@@ -42,7 +42,9 @@ class Layers extends Component {
               </div>
               <div className="name-wrapper" style={style.nameWrapper(i)}>
                 <div className="canvas-wrapper" onClick={() => selectLayer(i)}>
-                  <canvas ref={canvas => {if (canvas) putLayerImageData(canvas, layer)}} width={p.width.size} height={p.height.size}/>
+                  <canvas ref={canvas => {if (canvas) putLayerImageData(canvas, layer)}} 
+                    width={p.width.size} 
+                    height={p.height.size}/>
                 </div>
                 <div className="name" onClick={() => selectLayer(i)}>
                   { layer.name }

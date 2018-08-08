@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 // helpers
 import { RGBtoHex } from '../helpers/colorConversion';
-import { getPosition } from '../helpers/canvas';
+// import { getPosition } from '../helpers/canvas';
 
 // redux
 import { connect } from 'react-redux';
@@ -67,30 +67,26 @@ class HueGradientCntr extends Component {
   }
 
   getColor = ({canvas, e, fire}) => {
-    const { color } = this.state;
-    const { updateColor, focusLayer:{ offset } } = this.props;
+    const { updateColor } = this.props;
+    const ctx = canvas.getContext('2d');
 
     if ( this.state.dragging || fire ) {
       // The canvas is updated so the circle changes position.
       this.setCanvas({canvas, e});
 
-      // Canvas context
-      const context = canvas.getContext('2d');
-
-      // Color location (mouse location)
-      const initialPos = { x: color.x, y: color.y };
-      const pos = getPosition({canvas, e, initialPos, offset});
+      // Color location
+      const pos = this.canvasMousePosition(canvas, e);
       const x = pos.x, y = pos.y;
       
       // The .getImageData() method returns an array of the pixel rgb colors [r,g,b,a,r,g,b,a,r...]
-      const imgData = context.getImageData(x, y, 1, 1).data;  // .getImageData(x, y, width, height)
+      const imgData = ctx.getImageData(x, y, 1, 1).data;  // .getImageData(x, y, width, height)
       
       const rgb = { r: imgData[0], g: imgData[1], b: imgData[2] };
       const hex = RGBtoHex(rgb.r, rgb.g, rgb.b);
 
       this.setState({ color: { rgb, hex, x, y } });
-      this.updateMousePosition(e, offset);
-      updateColor({rgb, pos});
+      this.updateMousePosition(e);
+      updateColor({ rgb, pos });
     }
   }
 
@@ -165,24 +161,22 @@ class HueGradientCntr extends Component {
   }
 
   drawCircle = (canvas, e) => {
+    const { gradientHue } = this.state;
     const context = canvas.getContext('2d');
-    const { color, gradientHue:{ hex } } = this.state;
-    const { offset } = this.props.focusLayer;
 
     // Arc values
-    const initialPos = { x: color.x, y: color.y };
-    const pos = getPosition({canvas, e, initialPos, offset});
+    const pos = this.canvasMousePosition(canvas, e);          // color position
     const x = pos.x, y = pos.y;
     const radius = 5;
     
     // Stroke Color
-    const range = {                                        // Values for where the stroke color should change
+    const range = {                                           // Values for where the stroke color should change
       x: Math.floor(canvas.width/2), 
       y: Math.floor(canvas.height/3) 
     };
-    let isLighter = /^([a-f])$/.test( hex[3] );            // The fourth character in the hexidecimal string is tested to see if the gradient hue is one of the lighter colors (colors between orange and light blue)
-    isLighter = (x < range.x || isLighter) && y < range.y; // 
-    const strokeColor = isLighter ? '#000' : '#fff';       // The stroke is black if it's in a lighter color and white if it's not.
+    let isLighter = /^([a-f])$/.test( gradientHue.hex[3] );  // The fourth character in the hexidecimal string is tested to see if the gradient hue is one of the lighter colors (colors between orange and light blue)
+    isLighter = (x < range.x || isLighter) && y < range.y;   // 
+    const strokeColor = isLighter ? '#000' : '#fff';         // The stroke is black if it's in a lighter color and white if it's not.
 
     // Circle
     context.arc(x, y, radius, 0, 2 * Math.PI);
@@ -201,6 +195,29 @@ class HueGradientCntr extends Component {
         y: e.clientY - offset.height + window.pageYOffset
       } });
     }
+  }
+
+  canvasMousePosition = (canvas, e) => {
+    const { offset } = this.props.focusLayer;
+    let x = this.state.color.x; 
+    let y = this.state.color.y;
+
+    if (e && e.clientX && e.clientY) {
+      // Subtracting the canvas offset from the event coordinates get the coordinates relative to the canvas, which is needed to position the circle when the mouse is out the canvas. Adding the window offset gets the coordinates relative to the canvas when the window page is scrolled.
+      x = e.clientX - canvas.offsetLeft + window.pageXOffset;
+      y = e.clientY - canvas.offsetTop + window.pageYOffset;
+
+      if (offset) {
+        x -= offset.width;
+        y -= offset.height;
+      }
+
+      // Boundaries so the circle stays with in the canvas (-1 is necessary. The left edge of the canvas is black)
+      x = x < 0 ? 0 : x > canvas.width-1 ? canvas.width-1 : x;
+      y = y < 0 ? 0 : y > canvas.height  ? canvas.height  : y;
+    }
+
+    return { x, y };
   }
 
   detectCanvas = (bool) => {
