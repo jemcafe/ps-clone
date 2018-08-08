@@ -1,3 +1,22 @@
+export const newProject = (id, project) => ({
+  ...project,
+  id: id,
+  canvasLayer: 1,
+  layer: 0,
+  layers: [newLayer(1)],
+  zoom: '100%',
+  scroll: { x: 0, y: 0 }
+});
+
+export const newLayer = (id) => ({ 
+  id: id, 
+  name: `Layer ${id}`, 
+  imgData: null,
+  visible: true, 
+  locked: false,
+  opacity: '100%'
+});
+
 export const newId = (ids) => {
   if ( Array.isArray(ids) ) {
     const array = [...ids];

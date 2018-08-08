@@ -1,9 +1,13 @@
-import { newId } from '../../../helpers/projects';
+/* Variables set to a state value references that value in state, unless that value is set to a new object. Whatever change to is made to that variable, changes the reference value. */
+
+// Helpers
+import { newId, newProject, newLayer } from './helpers';
 
 // Action Types
 export const 
   CREATE_PROJECT = 'CREATE_PROJECT',
   REMOVE_PROJECT = 'REMOVE_PROJECT',
+  REMOVE_ALL_PROJECTS = 'REMOVE_ALL_PROJECTS',
   SELECT_TAB = 'SELECT_TAB',
   ADD_LAYER = 'ADD_LAYER',
   DELETE_LAYER = 'DELETE_LAYER',
@@ -27,26 +31,8 @@ export const createProject = (project) => ({
     const tab = projects.length;
     const id = newId([...projects].map(e => e.id));
 
-    // New Properties
-    project = {
-      ...project,
-      id: id,
-      canvasLayer: 1,
-      layer: 0,
-      layers: [{ 
-        id: 1, 
-        name: 'Layer 1',
-        imgData: null,
-        visible: true, 
-        locked: false, 
-        opacity: '100%'
-      }],
-      zoom: '100%',
-      scroll: { x: 0, y: 0 }
-    }
-
-    // New array
-    projects = [...projects, project];
+    // A new project is added
+    projects = [...projects, newProject(id, project)];
 
     // console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };
@@ -73,27 +59,27 @@ export const removeProject = (index) => ({
   }
 });
 
+export const removeAllProjects = () => ({
+  type: REMOVE_ALL_PROJECTS,
+  payload: (state) => ({...state, tab: 0, projects: [] })
+});
+
 export const addLayer = () => ({
   type: ADD_LAYER,
   payload: (state) => {
-    // Variables set to state values reference the value in state, unless they're set to a new object.
-    // Splicing layers makes changes projects since they both reference state.
     const { projects, tab } = state;
     const project = state.projects[tab];
     const layer = project.layer;
     const layers = project.layers;
     const id = newId([...layers].map(e => e.id));
 
-    // New layer added
-    layers.splice(layer, 0, { 
-      id: id, 
-      name: `Layer ${id}`, 
-      visible: true, 
-      locked: false
-    });
+    if (projects.length > 0) {
+      // New layer added
+      layers.splice(layer, 0, newLayer(id));
 
-    // Canvas layer
-    project.canvasLayer = id;
+      // Canvas layer
+      project.canvasLayer = id;
+    }
 
     // console.log('Add Layer', projects[tab].layers);
     return {...state, projects };
@@ -108,12 +94,14 @@ export const deleteLayer = () => ({
     const layer = project.layer;
     const layers = project.layers;
 
-    // The layer is removed
-    layers.splice(layer, 1);
+    if (projects.length > 0) {
+      // The layer is removed
+      layers.splice(layer, 1);
 
-    // If the last layer is the deleted the selcted layer changes
-    if (layer > layers.length-1 && layer !== 0) {
-      project.layer = layers.length-1;
+      // If the last layer is the deleted the selcted layer changes
+      if (layer > layers.length-1 && layer !== 0) {
+        project.layer = layers.length-1;
+      }
     }
 
     // console.log(`Delete Layer ${layer}`, layers);

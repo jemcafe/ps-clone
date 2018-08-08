@@ -38,17 +38,17 @@ class Projects extends Component {
       }
     }
 
-    const tabList = p.map((project, i) => (
-      <li key={project.id} className={ classNames.tab(i) } onClick={() => selectTab(i)}>
-        <div onClick={(e) => removeProject(e, i)}><i className="icon-times"></i></div>
-        { project.name }
-      </li>
-    ));
-
     return (
       <div ref="wrapper" id="projects">
         <nav ref="nav" style={style.nav}>
-          <ul className="tabs">{ tabList }</ul>
+          <ul className="tabs">
+            { p.map((project, i) => (
+              <li key={project.id} className={ classNames.tab(i) } onClick={() => selectTab(i)}>
+                <div onClick={(e) => removeProject(e, i)}><i className="icon-times"></i></div>
+                { project.name }
+              </li>
+            )) }
+          </ul>
           <div>
             <div className="double-angle-btn">
               <i className="icon-angle-double-right"></i>
@@ -56,9 +56,9 @@ class Projects extends Component {
           </div>
         </nav>
         <div className="container" style={style.container}>
-          { p.map((e, i) => {
-            return tab === i ? <CanvasArea key={e.id} /> : null
-          }) }
+          { p.map((e, i) => (
+            tab === i && <CanvasArea key={e.id} /> 
+          )) }
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import { 
   CREATE_PROJECT,
   REMOVE_PROJECT,
+  REMOVE_ALL_PROJECTS,
   SELECT_TAB,
   ADD_LAYER,
   DELETE_LAYER,
@@ -44,6 +45,8 @@ export default (state = initialState, action) => {
     case CREATE_PROJECT:
       return payload(state);
     case REMOVE_PROJECT:
+      return payload(state);
+    case REMOVE_ALL_PROJECTS:
       return payload(state);
     case SELECT_TAB:
       return payload(state);

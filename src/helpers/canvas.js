@@ -1,24 +1,3 @@
-// export const getPosition = ({canvas, e, initialPos = {x:0,y:0}, offset}) => {
-//   let x = initialPos.x, y = initialPos.y;
-
-//   if (e && e.clientX && e.clientY) {
-//     // Subtracting the canvas offset from the event coordinates get the coordinates relative to the canvas, which is needed to position the circle when the mouse is out the canvas. Adding the window offset gets the coordinates relative to the canvas when the window page is scrolled.
-//     x = e.clientX - canvas.offsetLeft + window.pageXOffset;
-//     y = e.clientY - canvas.offsetTop + window.pageYOffset;
-
-//     if (offset) {
-//       x -= offset.width;
-//       y -= offset.height;
-//     }
-
-//     // Boundaries so the circle stays with in the canvas (-1 is necessary. The left edge of the canvas is black)
-//     x = x < 0 ? 0 : x > canvas.width-1 ? canvas.width-1 : x;
-//     y = y < 0 ? 0 : y > canvas.height  ? canvas.height  : y;
-//   }
-
-//   return { x, y };
-// }
-
 // Focus layer
 export const getMousePosition = ({e, offset}) => {
   let x = 0, y = 0;

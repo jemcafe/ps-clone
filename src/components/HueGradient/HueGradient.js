@@ -23,8 +23,6 @@ class HueGradient extends Component {
       slider = true,
       focus,
       engage, 
-      // disengage, 
-      // getColor, 
       changeHue,
       updateMousePosition,
       detectCanvas,
@@ -59,7 +57,7 @@ class HueGradient extends Component {
         </div>
 
         { slider &&
-        <Slider min={0} max={255 * 6} onChange={(value) => changeHue({canvas:this.refs.canvas, value})} /> }
+          <Slider min={0} max={255 * 6} onChange={(value) => changeHue({canvas:this.refs.canvas, value})} /> }
       </div>
     );
   }
@@ -69,8 +67,6 @@ HueGradient.propTypes = {
   state: PropTypes.object.isRequired,
   initCanvas: PropTypes.func.isRequired,
   engage: PropTypes.func.isRequired,
-  // disengage: PropTypes.func.isRequired,
-  // getColor: PropTypes.func.isRequired,
   changeHue: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired,
 }

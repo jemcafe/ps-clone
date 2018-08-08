@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { openWindow } from '../redux/reducer/windows/actions';
+import { removeProject, removeAllProjects } from '../redux/reducer/projects/actions';
 
 import ToolBar from '../components/ToolBar/ToolBar';
 
@@ -11,8 +12,17 @@ class ToolBarCntr extends Component {
     super(props);
     this.state = {
       items: this.props.items,
-      isActive: false
+      isActive: false,
+      projects: this.props.projects.projects,
+      tab: this.props.projects.tab
     }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return { 
+      projects: nextProps.projects.projects,
+      tab: nextProps.projects.tab
+    };
   }
 
   toggleActive = () => {
@@ -20,13 +30,19 @@ class ToolBarCntr extends Component {
   }
 
   handleAction = (option) => {
-    if ( option.window ) {
-      this.props.openWindow(option.window);
-      this.toggleActive();
-    } else if ( !option.options ) {
+    if ( !option.options ) {
       console.log(`${option.name} CLICKED`);
-    };
 
+      if ( option.window ) {
+        this.props.openWindow(option.window);
+      } else if (option.action === 'closeProject') {
+        this.props.removeProject(this.state.tab);
+      } else if (option.action === 'closeAllProjects') {
+        this.props.removeAllProjects();
+      };
+
+      this.toggleActive();
+    }
   }
 
   render () {
@@ -45,11 +61,14 @@ ToolBarCntr.propTypes =  {
 }
 
 const mapStateToProps = (state) => ({
-  windows: state.windows
+  windows: state.windows,
+  projects: state.projects
 })
 
 const mapDispatchToProps = {
-  openWindow
+  openWindow,
+  removeProject,
+  removeAllProjects
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToolBarCntr);

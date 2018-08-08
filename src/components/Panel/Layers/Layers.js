@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Layers extends Component {
-  componentDidMount () {
-    console.log(this.refs);
-  }
-
   render () {
     const { 
       project: p, 
@@ -33,7 +29,7 @@ class Layers extends Component {
           </button>
         </header>
         <ul>
-          { hasProjects && p.layers.map((layer, i) => (
+          { p.layers ? p.layers.map((layer, i) => (
             <li key={layer.id} className="layer">
               <div className="eye-wrapper" title="Visibilty" onClick={() => showLayer(i)}>
                 <div className="eye" style={style.eye(layer.visible)}>
@@ -55,13 +51,13 @@ class Layers extends Component {
                 </div> }
               </div>
             </li>
-          )) }
+          )) : null }
         </ul>
         <footer className="footer">
-          <button title="New Layer" onClick={() => hasProjects && addLayer()}>
+          <button title="New Layer" onClick={() => addLayer()}>
             <i className="icon-new-layer"></i>
           </button>
-          <button title="Delete Layer" onClick={() => hasProjects && deleteLayer()}>
+          <button title="Delete Layer" onClick={() => deleteLayer()}>
             <i className="icon-trash"></i>
           </button>
         </footer>

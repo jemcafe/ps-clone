@@ -1,11 +1,13 @@
+/* Along with a name property, options has a window, action, or options property */
+
 export default [
   { name: 'File', 
     options: [
       { name: 'New Project', window: 'newProject' },
       { name: 'Open' },
       { name: 'Save' },
-      { name: 'Close' },
-      { name: 'Close All'}
+      { name: 'Close', action: 'closeProject' },
+      { name: 'Close All', action: 'closeAllProjects' }
     ] 
   },
   { name: 'Edit', 
