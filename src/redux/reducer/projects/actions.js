@@ -36,9 +36,9 @@ export const createProject = (project) => ({
       layers: [{ 
         id: 1, 
         name: 'Layer 1',
+        imgData: null,
         visible: true, 
         locked: false, 
-        imgData: null,
         opacity: '100%'
       }],
       zoom: '100%',

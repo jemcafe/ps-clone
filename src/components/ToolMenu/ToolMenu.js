@@ -31,9 +31,11 @@ function ToolMenu (props) {
     color: isCollapsed ? 'color-collapsed' : 'color'
   }
 
-  const listOfTools = tools.map((e, i) => {
-    return <li key={i} className={`tool${classNames.tool(e)}`} title={e.name} onClick={() => selectTool(e.name)}><i className={e.icon}></i></li>
-  });
+  const listOfTools = tools.map((e, i) => (
+    <li key={i} className={`tool${classNames.tool(e)}`} title={e.name} onClick={() => selectTool(e.name)}>
+      <i className={e.icon}></i>
+    </li>
+  ));
 
   return (
     <div id="tool-menu">
