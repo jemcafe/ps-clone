@@ -47,7 +47,7 @@ export const createProject = (project) => ({
     // New array
     projects = [...projects, project];
 
-    console.log('Create project', projects, 'id', project.id);
+    // console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };
   }
 });
@@ -67,7 +67,7 @@ export const removeProject = (index) => ({
     // The project is removed
     projects.splice(index, 1);
 
-    console.log('Remove project', projects, 'index', index);
+    // console.log('Remove project', projects, 'index', index);
     return {...state, projects, tab };
   }
 });

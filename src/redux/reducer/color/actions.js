@@ -78,6 +78,7 @@ export const updateColor = ({rgb, pos}) => ({
     for (let i in state) {
       if (state[i].selected) {
         property = i;
+        state[i].rgb = rgb;
         state[i].hex = RGBtoHex(rgb.r, rgb.g, rgb.b);
         state[i].cmyk = RGBtoCMYK(rgb.r, rgb.g, rgb.b);
         state[i].hsl = RGBtoHSL(rgb.r, rgb.g, rgb.b);

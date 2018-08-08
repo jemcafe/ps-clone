@@ -14,7 +14,7 @@ class CanvasAreaCntr extends Component {
 
     this.state = {
       project: project,
-      layers: project.layers.reverse(),
+      layers: project.layers,
       width: 0,
       height: 0,
       mouse: { x: 0, y: 0 },
@@ -22,7 +22,6 @@ class CanvasAreaCntr extends Component {
       canvasMouseOffset: { x: 0, y: 0 },
       dragging: false,
       brushPoints: [],
-      // canvasIsBigger: false,
       inCanvas: false
     }
   }
@@ -31,12 +30,11 @@ class CanvasAreaCntr extends Component {
   // It must return a new state. It does not have access to "this"
   static getDerivedStateFromProps(nextProps, prevState) {
     const { projects, tab } = nextProps.projects;
-    const p = projects[tab];
+    const project = projects[tab];
 
     return {
-      project: {...p},
-      layers: [...p.layers].reverse(),
-      // canvasIsBigger: (+p.width.size > prevState.width || +p.height.size > prevState.height)
+      project: {...project},
+      layers: [...project.layers].reverse(),
     };
   }
 
@@ -122,18 +120,24 @@ class CanvasAreaCntr extends Component {
   }
 
   engage = (canvas, e) => {
+    const { layer, layers } = this.state.project;
     const { focusCanvas } = this.props;
+    const l = layers[layer];
 
-    this.setState({ dragging: true });
+    if (!l.locked) {
+      this.setState({ dragging: true });
 
-    this.putPoint(canvas, e, true);  // A point is drawn
+      this.putPoint(canvas, e, true);  // A point is drawn
 
-    focusCanvas({
-      focus: 'canvas', 
-      onMouseMove: (e) => this.putPoint(canvas, e),
-      onMouseUp: () => this.disengage(canvas),
-      onMouseLeave: () => this.disengage(canvas)
-    });
+      focusCanvas({
+        focus: 'canvas', 
+        onMouseMove: (e) => this.putPoint(canvas, e),
+        onMouseUp: () => this.disengage(canvas),
+        onMouseLeave: () => this.disengage(canvas)
+      });
+    } else {
+      alert(`${l.name} is locked`);
+    }
   }
 
   disengage = (canvas) => {
@@ -152,20 +156,22 @@ class CanvasAreaCntr extends Component {
   putPoint = (canvas, e, fire) => {
     const { canvasMouse, dragging, brushPoints } = this.state;
     const { tool: t, paintBrush, eraser } = this.props.tools;
-    const { color_1, color_2 } = this.props.color;
+    const { color_1: c1, color_2: c2 } = this.props.color;
     const context = canvas.getContext('2d');
-
     let tool = null
     let color = null;
-    this.updateMousePosition(e)  // The location of the point is the mouse' position
+    let alpha = null;
+
+    // Mouse position updated
+    this.updateMousePosition(e);
 
     // The selected tool (brush or eraser)
     if (t === 'paintBrush') {
       tool = paintBrush;
-      color = color_1.hex;
+      color = c1.hex;
     } else if (t === 'eraser') {
       tool = eraser;
-      color = color_2.hex;
+      color = c2.hex;
     }
 
     if ( tool && (dragging || fire) ) {
@@ -224,6 +230,8 @@ class CanvasAreaCntr extends Component {
     // console.log('CanvasArea canvasMouseOffset:', this.state.canvasMouseOffset);
     // console.log('Width', this.state.project.width.size, this.state.width);
     // console.log('Height', this.state.project.height.size, this.state.height);
+    // console.log('color', this.props.color.color_1);
+    // console.log('tool', this.props.tools.paintBrush);
 
     return (
       <CanvasArea 
@@ -232,7 +240,6 @@ class CanvasAreaCntr extends Component {
         hasLayers={ this.state.layers.length > 0 }
         mouse={ this.state.mouse }
         canvasMouse={ this.state.canvasMouse }
-        // canvasIsBigger={ this.state.canvasIsBigger }
         inCanvas={ this.state.inCanvas}
         initCanvas={ this.initCanvas }
         updateCanvasArea={ this.updateCanvasArea }

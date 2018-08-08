@@ -38,7 +38,8 @@ class TabGroup extends Component {
         height: '100%'
       },
       content: isCollapsed ? {
-        minHeight: '200px'
+        // minHeight: '200px',
+        height: '274px'
       } : null
     }
 

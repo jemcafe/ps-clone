@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Layers from '../../components/Panel/Layers/Layers';
 
 import { connect } from 'react-redux';
 import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer } from '../../redux/reducer/projects/actions';
 
-function LayersCntr (props) {
-  const { projects, tab } = props.projects;
-  const project = projects[tab] || {};
+class LayersCntr extends Component {
+  constructor (props) {
+    super(props);
+    const { projects, tab } = this.props.projects;
+    const project = projects[tab] || {};
 
-  return (
-    <Layers 
-      project={project} 
-      hasProjects={projects.length > 0}
-      {...props} />
-  );
+    this.state = {
+      project: project
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { projects, tab } = nextProps.projects;
+    const project = projects[tab];
+
+    return {
+      project: {...project},
+    };
+  }
+
+  putLayerImageData = (canvas, layer) => {
+    const ctx = canvas.getContext('2d');
+    if (layer.imgData) ctx.putImageData(layer.imgData, 0, 0);
+  }
+
+  render () {
+    return (
+      <Layers 
+        project={this.state.project} 
+        hasProjects={this.props.projects.projects.length > 0}
+        putLayerImageData={this.putLayerImageData}
+        {...this.props} />
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({

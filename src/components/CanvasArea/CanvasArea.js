@@ -19,12 +19,11 @@ class CanvasArea extends Component {
     const {
       project: p,
       layers,
-      tools,
+      tools: t,
       focus,
       hasLayers,
       mouse,
       inCanvas,
-      // canvasIsBigger,
       updateCanvasArea,
       updateMousePosition,
       engage,
@@ -43,7 +42,15 @@ class CanvasArea extends Component {
       },
       layer: (e) => ({
         visibility: e.visible ? 'visible' : 'hidden'
-      })
+      }),
+      touchOverlay: {
+        cursor: (
+          t.tool === 'move' ? 'move' : 
+          t.tool === 'hand' ? 'grab' :
+          t.tool === 'magnify' && t.magnify.in ? 'zoom-in' : 
+          t.tool === 'magnify' && t.magnify.out ? 'zoom-out' : null
+        )
+      }
     }
 
     return (
@@ -67,10 +74,11 @@ class CanvasArea extends Component {
             )) }
 
             { (inCanvas || focus === 'canvas') && 
-              <Cursor tools={tools} mouse={mouse} zIndex={0} /> }
+              <Cursor tools={t} mouse={mouse} zIndex={0} /> }
 
             <canvas ref="touch" 
               className="touch-overlay"
+              style={style.touchOverlay}
               width={p.width.size} 
               height={p.height.size}
               onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
@@ -88,9 +96,9 @@ CanvasArea.propTypes = {
   project: PropTypes.object.isRequired,
   layers: PropTypes.array.isRequired,
   tools: PropTypes.object.isRequired,
+  hasLayers: PropTypes.bool.isRequired,
   mouse: PropTypes.object.isRequired,
   inCanvas: PropTypes.bool.isRequired,
-  // canvasIsBigger: PropTypes.bool,
   updateCanvasArea: PropTypes.func.isRequired,
   updateMousePosition: PropTypes.func.isRequired
 };
