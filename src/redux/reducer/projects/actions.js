@@ -24,7 +24,7 @@ export const selectTab = (tab) => ({
   payload: (state) => ({...state, tab })
 });
 
-export const createProject = (project) => ({
+export const createProject = (project, imgData) => ({
   type: CREATE_PROJECT,
   payload: (state) => {
     let { projects } = state;
@@ -32,7 +32,7 @@ export const createProject = (project) => ({
     const id = newId([...projects].map(e => e.id));
 
     // A new project is added
-    projects = [...projects, newProject(id, project)];
+    projects = [...projects, newProject(id, project, imgData)];
 
     // console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };

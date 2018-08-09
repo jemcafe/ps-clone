@@ -1,17 +1,17 @@
-export const newProject = (id, project) => ({
+export const newProject = (id, project, imgData) => ({
   ...project,
   id: id,
   canvasLayer: 1,
   layer: 0,
-  layers: [newLayer(1)],
+  layers: [newLayer(1, imgData)],
   zoom: '100%',
   scroll: { x: 0, y: 0 }
 });
 
-export const newLayer = (id) => ({ 
+export const newLayer = (id, imgData) => ({ 
   id: id, 
   name: `Layer ${id}`, 
-  imgData: null,
+  imgData: imgData ? imgData : null,
   visible: true, 
   locked: false,
   opacity: '100%'

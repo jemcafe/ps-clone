@@ -41,7 +41,6 @@ class CanvasAreaCntr extends Component {
   initCanvas = (refs) => {
     this.updateCanvasArea(refs);
     this.updateScroll(refs);
-    this.putCanvasColor(refs);
     this.putLayerImageData(refs);
   }
 
@@ -70,22 +69,6 @@ class CanvasAreaCntr extends Component {
     if (ca) {
       ca.scrollLeft = this.state.project.scroll.x;
       ca.scrollTop = this.state.project.scroll.y;
-    }
-  }
-
-  putCanvasColor = (refs) => { 
-    const { width, height, layer, layers, background } = this.state.project;
-    const { saveImageData } = this.props;
-    const { layer_1: canvas } = refs;
-    const ctx = canvas.getContext('2d');
-    let imgData = null;
-
-    // The first layer's initial background color
-    if (layer === 0 && !layers[0].imgData) {
-      ctx.fillStyle = background;
-      ctx.fillRect(0, 0, width.size, height.size);
-      imgData = ctx.getImageData(0, 0, width.size, height.size);
-      saveImageData(imgData);
     }
   }
 

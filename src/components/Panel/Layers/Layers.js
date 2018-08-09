@@ -5,7 +5,6 @@ class Layers extends Component {
   render () {
     const { 
       project: p, 
-      hasProjects,
       addLayer,
       deleteLayer,
       selectLayer,

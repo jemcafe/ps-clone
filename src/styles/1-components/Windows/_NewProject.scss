@@ -46,4 +46,9 @@
       margin: 0 0 8px 0;
     }
   }
+
+  > canvas {
+    width: 0;
+    height: 0;
+  }
 }

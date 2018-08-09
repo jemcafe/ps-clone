@@ -1,7 +1,8 @@
 #windows {
+  z-index: 1;
+
   .window {
     position: absolute;
-    z-index: 1;
     border-radius: 4px;
     background: $gray;
     @extend %box-shadow;

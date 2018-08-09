@@ -53,11 +53,19 @@ class NewProjectCntr extends Component {
     });
   }
 
-  createProject = (e) => {
+  createProject = (e, canvas) => {
     e.preventDefault();
-    const { createProject } = this.props;
     const { name, width, height, resolution, colorMode, background } = this.state;
-    createProject({ name, width, height, resolution, colorMode, background });
+
+    // The image data for the initial layer's background color
+    canvas.width = width.size;
+    canvas.height = height.size;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, width.size, height.size);
+    const imgData = ctx.getImageData(0, 0, width.size, height.size);
+
+    this.props.createProject({ name, width, height, resolution, colorMode, background }, imgData);
     this.props.closeWindow('newProject');
   }
 

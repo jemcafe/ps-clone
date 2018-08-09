@@ -32,8 +32,7 @@ class LayersCntr extends Component {
   render () {
     return (
       <Layers 
-        project={this.state.project} 
-        hasProjects={this.props.projects.projects.length > 0}
+        project={this.state.project}
         putLayerImageData={this.putLayerImageData}
         {...this.props} />
     );

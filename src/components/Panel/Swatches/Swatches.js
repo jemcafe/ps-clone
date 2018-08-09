@@ -14,7 +14,7 @@ class Swatches extends Component {
       <div id="swatches">
         <div className="recent-wrapper">
           <ul className="recent-list">
-            { swatches(11) }
+            { swatches(12) }
           </ul>
         </div>
         <ul className="swatch-list">

@@ -15,7 +15,7 @@ function Eyedropper (props) {
       fontSize: size,
       zIndex: zIndex,
       color: '#000000',
-      background: 'gray'
+      // background: 'gray'
     }
   }
 
