@@ -30,17 +30,20 @@ class ToolBarCntr extends Component {
   }
 
   handleAction = (option) => {
+    const { projects: p, tab } = this.state;
+    const { openWindow, removeProject, removeAllProjects } = this.props;
+
     if ( !option.options ) {
-      console.log(`${option.name} CLICKED`);
 
       if ( option.window ) {
-        this.props.openWindow(option.window);
+        openWindow(option.window);
       } else if (option.action === 'closeProject') {
-        this.props.removeProject(this.state.tab);
+        if (p.length) removeProject(tab);
       } else if (option.action === 'closeAllProjects') {
-        this.props.removeAllProjects();
+        if (p.length) removeAllProjects();
       };
 
+      console.log(`${option.name} CLICKED`);
       this.toggleActive();
     }
   }
