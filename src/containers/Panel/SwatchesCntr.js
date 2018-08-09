@@ -7,10 +7,20 @@ import { selectColor, updateColor } from '../../redux/reducer/color/actions';
 import Swatches from '../../components/Panel/Swatches/Swatches';
 
 class SwatchesCntr extends Component {
-  setSwatchColor = (canvas) => {
-    const ctx = canvas.getContext('2d');
+  constructor () {
+    super();
+    this.state = {
+      history: [],
+      colors: []
+    }
+  }
 
+  componentDidMount () {
+    // this.setSwatchColors();
+  }
 
+  setSwatchColors = () => {
+    
   }
 
   getColor = (canvas) => {
@@ -18,7 +28,7 @@ class SwatchesCntr extends Component {
   }
 
   render () {
-    // Max recent swatches is 11
+    // Max swatches history is 11
 
     return (
       <Swatches
