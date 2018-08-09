@@ -68,12 +68,14 @@ export const addLayer = () => ({
   type: ADD_LAYER,
   payload: (state) => {
     const { projects, tab } = state;
-    const project = state.projects[tab];
-    const layer = project.layer;
-    const layers = project.layers;
-    const id = newId([...layers].map(e => e.id));
+    const project = projects[tab];
+    let layer = null, layers = null, id = null;
 
-    if (projects.length > 0) {
+    if (projects.length && project.layers) {
+      layer = project.layer;
+      layers = project.layers;
+      id = newId([...layers].map(e => e.id));
+
       // New layer added
       layers.splice(layer, 0, newLayer(id));
 
@@ -91,10 +93,12 @@ export const deleteLayer = () => ({
   payload: (state) => {
     const { projects, tab } = state;
     const project = projects[tab];
-    const layer = project.layer;
-    const layers = project.layers;
+    let layer = null, layers = null;
 
-    if (projects.length > 0) {
+    if (projects.length && project.layers) {
+      layer = project.layer;
+      layers = project.layers;
+
       // The layer is removed
       layers.splice(layer, 1);
 
@@ -132,8 +136,12 @@ export const lockLayer = () => ({
   payload: (state) => {
     const { projects, tab } = state;
     const project = projects[tab];
-    const layer = project.layers[project.layer];
-    layer.locked = !layer.locked;
+    let layer = null;
+
+    if (projects.length && project.layers) {
+      layer = project.layers[project.layer];
+      layer.locked = !layer.locked;
+    }
 
     // console.log(`Lock layer ${layer}`, projects[tab].layers[layer].locked);
     return {...state, projects };
