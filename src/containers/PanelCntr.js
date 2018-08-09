@@ -62,7 +62,7 @@ class PanelCntr extends Component {
     if ( tabGroup.id === 3 ) {
       if (t && isCollapsed) {
         // console.log('focusLayer offset', { width: t.offsetLeft-222, height: t.offsetTop });
-        updateOffset({ width: t.offsetLeft-222, height: t.offsetTop });
+        updateOffset({ width: t.offsetLeft-202, height: t.offsetTop });
       } else {
         // console.log('focusLayer offset', { width: 0, height: 0 });
         updateOffset({ width: 0, height: 0 });

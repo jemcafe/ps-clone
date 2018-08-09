@@ -15,7 +15,7 @@ function Brush (props) {
   const pos = { x: -r + mouse.x - 1, y: -r + mouse.y - 1 };
 
   // styles
-  const styles = {
+  const style = {
     brush: {
       position: 'fixed',
       top: pos.y,
@@ -25,7 +25,7 @@ function Brush (props) {
   }
 
   return (
-    <svg id="brush" width={ width } height={ height } style={ styles.brush }>
+    <svg id="cursor-brush" width={ width } height={ height } style={ style.brush }>
       <circle cx={ cx } cy={ cy } r={ r } stroke={ stroke } strokeWidth={ strokeWidth } fill={ fill } />
     </svg>
   );

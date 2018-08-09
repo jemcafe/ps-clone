@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function Swatches () {
-  return (
-    <div className="swatches" style={{margin:'auto',alignSelf:'center'}}>
-      <div>SWATCHES CONTENT</div>
-    </div>
-  );
+class Swatches extends Component {
+
+  render () {
+    const swatches = (num) => {
+      let swatches = [];
+      for (let i = 0; i < num; i++) 
+        swatches.push(<canvas className="swatch"/>);
+      return swatches;
+    }
+
+    return (
+      <div id="swatches">
+        <div className="recent-wrapper">
+          <ul className="recent-list">
+            { swatches(11) }
+          </ul>
+        </div>
+        <ul className="swatch-list">
+          { swatches(100) }
+        </ul>
+      </div>
+    );
+  }
 }
 
 export default Swatches;
