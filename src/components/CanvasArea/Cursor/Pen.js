@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cursor from '../../../assets/images/cursor-pen.svg';
+import pen from '../../../assets/images/cursor-pen.svg';
 
 function Pen (props) {
   const { mouse, zIndex } = props;
@@ -19,9 +19,7 @@ function Pen (props) {
     }
   }
 
-  return (
-    <img id="cursor-pen" style={ style.pen } src={ cursor } alt="pen"/>
-  );
+  return <img id="cursor-pen" style={ style.pen } src={ pen } alt="pen"/>;
 }
 
 Pen.propTypes = {

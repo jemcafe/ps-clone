@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cursor from '../../../assets/images/cursor-eyedropper.svg';
+import eyedropper from '../../../assets/images/cursor-eyedropper.svg';
 
 function Eyedropper (props) {
   const { mouse, zIndex } = props;
@@ -19,9 +19,7 @@ function Eyedropper (props) {
     }
   }
 
-  return (
-    <img id="cursor-eyedropper" style={ style.eyedropper } src={ cursor }alt="eyedropper"/>
-  );
+  return <img id="cursor-eyedropper" style={ style.eyedropper } src={ eyedropper } alt="eyedropper"/>;
 }
 
 Eyedropper.propTypes = {

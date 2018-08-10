@@ -52,9 +52,9 @@ class CanvasArea extends Component {
           t.tool === 'hand' ? ' cursor-hand' :
           // t.tool === 'eyedropper' ? ' cursor-eyedropper' :
           // t.tool === 'pen' ? ' cursor-pen' :
-          t.tool === 'shape' ? ' cursor-shape' :
-          t.tool === 'magnify' && t.magnify.in ? ' cursor-zoom-in' : 
-          t.tool === 'magnify' && t.magnify.out ? ' cursor-zoom-out' : ''
+          t.tool === 'shape' ? ' cursor-shape' : ''
+          // t.tool === 'magnify' && t.magnify.in ? ' cursor-zoom-in' : 
+          // t.tool === 'magnify' && t.magnify.out ? ' cursor-zoom-out' : ''
         )
       }
     }
