@@ -10,16 +10,14 @@ function Eyedropper (props) {
 
   // styles
   const style = {
-    eyedropper: {
-      position: 'fixed',
-      top: pos.y,
-      left: pos.x,
-      width: size,
-      zIndex: zIndex
-    }
+    position: 'fixed',
+    top: pos.y,
+    left: pos.x,
+    width: size,
+    zIndex: zIndex
   }
 
-  return <img id="cursor-eyedropper" style={ style.eyedropper } src={ eyedropper } alt="eyedropper"/>;
+  return <img id="cursor-eyedropper" style={ style } src={ eyedropper } alt="eyedropper"/>;
 }
 
 Eyedropper.propTypes = {

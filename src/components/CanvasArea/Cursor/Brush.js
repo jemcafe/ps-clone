@@ -16,16 +16,14 @@ function Brush (props) {
 
   // styles
   const style = {
-    brush: {
-      position: 'fixed',
-      top: pos.y,
-      left: pos.x,
-      zIndex: zIndex
-    }
+    position: 'fixed',
+    top: pos.y,
+    left: pos.x,
+    zIndex: zIndex
   }
 
   return (
-    <svg id="cursor-brush" width={ width } height={ height } style={ style.brush }>
+    <svg id="cursor-brush" width={ width } height={ height } style={ style }>
       <circle cx={ cx } cy={ cy } r={ r } stroke={ stroke } strokeWidth={ strokeWidth } fill={ fill } />
     </svg>
   );

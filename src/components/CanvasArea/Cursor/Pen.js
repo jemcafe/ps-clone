@@ -10,16 +10,14 @@ function Pen (props) {
 
   // styles
   const style = {
-    pen: {
-      position: 'fixed',
-      top: pos.y,
-      left: pos.x,
-      width: size,
-      zIndex: zIndex
-    }
+    position: 'fixed',
+    top: pos.y,
+    left: pos.x,
+    width: size,
+    zIndex: zIndex
   }
 
-  return <img id="cursor-pen" style={ style.pen } src={ pen } alt="pen"/>;
+  return <img id="cursor-pen" style={ style } src={ pen } alt="pen"/>;
 }
 
 Pen.propTypes = {

@@ -10,16 +10,14 @@ function PaintBucket (props) {
 
   // styles
   const style = {
-    paintBucket: {
-      position: 'fixed',
-      top: pos.y,
-      left: pos.x,
-      height: size,
-      zIndex: zIndex
-    }
+    position: 'fixed',
+    top: pos.y,
+    left: pos.x,
+    height: size,
+    zIndex: zIndex
   }
 
-  return <img id="cursor-paintBucket" style={ style.paintBucket } src={ paintBucket } alt="Paint bucket"/>;
+  return <img id="cursor-paintBucket" style={ style } src={ paintBucket } alt="Paint bucket"/>;
 }
 
 PaintBucket.propTypes = {

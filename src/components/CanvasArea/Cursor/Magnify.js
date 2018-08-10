@@ -10,17 +10,15 @@ function Magnify (props) {
   const pos = { x: mouse.x - size/3, y: mouse.y - size/3 };
 
   const style = {
-    magnify: {
-      position: 'fixed',
-      top: pos.y,
-      left: pos.x,
-      width: size,
-      zIndex: zIndex
-    }
+    position: 'fixed',
+    top: pos.y,
+    left: pos.x,
+    width: size,
+    zIndex: zIndex
   }
 
-  if ( magnify.in ) return <img id="cursor-zoom-in" style={ style.magnify } src={ zoomIn } alt="zoom in"/>;
-  if ( magnify.out ) return <img id="cursor-zoom-out" style={ style.magnify } src={ zoomOut } alt="zoom out"/>;
+  if ( magnify.in ) return <img id="cursor-zoom-in" style={ style } src={ zoomIn } alt="zoom in"/>;
+  if ( magnify.out ) return <img id="cursor-zoom-out" style={ style } src={ zoomOut } alt="zoom out"/>;
 }
 
 Magnify.propTypes = {
