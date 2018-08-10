@@ -14,7 +14,6 @@ function Brush (props) {
   const cy = r + strokeWidth;
   const pos = { x: -r + mouse.x - 1, y: -r + mouse.y - 1 };
 
-  // styles
   const style = {
     position: 'fixed',
     top: pos.y,

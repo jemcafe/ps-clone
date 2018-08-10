@@ -8,7 +8,6 @@ function Pen (props) {
   const size = 24;
   const pos = { x: mouse.x, y: mouse.y };
 
-  // styles
   const style = {
     position: 'fixed',
     top: pos.y,

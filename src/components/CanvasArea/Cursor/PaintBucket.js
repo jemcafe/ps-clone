@@ -8,7 +8,6 @@ function PaintBucket (props) {
   const size = 24;
   const pos = { x: mouse.x - 1, y: mouse.y - 1 };
 
-  // styles
   const style = {
     position: 'fixed',
     top: pos.y,
