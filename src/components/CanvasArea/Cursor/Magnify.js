@@ -9,7 +9,6 @@ function Magnify (props) {
   const size = 21;
   const pos = { x: mouse.x - size/3, y: mouse.y - size/3 };
 
-  // styles
   const style = {
     magnify: {
       position: 'fixed',
