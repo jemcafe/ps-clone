@@ -1,0 +1,31 @@
+.cursor-move { 
+  cursor: move;
+}
+
+.cursor-eyedropper { 
+  cursor: url('../assets/images/cursor-eyedropper.png') 0 28, auto; 
+}
+
+.cursor-pen { 
+  cursor: url('../assets/images/cursor-pen.png') 1 1, auto; 
+}
+
+.cursor-shape { 
+  cursor: crosshair;
+}
+
+.cursor-hand { 
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.cursor-zoom-in { 
+  cursor: zoom-in; 
+  cursor: -webkit-zoom-in; 
+}
+
+.cursor-zoom-out { 
+  cursor: zoom-out; 
+  cursor: -webkit-zoom-out; 
+}

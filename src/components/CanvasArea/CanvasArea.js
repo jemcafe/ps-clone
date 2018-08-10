@@ -42,13 +42,19 @@ class CanvasArea extends Component {
       },
       layer: (e) => ({
         visibility: e.visible ? 'visible' : 'hidden'
-      }),
+      })
+    }
+
+    const classNames = {
       touchOverlay: {
         cursor: (
-          t.tool === 'move' ? 'move' : 
-          t.tool === 'hand' ? 'grab' :
-          t.tool === 'magnify' && t.magnify.in ? 'zoom-in' : 
-          t.tool === 'magnify' && t.magnify.out ? 'zoom-out' : null
+          t.tool === 'move' ? ' cursor-move' : 
+          t.tool === 'hand' ? ' cursor-hand' :
+          t.tool === 'eyedropper' ? ' cursor-eyedropper' :
+          t.tool === 'pen' ? ' cursor-pen' :
+          t.tool === 'shape' ? ' cursor-shape' :
+          t.tool === 'magnify' && t.magnify.in ? ' cursor-zoom-in' : 
+          t.tool === 'magnify' && t.magnify.out ? ' cursor-zoom-out' : ''
         )
       }
     }
@@ -77,7 +83,7 @@ class CanvasArea extends Component {
               <Cursor tools={t} mouse={mouse} zIndex={0} /> }
 
             <canvas ref="touch" 
-              className="touch-overlay"
+              className={`touch-overlay${classNames.touchOverlay.cursor}`}
               style={style.touchOverlay}
               width={p.width.size} 
               height={p.height.size}
