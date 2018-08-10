@@ -6,7 +6,7 @@ import zoomOut from '../../../assets/images/cursor-zoomOut.svg';
 function Magnify (props) {
   const { mouse, zIndex, magnify } = props;
 
-  const size = 18;
+  const size = 21;
   const pos = { x: mouse.x - size/3, y: mouse.y - size/3 };
 
   // styles
