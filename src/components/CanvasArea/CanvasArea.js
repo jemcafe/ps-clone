@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Cursor from './Cursor/Cursor';
+import BrushCursor from './BrushCursor/BrushCursor';
 
 class CanvasArea extends Component {
   componentDidMount () {
@@ -46,17 +46,16 @@ class CanvasArea extends Component {
     }
 
     const classNames = {
-      touchOverlay: {
-        cursor: (
-          t.tool === 'move' ? ' cursor-move' : 
-          t.tool === 'hand' ? ' cursor-hand' :
-          // t.tool === 'eyedropper' ? ' cursor-eyedropper' :
-          // t.tool === 'pen' ? ' cursor-pen' :
-          t.tool === 'shape' ? ' cursor-shape' : ''
-          // t.tool === 'magnify' && t.magnify.in ? ' cursor-zoom-in' : 
-          // t.tool === 'magnify' && t.magnify.out ? ' cursor-zoom-out' : ''
-        )
-      }
+      cursor: (
+        t.tool === 'move' ? ' cursor-move' : 
+        t.tool === 'hand' ? ' cursor-hand' :
+        t.tool === 'eyedropper' ? ' cursor-eyedropper' :
+        t.tool === 'paintBucket' ? ' cursor-paintBucket' :
+        t.tool === 'pen' ? ' cursor-pen' :
+        t.tool === 'shape' ? ' cursor-crosshair' :
+        t.tool === 'magnify' && t.magnify.in ? ' cursor-zoomIn' : 
+        t.tool === 'magnify' && t.magnify.out ? ' cursor-zoomOut' : ''
+      )
     }
 
     return (
@@ -80,10 +79,10 @@ class CanvasArea extends Component {
             )) }
 
             { (inCanvas || focus === 'canvas') && 
-              <Cursor tools={t} mouse={mouse} zIndex={0} /> }
+              <BrushCursor tools={t} mouse={mouse} zIndex={0} /> }
 
             <canvas ref="touch" 
-              className={`touch-overlay${classNames.touchOverlay.cursor}`}
+              className={`touch-overlay${classNames.cursor}`}
               style={style.touchOverlay}
               width={p.width.size} 
               height={p.height.size}

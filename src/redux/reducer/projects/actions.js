@@ -1,7 +1,7 @@
 /* Variables set to a state value references that value in state, unless that value is set to a new object. Whatever change to is made to that variable, changes the reference value. */
 
 // Helpers
-import { newId, newProject, newLayer } from './helpers';
+import { newProject, newLayer, newId } from '../../../helpers/projects';
 
 // Action Types
 export const 
@@ -16,7 +16,8 @@ export const
   UNLOCK_LAYER = 'UNLOCK_LAYER',
   SHOW_LAYER = 'SHOW_LAYER',
   SAVE_IMAGE_DATA = 'SAVE_IMAGE_DATA',
-  UPDATE_SCROLL = 'UPDATE_SCROLL';
+  UPDATE_SCROLL = 'UPDATE_SCROLL',
+  UPDATE_LAYER_NAME = 'UPDATE_LAYER_NAME';
 
 // Action Creators
 export const selectTab = (tab) => ({
@@ -31,8 +32,11 @@ export const createProject = (project, imgData) => ({
     const tab = projects.length;
     const id = newId([...projects].map(e => e.id));
 
-    // A new project is added
-    projects = [...projects, newProject(id, project, imgData)];
+    // New project
+    projects = [
+      ...projects, 
+      newProject({id, project, imgData})
+    ];
 
     // console.log('Create project', projects, 'id', project.id);
     return {...state, projects, tab };
@@ -69,7 +73,9 @@ export const addLayer = () => ({
   payload: (state) => {
     const { projects, tab } = state;
     const project = projects[tab];
-    let layer = null, layers = null, id = null;
+    let layer = null;
+    let layers = null;
+    let id = null;
 
     if (projects.length && project.layers) {
       layer = project.layer;
@@ -77,7 +83,7 @@ export const addLayer = () => ({
       id = newId([...layers].map(e => e.id));
 
       // New layer added
-      layers.splice(layer, 0, newLayer(id));
+      layers.splice(layer, 0, newLayer({id}));
 
       // Canvas layer
       project.canvasLayer = id;
@@ -195,6 +201,19 @@ export const updateScroll = (scroll) => ({
     project.scroll = scroll;
 
     // console.log(`Update scroll`, projects[tab].scroll);
+    return {...state, projects };
+  }
+})
+
+export const updateLayerName = (input) => ({
+  type: UPDATE_LAYER_NAME,
+  payload: (state) => {
+    const { projects, tab } = state;
+    const project = projects[tab];
+    const layer = project.layers[project.layer];
+    layer.name = input;
+
+    // console.log(`Update layer name`, projects[tab].layers[projects[tab].layer].name);
     return {...state, projects };
   }
 })

@@ -2,25 +2,22 @@ import React, { Component } from 'react';
 import Layers from '../../components/Panel/Layers/Layers';
 
 import { connect } from 'react-redux';
-import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer } from '../../redux/reducer/projects/actions';
+import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer, updateLayerName } from '../../redux/reducer/projects/actions';
 
 class LayersCntr extends Component {
   constructor (props) {
     super(props);
     const { projects, tab } = this.props.projects;
-    const project = projects[tab] || {};
-
     this.state = {
-      project: project
+      project: projects[tab] || {},
+      editName: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { projects, tab } = nextProps.projects;
-    const project = projects[tab];
-
     return {
-      project: {...project},
+      project: {...projects[tab]},
     };
   }
 
@@ -29,11 +26,24 @@ class LayersCntr extends Component {
     if (layer.imgData) ctx.putImageData(layer.imgData, 0, 0);
   }
 
+  changeName = () => {
+    console.log('DOUBLE CLICKED');
+    this.setState({ editName: true });
+  }
+
+  confirmName = () => {
+    console.log('NAME CONFIRMED');
+    this.setState({ editName: false });
+  }
+
   render () {
     return (
       <Layers 
         project={this.state.project}
+        editName={this.state.editName}
         putLayerImageData={this.putLayerImageData}
+        changeName={this.changeName}
+        confirmName={this.confirmName}
         {...this.props} />
     );
   }
@@ -49,7 +59,8 @@ const mapDispatchToProps = {
   selectLayer,
   lockLayer,
   unlockLayer,
-  showLayer
+  showLayer,
+  updateLayerName
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LayersCntr);

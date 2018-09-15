@@ -1,23 +1,35 @@
-.cursor-move { 
-  cursor: move;
+.cursor {
+  @include user-select(none);
 }
 
-.cursor-shape { 
-  cursor: crosshair;
+.cursor-move { 
+  cursor: url('../assets/images/cursor-move.png'), auto;
+}
+
+.cursor-eyedropper { 
+  cursor: url('../assets/images/cursor-eyedropper.png') 0 30, auto;
+}
+
+.cursor-paintBucket { 
+  cursor: url('../assets/images/cursor-paintBucket.png'), auto;
+}
+
+.cursor-pen { 
+  cursor: url('../assets/images/cursor-pen.png'), auto;
+}
+
+.cursor-zoomIn { 
+  cursor: url('../assets/images/cursor-zoomIn.png'), auto;
+}
+
+.cursor-zoomOut { 
+  cursor: url('../assets/images/cursor-zoomOut.png'), auto;
 }
 
 .cursor-hand { 
-  cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
+  cursor: url('../assets/images/cursor-hand.png'), auto;
 }
 
-.cursor-zoom-in { 
-  cursor: zoom-in; 
-  cursor: -webkit-zoom-in; 
-}
-
-.cursor-zoom-out { 
-  cursor: zoom-out; 
-  cursor: -webkit-zoom-out; 
+.cursor-crosshair { 
+  cursor: url('../assets/images/cursor-crosshair.png') 20 20, auto;
 }

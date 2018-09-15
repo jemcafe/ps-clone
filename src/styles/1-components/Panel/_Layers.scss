@@ -59,8 +59,14 @@
           flex: 1;
           display: flex;
           align-items: center;
-          padding: 0 0 0 8px;
+          padding: 8px;
           @include user-select(none);
+          input {
+            width: 100%;
+            font-size: 12px;
+            padding: 0;
+            background: $gray;
+          }
         }
         .lock {  // icon
           align-self: center;

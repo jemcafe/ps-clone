@@ -22,7 +22,7 @@ function Brush (props) {
   }
 
   return (
-    <svg id="cursor-brush" width={ width } height={ height } style={ style }>
+    <svg className="cursor" width={ width } height={ height } style={ style }>
       <circle cx={ cx } cy={ cy } r={ r } stroke={ stroke } strokeWidth={ strokeWidth } fill={ fill } />
     </svg>
   );

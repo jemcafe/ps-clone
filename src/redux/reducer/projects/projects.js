@@ -10,7 +10,8 @@ import {
   UNLOCK_LAYER,
   SHOW_LAYER,
   SAVE_IMAGE_DATA,
-  UPDATE_SCROLL
+  UPDATE_SCROLL,
+  UPDATE_LAYER_NAME
 } from './actions';
 
 const initialState = {
@@ -65,6 +66,8 @@ export default (state = initialState, action) => {
     case SAVE_IMAGE_DATA:
       return payload(state);
     case UPDATE_SCROLL:
+      return payload(state);
+    case UPDATE_LAYER_NAME:
       return payload(state);
     default:
       return state;

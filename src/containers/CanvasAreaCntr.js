@@ -74,14 +74,17 @@ class CanvasAreaCntr extends Component {
 
   putLayerImageData = (refs) => {
     const { layers } = this.state;
+    console.log('Layers ', layers);
 
-    for (let i = 0; i < layers.length; i++) {
-      const canvas = refs[`layer_${i+1}`];
-      const ctx = canvas.getContext('2d');
-      const layer = layers[i];
+    if ( layers.length ) {
+      for (let i = 0; i < layers.length; i++) {
+        const canvas = refs[`layer_${i+1}`];
+        const ctx = canvas.getContext('2d');
+        const layer = layers[i];
 
-      if (layer.imgData) {
-        ctx.putImageData(layer.imgData, 0, 0);
+        if (layer.imgData) {
+          ctx.putImageData(layer.imgData, 0, 0);
+        }
       }
     }
   }

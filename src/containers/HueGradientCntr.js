@@ -44,6 +44,12 @@ class HueGradientCntr extends Component {
       t.height = w.clientHeight;
       c.width = t.width;
       c.height = t.height;
+      this.setState(prev => {
+        const color = {...prev.color};
+        color.x = c.width;
+        color.y = c.height;
+        return { color };
+      });
       this.setCanvas({ canvas: c });
     }
   }

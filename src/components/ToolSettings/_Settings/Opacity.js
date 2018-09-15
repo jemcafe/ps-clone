@@ -73,7 +73,9 @@ class Opacity extends Component {
       <li className="opacity">
         Opacity:
         <div className="text-input">
-          <input type="text" value={input} 
+          <input 
+            type="text" 
+            value={input} 
             onChange={ this.handleTextChange } 
             onFocus={ this.hideDropdown } 
             onKeyPress={(e) => e.charCode === 13 && this.confirmInput()}

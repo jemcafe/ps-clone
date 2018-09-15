@@ -32,7 +32,7 @@ class NewProject extends Component {
                   </select>
                 </div>
               </div>
-              <br/>
+              {/* <br/> */}
               <div className="field">
                 <label>Height:</label>
                 <div className="input-wrapper">
@@ -43,7 +43,7 @@ class NewProject extends Component {
                   </select>
                 </div>
               </div>
-              <br/>
+              {/* <br/> */}
               <div className="field">
                 <label>Resolution:</label>
                 <div className="input-wrapper">
@@ -53,7 +53,7 @@ class NewProject extends Component {
                   </select>
                 </div>
               </div>
-              <br/>
+              {/* <br/> */}
               <div className="field">
                 <label>Color Mode:</label>
                 <div className="input-wrapper">
@@ -65,7 +65,7 @@ class NewProject extends Component {
                   </select>
                 </div>
               </div>
-              <br/>
+              {/* <br/> */}
               <div className="field">
                 <label>Background:</label>
                 <div className="input-wrapper">

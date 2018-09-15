@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 class Layers extends Component {
   render () {
     const { 
-      project: p, 
+      project: p,
+      editName,
       addLayer,
       deleteLayer,
       selectLayer,
       lockLayer,
       unlockLayer,
       showLayer,
-      putLayerImageData
+      updateLayerName,
+      putLayerImageData,
+      changeName,
+      confirmName
     } = this.props;
 
     const style = {
@@ -23,9 +27,7 @@ class Layers extends Component {
       <div className="layers">
         <header className="header">
           Lock:&nbsp;
-          <button title="Lock Layer" onClick={() => lockLayer()}>
-            <i className="icon-lock"></i>
-          </button>
+          <button title="Lock Layer" onClick={() => lockLayer()}><i className="icon-lock"></i></button>
         </header>
         <ul>
           { p.layers ? p.layers.map((layer, i) => (
@@ -37,13 +39,29 @@ class Layers extends Component {
               </div>
               <div className="name-wrapper" style={style.nameWrapper(i)}>
                 <div className="canvas-wrapper" onClick={() => selectLayer(i)}>
-                  <canvas ref={canvas => {if (canvas) putLayerImageData(canvas, layer)}} 
+                  <canvas 
+                    ref={canvas => { if (canvas) putLayerImageData(canvas, layer) }} 
                     width={p.width.size} 
                     height={p.height.size}/>
                 </div>
-                <div className="name" onClick={() => selectLayer(i)}>
-                  { layer.name }
+
+                <div 
+                  className="name" 
+                  onClick={() => selectLayer(i)} 
+                  onDoubleClick={() => changeName()}>
+                  { (editName && p.layer === i) ? (
+                    <input 
+                      ref={e => { if (e) e.focus() }} 
+                      type="text" 
+                      value={layer.name} 
+                      onChange={(e) => updateLayerName(e.target.value)} 
+                      onBlur={() => confirmName()}
+                      onKeyPress={(e) => e.charCode === 13 && confirmName()}/>
+                  ) : (
+                    layer.name.length > 12 ? `${layer.name.slice(0,12)}...` : layer.name
+                  ) }
                 </div>
+
                 { layer.locked && 
                 <div className="lock" onClick={() => unlockLayer(i)}>
                   <i className="icon-lock"></i>

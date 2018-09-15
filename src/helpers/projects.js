@@ -1,14 +1,14 @@
-export const newProject = (id, project, imgData) => ({
+export const newProject = ({id, project, imgData}) => ({
   ...project,
   id: id,
   canvasLayer: 1,
   layer: 0,
-  layers: [newLayer(1, imgData)],
+  layers: [newLayer({id:1, imgData})],
   zoom: '100%',
   scroll: { x: 0, y: 0 }
 });
 
-export const newLayer = (id, imgData) => ({ 
+export const newLayer = ({id, imgData}) => ({ 
   id: id, 
   name: `Layer ${id}`, 
   imgData: imgData ? imgData : null,
@@ -28,18 +28,15 @@ export const newId = (ids) => {
     } else if (array.length === 1) {
 
       if (array[0] === 1) return array.length + 1;
-      else return array.length;
+      return array.length;
 
     } else {
 
       array.sort((a, b) => a - b);
-
       if (array[0] > 1) return 1;
-
       for (let i = 0; i < array.length; i++) {
         if (array[i] !== (i+1)) return array[i-1] + 1;
       }
-
       return array.length + 1;
 
     }
