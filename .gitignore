@@ -25,6 +25,3 @@ src/**/*.css
 
 # fontawesome
 src/styles/fontawesome/*
-
-# svg cursors
-src/assets/images/*.svg
