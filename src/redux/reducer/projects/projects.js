@@ -2,7 +2,7 @@ import {
   CREATE_PROJECT,
   REMOVE_PROJECT,
   REMOVE_ALL_PROJECTS,
-  SELECT_TAB,
+  SELECT_PROJECT,
   ADD_LAYER,
   DELETE_LAYER,
   SELECT_LAYER,
@@ -15,7 +15,7 @@ import {
 } from './actions';
 
 const initialState = {
-  tab: 0,
+  projectIndex: 0,
   projects: [
     // {
     //   id: 1,
@@ -26,7 +26,7 @@ const initialState = {
     //   colorMode: { mode: 'RGB' , bit: '8 bit' },
     //   background: '#ffffff',
     //   canvasLayer: 3,
-    //   layer: 0,
+    //   layerIndex: 0,
     //   layers: [
     //     { id: 1, name: 'Layer 1', imgData: null, visible: true, locked: false, opacity: '100%' },
     //     { id: 2, name: 'Layer 2', imgData: null, visible: true, locked: false, opacity: '100%' },
@@ -49,7 +49,9 @@ export default (state = initialState, action) => {
       return payload(state);
     case REMOVE_ALL_PROJECTS:
       return payload(state);
-    case SELECT_TAB:
+    case SELECT_PROJECT:
+      return payload(state);
+    case UPDATE_SCROLL:
       return payload(state);
     case ADD_LAYER:
       return payload(state);
@@ -63,11 +65,9 @@ export default (state = initialState, action) => {
       return payload(state);
     case SHOW_LAYER:
       return payload(state);
-    case SAVE_IMAGE_DATA:
-      return payload(state);
-    case UPDATE_SCROLL:
-      return payload(state);
     case UPDATE_LAYER_NAME:
+      return payload(state);
+    case SAVE_IMAGE_DATA:
       return payload(state);
     default:
       return state;

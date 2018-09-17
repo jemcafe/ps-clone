@@ -9,8 +9,8 @@ import CanvasArea from '../components/CanvasArea/CanvasArea';
 class CanvasAreaCntr extends Component {
   constructor (props) {
     super(props);
-    const { projects, tab } = this.props.projects;
-    const project = projects[tab];
+    const { projects, projectIndex } = this.props.projects;
+    const project = projects[projectIndex];
 
     this.state = {
       project: project,
@@ -29,8 +29,8 @@ class CanvasAreaCntr extends Component {
   // New lifecycle that replaces componentWillReceiveProps. 
   // It must return a new state. It does not have access to "this"
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { projects, tab } = nextProps.projects;
-    const project = projects[tab];
+    const { projects, projectIndex } = nextProps.projects;
+    const project = projects[projectIndex];
 
     return {
       project: {...project},
@@ -74,7 +74,6 @@ class CanvasAreaCntr extends Component {
 
   putLayerImageData = (refs) => {
     const { layers } = this.state;
-    console.log('Layers ', layers);
 
     if ( layers.length ) {
       for (let i = 0; i < layers.length; i++) {
@@ -106,10 +105,10 @@ class CanvasAreaCntr extends Component {
   }
 
   engage = (canvas, e) => {
-    const { layer, layers } = this.state.project;
-    const l = layers[layer];
+    const { layerIndex, layers } = this.state.project;
+    const layer = layers[layerIndex];
 
-    if (!l.locked) {
+    if (!layer.locked) {
       this.setState({ dragging: true });
 
       this.putPoint(canvas, e, true);  // A point is drawn
@@ -121,7 +120,7 @@ class CanvasAreaCntr extends Component {
         onMouseLeave: () => this.disengage(canvas)
       });
     } else {
-      alert(`${l.name} is locked`);
+      alert(`${layer.name} is locked`);
     }
   }
 
@@ -140,7 +139,7 @@ class CanvasAreaCntr extends Component {
   putPoint = (canvas, e, fire) => {
     const { canvasMouse, dragging, brushPoints } = this.state;
     const { tool: t, paintBrush, eraser } = this.props.tools;
-    const { color1: c1, color2: c2 } = this.props.color;
+    const { frgd, bkgd } = this.props.color;
     const context = canvas.getContext('2d');
     let tool = null
     let color = null;
@@ -151,10 +150,10 @@ class CanvasAreaCntr extends Component {
     // The selected tool (brush or eraser)
     if (t === 'paintBrush') {
       tool = paintBrush;
-      color = c1.hex;
+      color = frgd.hex;
     } else if (t === 'eraser') {
       tool = eraser;
-      color = c2.hex;
+      color = bkgd.hex;
     }
 
     if ( tool && (dragging || fire) ) {

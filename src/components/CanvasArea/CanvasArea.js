@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import BrushCursor from './BrushCursor/BrushCursor';
+import BrushCursor from '../BrushCursor/BrushCursor';
 
 class CanvasArea extends Component {
   componentDidMount () {
@@ -40,22 +40,13 @@ class CanvasArea extends Component {
         height: `${p.height.size}px`,
         margin: 'auto',
       },
-      layer: (e) => ({
-        visibility: e.visible ? 'visible' : 'hidden'
+      layer: (layer) => ({
+        visibility: layer.visible ? 'visible' : 'hidden'
       })
     }
 
     const classNames = {
-      cursor: (
-        t.tool === 'move' ? ' cursor-move' : 
-        t.tool === 'hand' ? ' cursor-hand' :
-        t.tool === 'eyedropper' ? ' cursor-eyedropper' :
-        t.tool === 'paintBucket' ? ' cursor-paintBucket' :
-        t.tool === 'pen' ? ' cursor-pen' :
-        t.tool === 'shape' ? ' cursor-crosshair' :
-        t.tool === 'magnify' && t.magnify.in ? ' cursor-zoomIn' : 
-        t.tool === 'magnify' && t.magnify.out ? ' cursor-zoomOut' : ''
-      )
+      cursor: t[t.tool].cursor ? t[t.tool].cursor : ''
     }
 
     return (
@@ -66,32 +57,34 @@ class CanvasArea extends Component {
         onMouseOver={() => updateCanvasArea(this.refs)}
         onMouseMove={(e) => updateMousePosition(e)}>
         
-        { hasLayers && 
-          <div ref="canvasWrapper" className="canvas-wrapper" style={style.canvasWrapper}>
+      { hasLayers && 
+        <div ref="canvasWrapper" 
+          className="canvas-wrapper" 
+          style={style.canvasWrapper}>
 
-            { layers.map((e, i) => (
-              <canvas key={e.id} 
-                ref={`layer_${e.id}`} 
-                className={`layer-${e.id}`}
-                style={style.layer(e)}
-                width={p.width.size} 
-                height={p.height.size}/>
-            )) }
-
-            { (inCanvas || focus === 'canvas') && 
-              <BrushCursor tools={t} mouse={mouse} zIndex={0} /> }
-
-            <canvas ref="touch" 
-              className={`touch-overlay${classNames.cursor}`}
-              style={style.touchOverlay}
+          { layers.map((layer, i) => (
+            <canvas ref={`layer_${layer.id}`} 
+              key={layer.id} 
+              className={`layer-${layer.id}`}
+              style={style.layer(layer)}
               width={p.width.size} 
-              height={p.height.size}
-              onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
-              onMouseMove={(e) => updateMousePosition(e, this.refs)}
-              onMouseOver={() => detectCanvas(true)}
-              onMouseLeave={() => detectCanvas(false)}/>
+              height={p.height.size}/>
+          )) }
 
-          </div> }
+          { (inCanvas || focus === 'canvas') && 
+          <BrushCursor tools={t} mouse={mouse} zIndex={0} /> }
+
+          <canvas ref="touch" 
+            className={`touch-overlay${classNames.cursor}`}
+            style={style.touchOverlay}
+            width={p.width.size} 
+            height={p.height.size}
+            onMouseDown={(e) => engage(this.refs[`layer_${p.canvasLayer}`], e)}
+            onMouseMove={(e) => updateMousePosition(e, this.refs)}
+            onMouseOver={() => detectCanvas(true)}
+            onMouseLeave={() => detectCanvas(false)}/>
+
+        </div> }
       </div>
     );
   }

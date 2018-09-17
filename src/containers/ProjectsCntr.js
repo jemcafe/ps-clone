@@ -2,7 +2,7 @@ import React, { Component, Fragment as Aux } from 'react';
 import Projects from '../components/Projects/Projects';
 
 import { connect } from 'react-redux';
-import { removeProject, selectTab } from '../redux/reducer/projects/actions';
+import { removeProject, selectProject } from '../redux/reducer/projects/actions';
 
 class ProjectsCntr extends Component {
   constructor () {
@@ -12,9 +12,7 @@ class ProjectsCntr extends Component {
 
   updateDimensions = (refs) => {
     const { wrapper: w, nav: n } = refs;
-    if (w && n) {
-      this.setState({ height: w.clientHeight - n.offsetHeight });
-    }
+    if (w && n) this.setState({ height: w.clientHeight - n.offsetHeight });
   }
 
   removeProject = (e, i) => {
@@ -23,18 +21,16 @@ class ProjectsCntr extends Component {
   }
 
   render () {
-    const { projects } = this.props.projects;
-
     return (
       <Aux>
-        { projects.length > 0 &&  
+        { this.props.projects.projects.length > 0 &&  
         <Projects 
           projects={ this.props.projects.projects }
-          tab={ this.props.projects.tab }
+          tab={ this.props.projects.projectIndex }
           height={ this.state.height }
           updateDimensions={ this.updateDimensions }
           removeProject={ this.removeProject }
-          selectTab={ this.props.selectTab }
+          selectTab={ this.props.selectProject }
           children={ this.props.children } /> }
       </Aux>
     );
@@ -47,7 +43,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { 
   removeProject,
-  selectTab
+  selectProject
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsCntr);

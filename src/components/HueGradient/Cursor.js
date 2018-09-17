@@ -24,7 +24,7 @@ function Cursor (props) {
   }
 
   return (
-    <svg id="color-picker-cursor" width={ width } height={ height } style={ styles.brush }>
+    <svg id="color-picker-cursor" style={ styles.brush } width={ width } height={ height }>
       <circle cx={ cx } cy={ cy } r={ r } stroke={ '#000000' } strokeWidth={ strokeWidth } fill={ fill }/>
       <circle cx={ cx } cy={ cy } r={ r } stroke={ '#ffffff' } strokeWidth={ strokeWidth-2 } fill={ fill }/>
     </svg>

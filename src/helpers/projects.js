@@ -2,7 +2,7 @@ export const newProject = ({id, project, imgData}) => ({
   ...project,
   id: id,
   canvasLayer: 1,
-  layer: 0,
+  layerIndex: 0,
   layers: [newLayer({id:1, imgData})],
   zoom: '100%',
   scroll: { x: 0, y: 0 }

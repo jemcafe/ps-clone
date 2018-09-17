@@ -31,7 +31,10 @@ class Slider extends Component {
 
     return (
       <div ref="slider" id="color-slider">
-        <input type="range" style={style.input} min={min} max={max} defaultValue="0" 
+        <input type="range" 
+          style={style.input} 
+          min={min} max={max} 
+          defaultValue="0" 
           onClick={(e) => onChange(e.target.value)}
           onChange={(e) => onChange(e.target.value)}/>
       </div>

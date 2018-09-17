@@ -4,8 +4,8 @@ export default [
   { name: 'File', 
     options: [
       { name: 'New Project', window: 'newProject' },
-      { name: 'Open' },
-      { name: 'Save' },
+      { name: 'Open', action: 'openProject' },
+      { name: 'Save', action: 'saveProject' },
       { name: 'Close', action: 'closeProject' },
       { name: 'Close All', action: 'closeAllProjects' }
     ] 

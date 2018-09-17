@@ -7,17 +7,17 @@ import { addLayer, deleteLayer, selectLayer, lockLayer, unlockLayer, showLayer, 
 class LayersCntr extends Component {
   constructor (props) {
     super(props);
-    const { projects, tab } = this.props.projects;
+    const { projects, projectIndex } = this.props.projects;
     this.state = {
-      project: projects[tab] || {},
+      project: projects[projectIndex] || {},
       editName: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { projects, tab } = nextProps.projects;
+    const { projects, projectIndex } = nextProps.projects;
     return {
-      project: {...projects[tab]},
+      project: {...projects[projectIndex]},
     };
   }
 

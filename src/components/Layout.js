@@ -1,21 +1,19 @@
 import React from 'react';
 
 // constants
-import toolbarItems from '../tabs/toolbarItems';
-import tabGroups from '../tabs/tabGroups';
+import toolbarItems from '../content/toolbarItems';
+import tabGroups from '../content/tabGroups';
 
 // Components
 import ToolBar from '../containers/ToolBarCntr';
 import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
-// import CanvasArea from '../containers/CanvasAreaCntr';
 import Panel from '../containers/PanelCntr';
-
 import Windows from '../containers/Windows/WindowsCntr';
+import FocusLayer from './FocusLayer/FocusLayer';
+
 // import NewProject from '../containers/NewProjectCntr';
 // import HueGradient from '../containers/HueGradientCntr';
-
-import FocusLayer from './FocusLayer/FocusLayer';
 
 function Layout () {
   return (
@@ -32,8 +30,8 @@ function Layout () {
           <Projects />
         </div>
         <section className="panels">
-          <Panel align={'R'} tabGroups={tabGroups['1']} isCollapsed={true} />
-          <Panel align={'R'} tabGroups={tabGroups['2']} />
+          <Panel align={'R'} tabGroups={tabGroups._1} isCollapsed={true} />
+          <Panel align={'R'} tabGroups={tabGroups._2} />
         </section>
       </div>
       <Windows />

@@ -57,20 +57,13 @@ export const updateStrokeWidth = (value) => ({
   }
 });
 
-export const zoom = (value) => ({
+export const zoom = (value) => ({  // value equals 'in' or 'out'
   type: ZOOM,
   payload: (state) => {
-    const { magnify } = state;
-
-    if (value === 'in') {
-      magnify.in = true;
-      magnify.out = false;
-    }
-    if (value === 'out') {
-      magnify.in = false;
-      magnify.out = true;
-    }
-
+    const magnify = {...state.magnify};
+    magnify.cursor = ` cursor-zoom-${value}`;
+    magnify.zoom = value;
+    
     return {...state, magnify };
   }
 })

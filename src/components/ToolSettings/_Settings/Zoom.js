@@ -4,8 +4,8 @@ function Zoom (props) {
   const { tool, zoom } = props;
 
   const classNames = {
-    in: tool.in ? 'selected' : null,
-    out: tool.out ? 'selected' : null,
+    in: tool.zoom === 'in' ? 'selected' : null,
+    out: tool.zoom === 'out' ? 'selected' : null,
   }
 
   return (

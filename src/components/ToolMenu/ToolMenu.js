@@ -48,8 +48,12 @@ function ToolMenu (props) {
           <div className="swap" onClick={ swapColors }><i className="icon-swap"></i></div>
         </div>
         <div className="colors">
-          <div className="color-block"><div style={{background: c.color2.hex}} onClick={() => openWindow('colorPicker')}></div></div>
-          <div className="color-block"><div style={{background: c.color1.hex}} onClick={() => openWindow('colorPicker')}></div></div>
+          <div className="color-block">
+            <div style={{background: c.bkgd.hex}} onClick={() => openWindow('colorPicker')}></div>
+          </div>
+          <div className="color-block">
+            <div style={{background: c.frgd.hex}} onClick={() => openWindow('colorPicker')}></div>
+          </div>
         </div>
       </div>
     </div>

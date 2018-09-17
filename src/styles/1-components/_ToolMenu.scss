@@ -41,7 +41,8 @@ $reset-swap-XY: $colorBlock1 * 0.75 !default;  // x and y coordinate value for r
       display: flex;
       justify-content: space-around;
 
-      .reset, .swap {  // icons
+      .reset, 
+      .swap {  // icons
         @extend %center-content;
         font-size: 10px; 
         padding: 2px;
@@ -79,7 +80,10 @@ $reset-swap-XY: $colorBlock1 * 0.75 !default;  // x and y coordinate value for r
       @extend %center-content;
       position: absolute;
 
-      .reset, .swap { position: absolute; }
+      .reset, 
+      .swap { 
+        position: absolute; 
+      }
 
       .reset { transform: translate(-$reset-swap-XY, $reset-swap-XY); }
       .swap { transform: translate($reset-swap-XY, -$reset-swap-XY); }

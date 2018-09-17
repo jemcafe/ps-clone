@@ -56,9 +56,7 @@ class Projects extends Component {
           </div>
         </nav>
         <div className="container" style={style.container}>
-          { p.map((e, i) => (
-            tab === i && <CanvasArea key={e.id} /> 
-          )) }
+          { p.map((e, i) => tab === i && <CanvasArea key={e.id} /> ) }
         </div>
       </div>
     );

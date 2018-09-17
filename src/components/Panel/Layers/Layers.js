@@ -19,7 +19,7 @@ class Layers extends Component {
     } = this.props;
 
     const style = {
-      nameWrapper: (index) => p.layer === index ? { background:'gray' } : null,
+      nameWrapper: (index) => p.layerIndex === index ? { background:'gray' } : null,
       eye: (visible) => !visible ? { visibility:'hidden' } : null
     }
     
@@ -49,7 +49,7 @@ class Layers extends Component {
                   className="name" 
                   onClick={() => selectLayer(i)} 
                   onDoubleClick={() => changeName()}>
-                  { (editName && p.layer === i) ? (
+                  { (editName && p.layerIndex === i) ? (
                     <input 
                       ref={e => { if (e) e.focus() }} 
                       type="text" 

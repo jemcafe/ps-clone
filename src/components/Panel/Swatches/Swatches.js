@@ -6,7 +6,7 @@ class Swatches extends Component {
     const swatches = (num) => {
       let swatches = [];
       for (let i = 0; i < num; i++) 
-        swatches.push(<canvas className="swatch"/>);
+        swatches.push(<canvas key={i} className="swatch"/>);
       return swatches;
     }
 

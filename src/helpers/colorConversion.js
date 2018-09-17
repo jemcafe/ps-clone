@@ -1,7 +1,6 @@
-export const RGBtoHex = (r, g, b) => (
+export const RGBtoHex = ({r, g, b}) => (
   `#${colorToHex(r)}${colorToHex(g)}${colorToHex(b)}`
 );
-
 
 const colorToHex = (c) => {
   // The radix is 16 for hexidecimal numbers
@@ -10,8 +9,8 @@ const colorToHex = (c) => {
 }
 
 
-export const RGBtoHSL = (r, g, b) => {
-  // If the parameter values are out of range or not numbers, the default is returned.
+export const RGBtoHSL = ({r, g, b}) => {
+  // Default value
   if (r > 255  || g > 255  || b > 255 || 
       r < 0    || g < 0    || b < 0   ||
       isNaN(r) || isNaN(g) || isNaN(b)
@@ -68,8 +67,8 @@ export const RGBtoHSL = (r, g, b) => {
 }
 
 
-export const HSLtoRGB = (h, s, l) => {
-  // If the parameter values are out of range or not numbers, the default is returned.
+export const HSLtoRGB = ({h, s, l}) => {
+  // Default value
   if (h > 360  || s > 100  || l > 100 || 
       h < 0    || s < 0    || l < 0   ||
       isNaN(h) || isNaN(s) || isNaN(l)
@@ -120,8 +119,8 @@ export const HSLtoRGB = (h, s, l) => {
 }
 
 
-export const RGBtoCMYK = (r, g, b) => {
-  // If the parameter values are out of range or not numbers, the default is returned
+export const RGBtoCMYK = ({r, g, b}) => {
+  // Default value
   if (r > 255  || g > 255  || b > 255 || 
       r < 0    || g < 0    || b < 0   ||
       isNaN(r) || isNaN(g) || isNaN(b)
@@ -155,8 +154,8 @@ export const RGBtoCMYK = (r, g, b) => {
 }
 
 
-export const CMYKtoRGB = (c, m, y, k) => {
-  // If the parameter values are out of range or not numbers, the default value is returned.
+export const CMYKtoRGB = ({c, m, y, k}) => {
+  // Default value
   if (c > 100  || m > 100  || y > 100  || k > 100 || 
       c < 0    || m < 0    || y < 0    || k < 0   ||
       isNaN(c) || isNaN(m) || isNaN(y) || isNaN(k)
@@ -167,7 +166,6 @@ export const CMYKtoRGB = (c, m, y, k) => {
   const M = m * 0.01;
   const Y = y * 0.01;
   const K = k * 0.01;
-  // The RGB values are calculated from the CMY respectively
   let RGB = [C, M, Y];
 
   // RGB
@@ -179,13 +177,13 @@ export const CMYKtoRGB = (c, m, y, k) => {
 
 
 // RGB to CIELab
-export const RGBtoLAB =  (R, G, B) => {
-  const XYZ = RGBtoXYZ(R, G, B);
+export const RGBtoLAB =  ({r, g, b}) => {
+  const XYZ = RGBtoXYZ(r, g, b);
   return XYZtoLAB(XYZ.x, XYZ.y, XYZ.z);
 }
 
 const RGBtoXYZ = (R, G, B) => {
-  // If the parameter values are out of range or not numbers, the default value is returned.
+  // Default value
   if (R > 255  || G > 255  || B > 255 || 
       R < 0    || G < 0    || B < 0   ||
       isNaN(R) || isNaN(G) || isNaN(B)
@@ -222,13 +220,13 @@ const XYZtoLAB = (X, Y, Z) => {
 }
 
 
-export const LABtoRGB = (L, a, b) => {
+export const LABtoRGB = ({L, a, b}) => {
   const XYZ = LABtoXYZ(L, a, b);
   return XYZtoRGB(XYZ.x, XYZ.y, XYZ.z);
 }
 
 const LABtoXYZ = (L, a, b) => {
-  // If the parameter values are out of range or not numbers, the default is returned
+  // Default value
   if (L > 100 || a > 127  || b > 127  || 
       L < 0   || a < -128 || b < -128 ||
       isNaN(L) || isNaN(a) || isNaN(b)
@@ -263,9 +261,10 @@ const XYZtoRGB = (X, Y, Z) => {
   ];
 
   // RGB  (the values are off by 1 or 2 compared to reference values)
-  RGB = RGB.map(e => e > 0.0031308 ? (1.055 * Math.pow(e, 1/2.4) - 0.055) : (12.92 * e))
-           .map(e => e * 255)
-           .map(e => Math.round(e));
+  RGB = RGB
+    .map(e => e > 0.0031308 ? (1.055 * Math.pow(e, 1/2.4) - 0.055) : (12.92 * e))
+    .map(e => e * 255)
+    .map(e => Math.round(e));
 
   return { r: RGB[0], g: RGB[1], b: RGB[2] };
 }

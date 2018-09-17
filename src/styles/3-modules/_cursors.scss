@@ -2,6 +2,10 @@
   @include user-select(none);
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 .cursor-move { 
   cursor: url('../assets/images/cursor-move.png'), auto;
 }
@@ -10,7 +14,7 @@
   cursor: url('../assets/images/cursor-eyedropper.png') 0 30, auto;
 }
 
-.cursor-paintBucket { 
+.cursor-paint-bucket { 
   cursor: url('../assets/images/cursor-paintBucket.png'), auto;
 }
 
@@ -18,16 +22,16 @@
   cursor: url('../assets/images/cursor-pen.png'), auto;
 }
 
-.cursor-zoomIn { 
+.cursor-zoom-in { 
   cursor: url('../assets/images/cursor-zoomIn.png'), auto;
 }
 
-.cursor-zoomOut { 
+.cursor-zoom-out { 
   cursor: url('../assets/images/cursor-zoomOut.png'), auto;
 }
 
 .cursor-hand { 
-  cursor: url('../assets/images/cursor-hand.png'), auto;
+  cursor: url('../assets/images/cursor-hand.png') 16 16, auto;
 }
 
 .cursor-crosshair { 
