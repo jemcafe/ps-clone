@@ -16,7 +16,6 @@ export const
   SWAP_COLORS = 'SWAP_COLORS',
   UPDATE_COLOR = 'UPDATE_COLOR',
   UPDATE_COLOR_POSITION = 'UPDATE_COLOR_POSITION';
-  // UPDATE_GRADIENT_DIMENSIONS = 'UPDATE_GRADIENT_DIMENSIONS';
 
 // Action Creators
 export const selectColor = (property) => ({  // 'frgd' or 'bkgd'
@@ -84,14 +83,7 @@ export const updateColorPosition = (pos) => ({
     const color = {...state[selected]};
     color.x = pos.x;
     color.y = pos.y;
-    console.log('updateColorPosition', pos.x, pos.y);
+    // console.log('updateColorPosition', pos.x, pos.y);
     return {...state, [selected]: color }
   }
 });
-
-// export const updateGraidentDimensions = (dimensions) => ({
-//   type: UPDATE_GRADIENT_DIMENSIONS,
-//   payload: (state) => {
-//     return {...state, gradient: dimensions }
-//   }
-// });

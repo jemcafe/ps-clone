@@ -33,3 +33,18 @@
     }
   }
 }
+
+.color-slider {
+  border: 2px solid $darkgray;
+  border-radius: 20px;
+  background: colorGradient(0deg);
+
+  .handle {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background: radial-gradient(lightgray, #fff 75%);
+  }
+}

@@ -13,6 +13,6 @@ A photoshop clone project (not including every feature) built with React, Redux 
 
 ### Fix
 
-
+* In HueGradient, stop the color position from resetting when re-rendered after being collapsed.
 
 ...in progress

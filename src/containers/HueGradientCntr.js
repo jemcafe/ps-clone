@@ -8,6 +8,7 @@ import { RGBtoHex } from '../helpers/colorConversion';
 // redux
 import { connect } from 'react-redux';
 import { selectColor, updateColor, updateColorPosition } from '../redux/reducer/color/actions';
+import { updateGradientHue, updateGradientDimensions } from '../redux/reducer/colorPickers/actions';
 import { focusCanvas, unfocusCanvas } from '../redux/reducer/focusLayer/actions';
 
 // components
@@ -106,6 +107,7 @@ class HueGradientCntr extends Component {
   }
 
   changeHue = (canvas, value) => {
+    const { updateGradientHue } = this.props;
     // value = e ? +e.target.value : value;         // The string is converted to a number
     value = (255 * 6) - value;                   // The value starts at max
     let rgb = [0, 0, 0];
@@ -136,13 +138,20 @@ class HueGradientCntr extends Component {
       }
     });
 
-    const r = rgb[0], 
-          g = rgb[1], 
-          b = rgb[2], 
-          hex = RGBtoHex({ r, g, b });
-    this.setState({ gradientHue: { r, g, b, hex } });
+    rgb = { r: rgb[0], g: rgb[1], b: rgb[2] };
+    const hex = RGBtoHex(rgb);
+
+    this.setState({ 
+      gradientHue: { 
+        r: rgb[0], 
+        g: rgb[1], 
+        b: rgb[2],
+        hex: hex
+      }
+    });
 
     // The color and canvas are updated
+    updateGradientHue(rgb);
     this.getColor({ canvas, fire: true });
     this.setCanvas({ canvas, hex });
   }
@@ -279,9 +288,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   selectColor,
   updateColor,
+  updateColorPosition,
+  updateGradientHue,
+  updateGradientDimensions,
   focusCanvas,
-  unfocusCanvas,
-  updateColorPosition
+  unfocusCanvas
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HueGradientCntr);

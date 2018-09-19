@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ColorPair from './ColorPair';
 import Cursor from './Cursor';
 import Slider from './Slider';
+// import Slider from './Slider2';
 
 class HueGradient extends Component {
   componentDidMount () {
@@ -42,12 +43,16 @@ class HueGradient extends Component {
           <ColorPair color={color} selectColor={(selected) => selectColor(this.refs.canvas, selected)} /> }
         
         <div ref="wrapper" className="gradient-wrapper" style={style.wrapper}>
-          <canvas ref="canvas" className="color-canvas" style={style.canvas}/>
+          <canvas 
+            ref="canvas" 
+            className="color-canvas" 
+            style={style.canvas}/>
 
           { (inCanvas || focus === 'hueGradient') && 
             <Cursor mouse={mouse} zIndex={0} /> }
           
-          <canvas ref="touch" 
+          <canvas 
+            ref="touch" 
             className="touch-overlay"
             onMouseDown={(e) => engage(this.refs.canvas, e)}
             onMouseMove={(e) => updateMousePosition(e)}
