@@ -30,8 +30,8 @@ function Layout () {
           <Projects />
         </div>
         <section className="panels">
-          <Panel align={'R'} tabGroups={tabGroups._1} isCollapsed={true} />
-          <Panel align={'R'} tabGroups={tabGroups._2} />
+          <Panel align={'R'} tabGroups={tabGroups['1']} isCollapsed={true} />
+          <Panel align={'R'} tabGroups={tabGroups['2']} />
         </section>
       </div>
       <Windows />

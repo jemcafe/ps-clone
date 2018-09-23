@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // helpers
-import { RGBtoHex } from '../helpers/colorConversion';
+import { RGBtoHex, HSLtoRGB } from '../helpers/colorConversion';
 // import { getPosition } from '../helpers/canvas';
 
 // redux
@@ -17,34 +17,29 @@ import HueGradient from '../components/HueGradient/HueGradient';
 class HueGradientCntr extends Component {
   constructor (props) {
     super(props);
-    const { color } = this.props;
+    const { color, colorPickers } = this.props;
     this.state = {
+      initiated: false,
       color: color[color.selected],
-      gradientHue: {
-        r: 255,
-        g: 0,
-        b: 0,
-        hex: '#ff0000'
-      },
-      mouse: { 
-        x: 0, 
-        y: 0 
-      },
+      hue: colorPickers.hueGradient.hue,
+      mouse: { x: 0, y: 0 },
       dragging: false,
       inCanvas: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { color } = nextProps;
+    const { color, colorPickers } = nextProps;
     return {
-      color: {...color[color.selected]}
+      color: {...color[color.selected]},
+      hue: {...colorPickers.hueGradient.hue}
     };
   }
 
   initCanvas = (refs) => {
     const { canvas: c, touch: t, wrapper: w } = refs;
-    const { updateColorPosition } = this.props;
+    const { updateGradientDimensions, updateColorPosition } = this.props;
+    const { initiated } = this.state;
 
     // refs are unmounted then mounted, so they must checked for undefined
     if ( c && t && w ) {
@@ -52,9 +47,73 @@ class HueGradientCntr extends Component {
       t.height = w.clientHeight;
       c.width = t.width;
       c.height = t.height;
-      updateColorPosition({ x: 0, y: c.height });
+
+      updateGradientDimensions({
+        colorPicker: 'hueGradient', 
+        dimensions: { 
+          width: c.width, 
+          height: c.height 
+        }
+      });
+
+      if ( !initiated ) {
+        updateColorPosition({ x: 0, y: c.height });
+      }
+      
       this.setCanvas({ canvas: c });
+      this.setState({ initiated: true });
     }
+  }
+
+  changeHue = (canvas, value) => {
+    // // value = e ? +e.target.value : value;         // The string is converted to a number
+    // value = (255 * 6) - value;                   // The value starts at max
+    // let rgb = [0, 0, 0];
+    // const range = new Array(rgb.length * 2 + 1); // red, green, and blue increases to 255 and decreases to 0  (3 * 2).  1 is added for when the color goes back to red.
+
+    // // Range values. RGB values range from 0 to 255.
+    // for (let i = 0; i < range.length; i++) range[i] = i * 255;
+
+    // // RGB values
+    // const l = range.length-1;
+    // rgb = rgb.map((e, i) => {
+    //   // The ranges's index value. The value loops around.
+    //   const index = (offset, j = (i * 2 + offset)) => {
+    //     return (i === rgb.length-1 && j === l) ? l : (j % l)
+    //   };
+
+    //   // The rgb values change if the input value is within the specific ranges
+    //   if (value >= range[index(4)] && value < range[index(5)]+1) {
+    //     return (value - range[index(4)]);
+    //   } else if (value >= range[index(5)] && value < range[index(1)]+1) {
+    //     return range[1];
+    //   } else if (i === 0 && (value >= range[5] || (value >= range[0] && value < range[1]+1))) {
+    //     return range[1];
+    //   } else if (value >= range[index(1)] && value < range[index(2)]+1) {
+    //     return (range[index(2)] - value);
+    //   } else {
+    //     return range[0];
+    //   }
+    // });
+
+    // rgb = { r: rgb[0], g: rgb[1], b: rgb[2] };
+    // const hex = RGBtoHex(rgb);
+
+    // this.setState({ 
+    //   gradientHue: { rgb, hex }
+    // });
+    
+    const { updateGradientHue } = this.props;
+    // The colors are reverse when subtracting from the max
+    value = 360 - (+value);
+    const rgb = HSLtoRGB({ h: value, s: 100, l: 50 });
+    const hex = RGBtoHex(rgb);
+    console.log('HUE', value);
+
+    // The color and canvas are updated
+    updateGradientHue(rgb);
+    this.getColor({ canvas, fire: true });
+    this.setCanvas({ canvas, hex });
   }
 
   engage = (canvas, e) => {
@@ -76,7 +135,7 @@ class HueGradientCntr extends Component {
   }
 
   getColor = ({canvas, e, fire}) => {
-    const { color, dragging } = this.state;
+    const { color, hue, dragging } = this.state;
     const { updateColor, focusLayer } = this.props;
     const ctx = canvas.getContext('2d');
 
@@ -98,62 +157,11 @@ class HueGradientCntr extends Component {
       // .getImageData(x, y, width, height)
       const imgData = ctx.getImageData(x, y, 1, 1).data;
       const rgb = { r: imgData[0], g: imgData[1], b: imgData[2] };
-      const hue = this.state.gradientHue;
 
       // Mouse position and color updated
       this.updateMousePosition(e);
       updateColor({ rgb, hue, pos });
     }
-  }
-
-  changeHue = (canvas, value) => {
-    const { updateGradientHue } = this.props;
-    // value = e ? +e.target.value : value;         // The string is converted to a number
-    value = (255 * 6) - value;                   // The value starts at max
-    let rgb = [0, 0, 0];
-    const range = new Array(rgb.length * 2 + 1); // red, green, and blue increases to 255 and decreases to 0  (3 * 2).  1 is added for when the color goes back to red.
-
-    // Range values. RGB values range from 0 to 255.
-    for (let i = 0; i < range.length; i++) range[i] = i * 255;
-
-    // RGB values
-    const l = range.length-1;
-    rgb = rgb.map((e, i) => {
-      // The ranges's index value. The value loops around.
-      const index = (offset, j = (i * 2 + offset)) => {
-        return (i === rgb.length-1 && j === l) ? l : (j % l)
-      };
-
-      // The rgb values change if the input value is within the specific ranges
-      if (value >= range[index(4)] && value < range[index(5)]+1) {
-        return (value - range[index(4)]);
-      } else if (value >= range[index(5)] && value < range[index(1)]+1) {
-        return range[1];
-      } else if (i === 0 && (value >= range[5] || (value >= range[0] && value < range[1]+1))) {
-        return range[1];
-      } else if (value >= range[index(1)] && value < range[index(2)]+1) {
-        return (range[index(2)] - value);
-      } else {
-        return range[0];
-      }
-    });
-
-    rgb = { r: rgb[0], g: rgb[1], b: rgb[2] };
-    const hex = RGBtoHex(rgb);
-
-    this.setState({ 
-      gradientHue: { 
-        r: rgb[0], 
-        g: rgb[1], 
-        b: rgb[2],
-        hex: hex
-      }
-    });
-
-    // The color and canvas are updated
-    updateGradientHue(rgb);
-    this.getColor({ canvas, fire: true });
-    this.setCanvas({ canvas, hex });
   }
 
   setCanvas = ({canvas, e, hex}) => {
@@ -162,7 +170,7 @@ class HueGradientCntr extends Component {
   }
 
   setGradientColor = (canvas, hex) => {  // The default hex color is the color stored in state. 
-    hex = hex || this.state.gradientHue.hex;
+    hex = hex || this.state.hue.hex;
     const context = canvas.getContext('2d');
     
     // White linear gradient
@@ -178,10 +186,11 @@ class HueGradientCntr extends Component {
     blackGrd.addColorStop(0.99, "transparent");
     context.fillStyle = blackGrd;
     context.fillRect(0, 0, canvas.width, canvas.height);
+    console.log('setGradientColor');
   }
 
   drawCircle = (canvas, e) => {
-    const { color, gradientHue } = this.state;
+    const { color, hue } = this.state;
     const { focusLayer } = this.props;
     const context = canvas.getContext('2d');
 
@@ -204,7 +213,7 @@ class HueGradientCntr extends Component {
       y: Math.floor(canvas.height/3) 
     };
     // The fourth character in the hexidecimal string is tested to see if the gradient hue is one of the lighter colors (colors between orange and light blue)
-    let isLighter = /^([a-f])$/.test( gradientHue.hex[3] );
+    let isLighter = /^([a-f])$/.test( hue.hex[3] );
     isLighter = (x < range.x || isLighter) && y < range.y;
     const strokeStyle = isLighter ? '#000' : '#fff';
 
@@ -215,6 +224,7 @@ class HueGradientCntr extends Component {
 
     // The path is reset, so it's not connected to the next path.
     context.beginPath();
+    console.log('drawCircle');
   }
 
   updateMousePosition = (e) => {
@@ -258,13 +268,19 @@ class HueGradientCntr extends Component {
   }
 
   selectColor = (canvas, selected) => {
+    const { selectColor } = this.props;
     const { hex } = this.state.color.hue;
-    this.props.selectColor(selected);
+    selectColor(selected);
     this.setCanvas({ canvas, hex });
   }
 
   render() {
-    console.log('COLOR: ', this.state.color);
+    // console.log('COLOR: ', this.state.color);
+    // console.log('GRADIENT HUE: ', this.state.hue);
+    // console.log('COLOR Initiated: ', this.state.initiated);
+    // console.log('COLOR', this.props.color.frgd);
+    // console.log('COLOR', this.props.color.bkgd);
+    
     return (
       <HueGradient
         state={ this.state }
@@ -282,6 +298,7 @@ class HueGradientCntr extends Component {
 
 const mapStateToProps = (state) => ({
   color: state.color,
+  colorPickers: state.colorPickers,
   focusLayer: state.focusLayer
 });
 

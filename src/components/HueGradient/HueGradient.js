@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import ColorPair from './ColorPair';
 import Cursor from './Cursor';
-import Slider from './Slider';
-// import Slider from './Slider2';
+// import Slider from './Slider';
+import Slider from './Slider2';
 
 class HueGradient extends Component {
   componentDidMount () {
@@ -61,7 +61,7 @@ class HueGradient extends Component {
         </div>
 
         { hasSlider &&
-          <Slider min={0} max={255 * 6} onChange={(value) => changeHue(this.refs.canvas, value)} /> }
+          <Slider min={0} max={360} radius={20} onChange={(value) => changeHue(this.refs.canvas, value)} /> }
       </div>
     );
   }

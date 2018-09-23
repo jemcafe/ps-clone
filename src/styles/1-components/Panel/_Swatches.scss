@@ -9,13 +9,14 @@
     height: 16px;
   }
 
-  .recent-wrapper {
+  .recent-swatches-wrapper {
     padding: 4px;
     box-sizing: border-box;
     border-bottom: 1px solid $darkgray;
 
-    .recent-list {
+    .recent-swatches {
       display: flex;
+      min-height: 16px;
       padding: 2px;
       box-sizing: border-box;
       background: $darkgray;

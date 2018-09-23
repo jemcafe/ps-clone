@@ -1,4 +1,8 @@
 import { 
+  color 
+} from '../../../helpers/color';
+
+import { 
   SELECT_COLOR,
   RESET_COLORS,
   SWAP_COLORS,
@@ -9,32 +13,8 @@ import {
 const initialState = {
   initiated: false,
   selected: 'frgd',
-  frgd: {
-    hex: '#000000',
-    rgb: { r: 0, g: 0, b: 0 },
-    cmyk:{ c: 0, m: 100, y: 100, k: 0 },
-    hsl: { h: 0, s: 100, l: 0 },
-    lab: { l: 0, a: 0, b: 0 },
-    hue: { 
-      rgb: { r: 255, g: 0, b: 0 }, 
-      hex: '#ff0000' 
-    },
-    x: 0,
-    y: 0
-  },
-  bkgd: {
-    hex: '#ffffff',
-    rgb: { r: 255, g: 255, b: 255 },
-    cmyk:{ c: 0, m: 100, y: 100, k: 100 },
-    hsl: { h: 0, s: 100, l: 100 },
-    lab: { l: 100, a: 0, b: 0 },
-    hue: { 
-      rgb: { r: 255, g: 0, b: 0 }, 
-      hex: '#ff0000' 
-    },
-    x: 0,
-    y: 0
-  }
+  frgd: color({ r: 0, b: 0, g: 0 }),
+  bkgd: color({ r: 255, b: 255, g: 255 })
 };
 
 // Reducer

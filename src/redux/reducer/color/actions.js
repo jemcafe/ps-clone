@@ -81,8 +81,12 @@ export const updateColorPosition = (pos) => ({
   payload: (state) => {
     const { selected } = state;
     const color = {...state[selected]};
-    color.x = pos.x;
-    color.y = pos.y;
+
+    if (pos) {
+      color.x = pos.x;
+      color.y = pos.y;
+    } 
+
     // console.log('updateColorPosition', pos.x, pos.y);
     return {...state, [selected]: color }
   }

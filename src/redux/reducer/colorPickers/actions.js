@@ -1,9 +1,9 @@
 // Color Converters
 import { 
   RGBtoHex, 
-  RGBtoCMYK, 
-  RGBtoHSL, 
-  RGBtoLAB, 
+  // RGBtoCMYK, 
+  // RGBtoHSL, 
+  // RGBtoLAB, 
   // CMYKtoRGB, 
   // HSLtoRGB, 
   // LABtoRGB 
@@ -19,18 +19,15 @@ export const updateGradientHue = (rgb) => ({
   type: UPDATE_GRADIENT_HUE,
   payload: (state) => {
     const hg = {...state.hueGradient};
-
-    hg.hue = {
-      rgb: rgb,
-      hex: RGBtoHex(rgb)
-    };
+    hg.hue.rgb = rgb;
+    hg.hue.hex = RGBtoHex(rgb);
 
     console.log('updateGradientHue', hg.hue);
     return {...state, hueGradient: hg };
   }
 });
 
-export const updateGradientDimensions = (colorPicker, dimensions) => ({
+export const updateGradientDimensions = ({colorPicker, dimensions}) => ({
   type: UPDATE_GRADIENT_DIMENSIONS,
   payload: (state) => {
     const cp = {...state[colorPicker]};

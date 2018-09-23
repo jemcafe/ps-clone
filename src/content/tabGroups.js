@@ -8,7 +8,7 @@ import Swatches from '../containers/Panel/SwatchesCntr';
 import Layers from '../containers/Panel/LayersCntr';
 
 export default {
-  '_1': [
+  '1': [
     { id: 1,
       tabs: [
         { name: 'History', 
@@ -34,7 +34,7 @@ export default {
       isRemoved: false
     }
   ],
-  '_2': [
+  '2': [
     {
       id: 3,
       tabs: [

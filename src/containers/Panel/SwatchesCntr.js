@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 
 // redux
 import { connect } from 'react-redux';
-import { selectColor, updateColor } from '../../redux/reducer/color/actions';
+import { addRecentColor } from '../../redux/reducer/swatches/actions';
 
 import Swatches from '../../components/Panel/Swatches/Swatches';
 
 class SwatchesCntr extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      history: [],
-      colors: []
+      recentColors: this.props.swatches.recentColors,
+      colors: this.props.swatches.colors
     }
   }
 
-  componentDidMount () {
-    // this.setSwatchColors();
-  }
-
-  setSwatchColors = () => {
-    
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { recentColors, colors } = nextProps.swatches;
+    return {
+      recentColors: [...recentColors],
+      color: [...colors],
+    };
   }
 
   getColor = (canvas) => {
@@ -32,19 +32,19 @@ class SwatchesCntr extends Component {
 
     return (
       <Swatches
-        setSwatchColor={ this.setSwatchColor }
-        getColor={ this.getColor } />
+        recentColors={ this.state.recentColors }
+        colors={ this.state.colors }
+        addRecentColor={ this.props.addRecentColor} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  color: state.color
+  swatches: state.swatches
 });
 
 const mapDispatchToProps = {
-  selectColor, 
-  updateColor
+  addRecentColor
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwatchesCntr);
