@@ -9,7 +9,6 @@
     width: 36px;
     height: 36px;
     @extend %center-content;
-    // background: pink;
 
     > .color-block-wrapper {
       position: absolute;
@@ -17,7 +16,7 @@
 
       .color-block {
         border: 1px solid transparent;
-        padding: 1px;
+        // padding: 1px;
         cursor: pointer;
 
         > div {

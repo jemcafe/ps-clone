@@ -27,9 +27,10 @@ class Slider extends Component {
 
   init = () => {
     const { slider: s, handle: h } = this.refs;
+    const borderWidth = parseInt(s.style.borderWidth, 10) * 2;
     this.setState({ 
-      height: s.offsetHeight - h.offsetHeight,
-      width: s.offsetWidth - h.offsetWidth
+      height: (s.offsetHeight - borderWidth) - h.offsetHeight,
+      width: (s.offsetWidth - borderWidth) - h.offsetWidth
     });
   }
 
@@ -37,26 +38,43 @@ class Slider extends Component {
     const { handle: h } = this.refs;
     this.setState({ 
       dragging: true,
-      offsetY: e.clientY - h.offsetTop
+      offsetY: e.clientY - h.offsetTop,
+      offsetX: e.clientX - h.offsetLeft
     });
   }
 
   moveHandle = (e, fire) => {
     const { handle: h } = this.refs;
-    const { height, offsetY, dragging } = this.state;
-    let top = 0; 
+    const { dragging } = this.state;
+    const { min, max, onChange, horizontal } = this.props;
     
-    if (dragging) {
-      console.log(e.clientY);
-      // top = (h.offsetTop + offsetY) + ;
-      // boundaries
-      top = top < 0 ? 0 : top > height ? height : top;
-      this.setState({ top });
-    }
-    if (fire) {
-      this.setState(prev => ({
-        top: prev.top + (e.clientY - h.offsetTop)
-      }));
+    if ((dragging || fire) && !isNaN(min) && !isNaN(max)) {
+      e.persist();
+      this.setState(prev => {
+        let offset = 0;
+        let top = 0;
+        let left = 0;
+        let value = 0;
+
+        if (horizontal) {
+          offset = dragging ? prev.offsetX : h.offsetWidth/2;
+          left = prev.left + (e.clientX - h.offsetLeft - offset)
+          left = left < 0 ? 0 : left > prev.width ? prev.width : left; // boundaries
+          value = (left * (max - min))/prev.width;
+        } else {
+          offset = dragging ? prev.offsetY : h.offsetHeight/2;
+          top = prev.top + (e.clientY - h.offsetTop - offset)
+          top = top < 0 ? 0 : top > prev.height ? prev.height : top; // boundaries
+          value = (top * (max - min))/prev.height;
+        }
+
+        value = +(value).toFixed(2) + min;
+        value = Math.round(value);
+
+        console.log('VALUE', value);
+        onChange(value);
+        return { value, top, left };
+      });
     }
   }
 
@@ -66,19 +84,22 @@ class Slider extends Component {
 
   render () {
     const { 
-      min, 
-      max, 
       radius = 20, 
-      onChange 
+      onChange, 
+      horizontal,
+      length
     } = this.props;
-    console.log('height', this.state.height);
-    console.log('width', this.state.width);
-    // console.log('offsetY', this.state.offsetY);
-    console.log('top', this.state.top);
 
     const style = {
+      slider: {
+        borderWidth: 2,
+        margin: '0px 6px',
+        width: (length && !isNaN(length) && horizontal) ? length : null,
+        height: (length && !isNaN(length) && !horizontal) ? length : null
+      },
       handle: { 
-        top: this.state.top,
+        top: !horizontal ? this.state.top : null,
+        left: horizontal ? this.state.left : null,
         width: radius,
         height: radius
       }
@@ -88,6 +109,7 @@ class Slider extends Component {
       <div 
         ref="slider" 
         className="hue-slider"
+        style={style.slider}
         onClick={(e) => this.moveHandle(e, true)}>
         <div 
           ref="handle"
@@ -95,7 +117,8 @@ class Slider extends Component {
           style={style.handle}
           onMouseDown={this.engage}
           onMouseMove={(e) => this.moveHandle(e)}
-          onMouseUp={this.disengage}>
+          onMouseUp={this.disengage}
+          onMouseLeave={this.disengage}>
         </div>
       </div>
     );

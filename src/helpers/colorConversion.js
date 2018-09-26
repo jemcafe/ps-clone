@@ -11,10 +11,13 @@ const colorToHex = (c) => {
 
 export const RGBtoHSL = ({r, g, b}) => {
   // Default value
-  if (r > 255  || g > 255  || b > 255 || 
-      r < 0    || g < 0    || b < 0   ||
-      isNaN(r) || isNaN(g) || isNaN(b)
-  ) return { h: 0, s: 0, l: 0 };
+  if (
+    r > 255  || g > 255  || b > 255 || 
+    r < 0    || g < 0    || b < 0   ||
+    isNaN(r) || isNaN(g) || isNaN(b)
+  ) {
+    return { h: 0, s: 0, l: 0 };
+  }
 
   const RGB = [r, g, b];
   let min = 255, max = 0;
@@ -69,50 +72,41 @@ export const RGBtoHSL = ({r, g, b}) => {
 
 export const HSLtoRGB = ({h, s, l}) => {
   // Default value
-  if (h > 360  || s > 100  || l > 100 || 
-      h < 0    || s < 0    || l < 0   ||
-      isNaN(h) || isNaN(s) || isNaN(l)
-  ) return { r: 0, g: 0, b: 0 };
+  if (
+    h > 360  || s > 100  || l > 100 || 
+    h < 0    || s < 0    || l < 0   ||
+    isNaN(h) || isNaN(s) || isNaN(l)
+  ) {
+    return { r: 0, g: 0, b: 0 };
+  }
 
   // The HSL values are converted to deciamls
-  const H = +(h / 360).toFixed(3); 
+  const H = h / 360; 
   const S = s * 0.01;
   const L = l * 0.01;
   let RGB = [0, 0, 0];
 
   if (S === 0) {
     // If saturation is 0, there is no color. It's a grayscale, so the rgb values are equal.
-    RGB = RGB.map(e => Math.round(L * 0.01 * 255));
+    RGB = RGB.map(e => L);
   } else {
     // If lightness is less than 50%, use the formula for the darker values else use the formula for the lighter values.
-    const temp_1 = L < 0.5 ? (L * (1.0 + S)) : (L + S - (L * S));
-    const temp_2 = (2 * L) - temp_1;
-    
-    // 100% / 3 = 33.333...
-    let temp_RGB = [
-      +(H + 0.333).toFixed(3),
-      +(H).toFixed(3),
-      +(H - 0.333).toFixed(3)
-    ];
-
-    // The temporary rgb values are kept between 0 and 1
-    temp_RGB = temp_RGB.map(e => e < 0 ? e+1 : e > 1 ? e-1 : e);
+    const temp_2 = L < 0.5 ? (L * (1 + S)) : ((L + S) - (L * S));
+    const temp_1 = (2 * L) - temp_2;
 
     // RGB
-    RGB = RGB.map((e, i) => {
-      if (6 * temp_RGB[i] < 1) {
-        return temp_2 + (temp_1 - temp_2) * 6 * temp_RGB[i];
-      } else if (2 * temp_RGB[i] < 1) {
-        return temp_1;
-      } else if (3 * temp_RGB[i] < 2) {
-        return temp_2 + (temp_1 - temp_2) * 6 * (0.666 - temp_RGB[i]);
-      } else {
-        return temp_2;
-      }
-    });
+    const HuetoRGB = (t1, t2, tH) => {
+      tH = (tH < 0) ? (tH + 1) : (tH > 1) ? (tH - 1) : tH;
+      if ( (6 * tH) < 1 ) return ( t1 + (t2 - t1) * 6 * tH );
+      if ( (2 * tH) < 1 ) return ( t2 );
+      if ( (3 * tH) < 2 ) return ( t1 + (t2 - t1) * ((2 / 3) - tH) * 6 );
+      return t1;
+    }
 
-    // Converted to 8-bit color values
-    RGB = RGB.map(e => Math.round(e * 255));
+    RGB[0] = 255 * HuetoRGB(temp_1, temp_2, H + (1 / 3));
+    RGB[1] = 255 * HuetoRGB(temp_1, temp_2, H);
+    RGB[2] = 255 * HuetoRGB(temp_1, temp_2, H - (1 / 3));
+    RGB = RGB.map(e => Math.round(e));
   }
 
   return { r: RGB[0], g: RGB[1], b: RGB[2] };
@@ -121,12 +115,15 @@ export const HSLtoRGB = ({h, s, l}) => {
 
 export const RGBtoCMYK = ({r, g, b}) => {
   // Default value
-  if (r > 255  || g > 255  || b > 255 || 
-      r < 0    || g < 0    || b < 0   ||
-      isNaN(r) || isNaN(g) || isNaN(b)
-  ) return { c: 0, m: 0, y: 0, k: 1 };
+  if (
+    r > 255  || g > 255  || b > 255 || 
+    r < 0    || g < 0    || b < 0   ||
+    isNaN(r) || isNaN(g) || isNaN(b)
+  ) {
+    return { c: 0, m: 0, y: 0, k: 1 };
+  }
 
-  // 
+  //
   let CMYK = [
     1 - (r/255),
     1 - (g/255),
@@ -156,10 +153,13 @@ export const RGBtoCMYK = ({r, g, b}) => {
 
 export const CMYKtoRGB = ({c, m, y, k}) => {
   // Default value
-  if (c > 100  || m > 100  || y > 100  || k > 100 || 
-      c < 0    || m < 0    || y < 0    || k < 0   ||
-      isNaN(c) || isNaN(m) || isNaN(y) || isNaN(k)
-  ) return { r: 0, g: 0, b: 0 };
+  if (
+    c > 100  || m > 100  || y > 100  || k > 100 || 
+    c < 0    || m < 0    || y < 0    || k < 0   ||
+    isNaN(c) || isNaN(m) || isNaN(y) || isNaN(k)
+  ) {
+    return { r: 0, g: 0, b: 0 };
+  }
 
   // The CMYK values are converted to decimals
   const C = c * 0.01;
@@ -184,10 +184,13 @@ export const RGBtoLAB =  ({r, g, b}) => {
 
 const RGBtoXYZ = (R, G, B) => {
   // Default value
-  if (R > 255  || G > 255  || B > 255 || 
-      R < 0    || G < 0    || B < 0   ||
-      isNaN(R) || isNaN(G) || isNaN(B)
-  ) return { x: 0, y: 0, z: 0 };
+  if (
+    R > 255  || G > 255  || B > 255 || 
+    R < 0    || G < 0    || B < 0   ||
+    isNaN(R) || isNaN(G) || isNaN(B)
+  ) {
+    return { x: 0, y: 0, z: 0 };
+  }
 
   let RGB = [R/255, G/255, B/255];
   let X = 0, Y = 0, Z = 0;
@@ -227,10 +230,13 @@ export const LABtoRGB = ({L, a, b}) => {
 
 const LABtoXYZ = (L, a, b) => {
   // Default value
-  if (L > 100 || a > 127  || b > 127  || 
-      L < 0   || a < -128 || b < -128 ||
-      isNaN(L) || isNaN(a) || isNaN(b)
-  ) return { x: 0, y: 0, z: 0 };
+  if (
+    L > 100 || a > 127  || b > 127  || 
+    L < 0   || a < -128 || b < -128 ||
+    isNaN(L) || isNaN(a) || isNaN(b)
+  ) {
+    return { x: 0, y: 0, z: 0 };
+  }
 
   // XYZ
   let Y = (L + 16)/116;

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 // helpers
 import { RGBtoHex, HSLtoRGB } from '../helpers/colorConversion';
-// import { getPosition } from '../helpers/canvas';
 
 // redux
 import { connect } from 'react-redux';
@@ -19,10 +18,10 @@ class HueGradientCntr extends Component {
     super(props);
     const { color, colorPickers } = this.props;
     this.state = {
-      initiated: false,
       color: color[color.selected],
       hue: colorPickers.hueGradient.hue,
       mouse: { x: 0, y: 0 },
+      initiated: false,
       dragging: false,
       inCanvas: false
     }
@@ -39,7 +38,7 @@ class HueGradientCntr extends Component {
   initCanvas = (refs) => {
     const { canvas: c, touch: t, wrapper: w } = refs;
     const { updateGradientDimensions, updateColorPosition } = this.props;
-    const { initiated } = this.state;
+    const { color, initiated } = this.state;
 
     // refs are unmounted then mounted, so they must checked for undefined
     if ( c && t && w ) {
@@ -47,13 +46,11 @@ class HueGradientCntr extends Component {
       t.height = w.clientHeight;
       c.width = t.width;
       c.height = t.height;
+      console.log('init', color.x, color.y);
 
       updateGradientDimensions({
         colorPicker: 'hueGradient', 
-        dimensions: { 
-          width: c.width, 
-          height: c.height 
-        }
+        dimensions: { width: c.width, height: c.height }
       });
 
       if ( !initiated ) {
@@ -170,7 +167,7 @@ class HueGradientCntr extends Component {
   }
 
   setGradientColor = (canvas, hex) => {  // The default hex color is the color stored in state. 
-    hex = hex || this.state.hue.hex;
+    hex = hex || this.state.color.hue.hex;
     const context = canvas.getContext('2d');
     
     // White linear gradient
@@ -195,7 +192,6 @@ class HueGradientCntr extends Component {
     const context = canvas.getContext('2d');
 
     // Arc values
-    // Color position
     const pos = this.canvasMousePosition({
       canvas, 
       e,
@@ -207,7 +203,6 @@ class HueGradientCntr extends Component {
           radius = 5;
     
     // Stroke Color
-    // Values for where the stroke color should change
     const range = {
       x: Math.floor(canvas.width/2), 
       y: Math.floor(canvas.height/3) 
@@ -267,17 +262,10 @@ class HueGradientCntr extends Component {
     this.setState({ inCanvas: bool});
   }
 
-  selectColor = (canvas, selected) => {
-    const { selectColor } = this.props;
-    const { hex } = this.state.color.hue;
-    selectColor(selected);
-    this.setCanvas({ canvas, hex });
-  }
-
   render() {
-    // console.log('COLOR: ', this.state.color);
-    // console.log('GRADIENT HUE: ', this.state.hue);
-    // console.log('COLOR Initiated: ', this.state.initiated);
+    // console.log('COLOR:', this.state.color);
+    // console.log('GRADIENT HUE:', this.state.hue);
+    // console.log('COLOR Initiated:', this.state.initiated);
     // console.log('COLOR', this.props.color.frgd);
     // console.log('COLOR', this.props.color.bkgd);
     
@@ -289,8 +277,9 @@ class HueGradientCntr extends Component {
         changeHue={ this.changeHue }
         updateMousePosition={ this.updateMousePosition }
         detectCanvas={ this.detectCanvas }
-        selectColor={ this.selectColor }
+        setCanvas={ this.setCanvas }
         color={ this.props.color }
+        selectColor={ this.props.selectColor }
         focusLayer={ this.props.focusLayer } />
     );
   }
