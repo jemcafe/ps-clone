@@ -1,4 +1,4 @@
-/* Along with a name property, options has a window, action, or options property */
+/* Along with a name property, an option has a window, action, or options property */
 
 export default [
   { name: 'File', 
@@ -12,45 +12,50 @@ export default [
   },
   { name: 'Edit', 
     options: [
-      { name: 'Step Forward' },
-      { name: 'Step Backward' },
-      { name: 'Transform' }
+      { name: 'Step Forward', action: null  },
+      { name: 'Step Backward', action: null  },
+      { name: 'Transform', action: null }
     ] 
   },
   { name: 'Image', 
     options: [
-      { name: 'Image Size' },
-      { name: 'Canvas Size' }
+      { name: 'Image Size', window: null },
+      { name: 'Canvas Size', window: null }
     ] 
   },
   { name: 'Layer', 
     options: [
       { name: 'New', 
         options: [
-          { name: 'Layer...' },
-          { name: 'Group...' }
+          { name: 'Layer...', window: null },
+          { name: 'Group...', window: null }
         ] 
       },
-      { name: 'Duplicate' },
+      { name: 'Duplicate', window: 'duplicateLayer' },
       { name: 'Delete', 
         options: [
-          { name: 'Layer' }
+          { name: 'Layer', action: 'deleteLayer' }
         ] 
       },
-      { name: 'Rename Layer...' }
+      { name: 'Rename Layer...', window: 'renameLayer' }
     ] 
   },
   { name: 'Type', 
     options: [
-      { name: 'Orientation' }
+      { name: 'Orientation',
+        options: [
+          { name: 'Horizontal', action: null },
+          { name: 'Vertical', action: null }
+        ] 
+      }
     ] 
   },
   { name: 'Select', 
     options: [
-      { name: 'All' },
-      { name: 'Deselect' },
-      { name: 'Reselect' },
-      { name: 'Inverse' }
+      { name: 'All', action: 'selectAll' },
+      { name: 'Deselect', action: 'deselect' },
+      { name: 'Reselect', action: 'reselect' },
+      { name: 'Inverse', action: 'inverseSelect' }
     ] 
   },
   { name: 'Filter', 
@@ -86,7 +91,7 @@ export default [
   },
   { name: 'Help', 
     options: [
-      { name: 'Google it' }
+      { name: 'Google it', link: 'https://www.google.com/' }
     ] 
   }
 ]

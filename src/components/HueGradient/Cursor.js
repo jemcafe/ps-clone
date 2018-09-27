@@ -14,7 +14,7 @@ function Cursor (props) {
   const pos = { x: mouse.x - cx, y: mouse.y - cy };
 
   // styles
-  const styles = {
+  const style = {
     brush: {
       position: 'fixed',
       top: pos.y,
@@ -24,9 +24,9 @@ function Cursor (props) {
   }
 
   return (
-    <svg id="color-picker-cursor" style={ styles.brush } width={ width } height={ height }>
-      <circle cx={ cx } cy={ cy } r={ r } stroke={ '#000000' } strokeWidth={ strokeWidth } fill={ fill }/>
-      <circle cx={ cx } cy={ cy } r={ r } stroke={ '#ffffff' } strokeWidth={ strokeWidth-2 } fill={ fill }/>
+    <svg id="color-picker-cursor" style={style.brush} width={width} height={height}>
+      <circle cx={cx} cy={cy} r={r} stroke={'#000000'} strokeWidth={strokeWidth} fill={fill}/>
+      <circle cx={cx} cy={cy} r={r} stroke={'#ffffff'} strokeWidth={strokeWidth-2} fill={fill}/>
     </svg>
   );
 }

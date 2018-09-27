@@ -9,28 +9,21 @@ const colorToHex = (c) => {
 }
 
 
-export const RGBtoHSL = ({r, g, b}) => {
+export const RGBtoHSL = (rgb) => {
   // Default value
-  if (
-    r > 255  || g > 255  || b > 255 || 
-    r < 0    || g < 0    || b < 0   ||
-    isNaN(r) || isNaN(g) || isNaN(b)
-  ) {
-    return { h: 0, s: 0, l: 0 };
+  for (let key in rgb) {
+    const value = rgb[key];
+    if (isNaN(value) || value > 255 || value < 0) {
+      return { h: 0, s: 0, l: 0 };
+    }
   }
 
-  const RGB = [r, g, b];
-  let min = 255, max = 0;
+  const RGB = [rgb.r, rgb.g, rgb.b].map(value => +(value/255).toFixed(2));
+  const min = Math.min(RGB[0], RGB[1], RGB[2]);
+  const max = Math.max(RGB[0], RGB[1], RGB[2]);
   let H = 0; 
   let S = 0; 
   let L = 0;
-
-  // The rgb values are converted from 8-bit color values to decimals, and the smallest and largest values are found.
-  for (let i = 0; i < RGB.length; i++) {
-    RGB[i] = +(RGB[i]/255).toFixed(2);
-    max = RGB[i] > max ? RGB[i] : max;
-    min = RGB[i] < min ? RGB[i] : min;
-  }
   
   // LIGHTNESS
   L = Math.round((min + max)/2 * 100);  // Brightness formula
@@ -45,7 +38,7 @@ export const RGBtoHSL = ({r, g, b}) => {
     // If the lightness is greater than 50%, the saturation is darker and lighter if it's not.
     const bit = L > 0.5 ? 2.0 : 0;
     // Saturation formula
-    S = Math.round((max-min)/(bit-min-max) * 100);
+    S = Math.round((max - min)/(bit - min - max) * 100);
   }
 
   // HUE
@@ -113,21 +106,20 @@ export const HSLtoRGB = ({h, s, l}) => {
 }
 
 
-export const RGBtoCMYK = ({r, g, b}) => {
+export const RGBtoCMYK = (rgb) => {
   // Default value
-  if (
-    r > 255  || g > 255  || b > 255 || 
-    r < 0    || g < 0    || b < 0   ||
-    isNaN(r) || isNaN(g) || isNaN(b)
-  ) {
-    return { c: 0, m: 0, y: 0, k: 1 };
+  for (let key in rgb) {
+    const value = rgb[key];
+    if (isNaN(value) || value > 255 || value < 0) {
+      return { c: 0, m: 0, y: 0, k: 1 };
+    }
   }
 
   //
   let CMYK = [
-    1 - (r/255),
-    1 - (g/255),
-    1 - (b/255),
+    1 - (rgb.r/255),
+    1 - (rgb.g/255),
+    1 - (rgb.b/255),
     0
   ];
   let temp_K = 1;
@@ -177,26 +169,26 @@ export const CMYKtoRGB = ({c, m, y, k}) => {
 
 
 // RGB to CIELab
-export const RGBtoLAB =  ({r, g, b}) => {
-  const XYZ = RGBtoXYZ(r, g, b);
+export const RGBtoLAB =  (rgb) => {
+  const XYZ = RGBtoXYZ(rgb);
   return XYZtoLAB(XYZ.x, XYZ.y, XYZ.z);
 }
 
-const RGBtoXYZ = (R, G, B) => {
+const RGBtoXYZ = (rgb) => {
   // Default value
-  if (
-    R > 255  || G > 255  || B > 255 || 
-    R < 0    || G < 0    || B < 0   ||
-    isNaN(R) || isNaN(G) || isNaN(B)
-  ) {
-    return { x: 0, y: 0, z: 0 };
+  for (let key in rgb) {
+    const value = rgb[key];
+    if (isNaN(value) || value > 255 || value < 0) {
+      return { x: 0, y: 0, z: 0 };
+    }
   }
 
-  let RGB = [R/255, G/255, B/255];
+  let RGB = [rgb.r/255, rgb.g/255, rgb.b/255];
   let X = 0, Y = 0, Z = 0;
 
-  RGB = RGB.map(e => e > 0.04045 ? Math.pow((e + 0.055)/1.055, 2.4) : e/12.92)
-           .map(e => e * 100);
+  RGB = RGB
+    .map(e => e > 0.04045 ? Math.pow((e + 0.055)/1.055, 2.4) : e/12.92)
+    .map(e => e * 100);
 
   X = RGB[0] * 0.4124 + RGB[1] * 0.3576 + RGB[2] * 0.1805;
   Y = RGB[0] * 0.2126 + RGB[1] * 0.7152 + RGB[2] * 0.0722;

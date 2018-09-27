@@ -1,4 +1,4 @@
-import swatchColors from '../../../content/swatchColors';
+import swatchColors from '../../../constants/swatchColors';
 
 import { 
   ADD_SWATCH,

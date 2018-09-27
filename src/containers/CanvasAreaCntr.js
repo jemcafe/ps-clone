@@ -88,31 +88,13 @@ class CanvasAreaCntr extends Component {
     }
   }
 
-  updateMousePosition = ({ nativeEvent: e }) => {
-    if (e) {
-      this.setState(prev => {
-        const mouse = {
-          x: e.clientX + window.pageXOffset,
-          y: e.clientY + window.pageYOffset
-        };
-        const canvasMouse = {
-          x: mouse.x + prev.canvasMouseOffset.x,
-          y: mouse.y + prev.canvasMouseOffset.y
-        };
-        return { mouse, canvasMouse };
-      });
-    }
-  }
-
   engage = (canvas, e) => {
     const { layerIndex, layers } = this.state.project;
     const layer = layers[layerIndex];
 
     if (!layer.locked) {
       this.setState({ dragging: true });
-
       this.putPoint(canvas, e, true);  // A point is drawn
-
       this.props.focusCanvas({
         focus: 'canvas', 
         onMouseMove: (e) => this.putPoint(canvas, e),
@@ -198,6 +180,22 @@ class CanvasAreaCntr extends Component {
 
   detectCanvas = (bool) => {
     this.setState({ inCanvas: bool });
+  }
+
+  updateMousePosition = ({ nativeEvent: e }) => {
+    if (e) {
+      this.setState(prev => {
+        const mouse = {
+          x: e.clientX + window.pageXOffset,
+          y: e.clientY + window.pageYOffset
+        };
+        const canvasMouse = {
+          x: mouse.x + prev.canvasMouseOffset.x,
+          y: mouse.y + prev.canvasMouseOffset.y
+        };
+        return { mouse, canvasMouse };
+      });
+    }
   }
 
   render() {

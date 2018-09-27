@@ -28,9 +28,8 @@ class HueGradient extends Component {
       changeHue,
       updateMousePosition,
       detectCanvas,
-      color,
-      selectColor,
-      setCanvas
+      color: c,
+      selectColor
     } = this.props;
 
     const style = {
@@ -38,15 +37,18 @@ class HueGradient extends Component {
       canvas: { position: 'absolute' }
     }
 
+    console.log('COLOR', c[c.selected]);
+
     return (
       <div className="hue-gradient">
         { hasColorPair &&
           <ColorPair 
-            color={color} 
-            selectColor={(selected) => selectColor(selected)}
-            setCanvas={() => setCanvas({canvas:this.refs.canvas})} /> }
+            color={c} 
+            selectColor={(frgd_bkgd) => selectColor(this.refs.canvas, frgd_bkgd)} /> }
         
-        <div ref="wrapper" className="gradient-wrapper" style={style.wrapper}>
+        <div ref="wrapper" 
+          className="gradient-wrapper" 
+          style={style.wrapper}>
 
           <canvas 
             ref="canvas" 
@@ -73,7 +75,7 @@ class HueGradient extends Component {
             radius={20} 
             // horizontal={true}
             // length={100}
-            // value={360 - color[color.selected].hsl.h}
+            value={c[c.selected].hue.hue}
             onChange={(value) => changeHue(this.refs.canvas, value)} /> }
       </div>
     );
@@ -85,8 +87,7 @@ HueGradient.propTypes = {
   initCanvas: PropTypes.func.isRequired,
   engage: PropTypes.func.isRequired,
   changeHue: PropTypes.func.isRequired,
-  selectColor: PropTypes.func.isRequired,
-  setCanvas: PropTypes.func.isRequired,
+  selectColor: PropTypes.func.isRequired
 }
 
 export default HueGradient;

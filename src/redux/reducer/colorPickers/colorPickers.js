@@ -4,22 +4,12 @@ import {
 } from './actions';
 
 const initialState = {
+  width: 0,
+  height: 0,
   hueGradient: {
-    hue: {
-      rgb: { r: 255, g: 0, b: 0 },
-      hex: '#ff0000'
-    },
-    color: { 
-      hex: '#000000',
-      rgb: { r: 0, g: 0, b: 0 },
-      cmyk:{ c: 0, m: 100, y: 100, k: 0 },
-      hsl: { h: 0, s: 100, l: 0 },
-      lab: { l: 0, a: 0, b: 0 },
-      x: 0,
-      y: 0
-    },
-    width: 0,
-    height: 0
+    rgb: { r: 255, g: 0, b: 0 },
+    hex: '#ff0000',
+    hue: 0
   }
 }
 

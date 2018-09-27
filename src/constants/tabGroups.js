@@ -7,13 +7,17 @@ import Color from '../containers/Panel/ColorCntr';
 import Swatches from '../containers/Panel/SwatchesCntr';
 import Layers from '../containers/Panel/LayersCntr';
 
+/* className property is optional */
+
 export default {
   '1': [
     { id: 1,
       tabs: [
-        { name: 'History', 
+        { 
+          name: 'History', 
           content: <History />, 
-          menu: ['Step Forward', 'Step Backward'] }
+          menu: ['Step Forward', 'Step Backward'] 
+        }
       ],
       tab: 0,
       isHidden: true,
@@ -22,12 +26,16 @@ export default {
     {
       id: 2,
       tabs: [
-        { name: 'Character', 
+        { 
+          name: 'Character', 
           content: <Character />, 
-          menu: ['Reset Character'] },
-        { name: 'Paragraph', 
+          menu: ['Reset Character'] 
+        },
+        { 
+          name: 'Paragraph', 
           content: <Paragraph />, 
-          menu: ['Reset Paragraph'] }
+          menu: ['Reset Paragraph'] 
+        }
       ],
       tab: 0,
       isHidden: true,
@@ -38,12 +46,16 @@ export default {
     {
       id: 3,
       tabs: [
-        { name: 'Color', 
+        { 
+          name: 'Color', 
           content: <Color />, 
-          menu: ['Hue Box'] },
-        { name: 'Swatches', 
+          menu: ['Hue Box'] 
+        },
+        { 
+          name: 'Swatches', 
           content: <Swatches />, 
-          menu: ['New Swatch...'] }
+          menu: ['New Swatch...'] 
+        }
       ],
       tab: 0,
       isHidden: true,
@@ -52,9 +64,11 @@ export default {
     {
       id: 4,
       tabs: [
-        { name: 'Layers', 
+        { 
+          name: 'Layers', 
           content: <Layers />, 
-          menu: ['New Layer...', 'Duplicate Layer', 'Delete Layer'] }
+          menu: ['New Layer...', 'Duplicate Layer', 'Delete Layer'] 
+        }
       ],
       tab: 0,
       isHidden: true,
@@ -62,5 +76,3 @@ export default {
     }
   ]
 };
-
-/* className proptery is optional */

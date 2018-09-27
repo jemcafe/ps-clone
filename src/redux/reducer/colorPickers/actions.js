@@ -2,7 +2,7 @@
 import { 
   RGBtoHex, 
   // RGBtoCMYK, 
-  // RGBtoHSL, 
+  RGBtoHSL, 
   // RGBtoLAB, 
   // CMYKtoRGB, 
   // HSLtoRGB, 
@@ -18,24 +18,24 @@ export const
 export const updateGradientHue = (rgb) => ({
   type: UPDATE_GRADIENT_HUE,
   payload: (state) => {
-    const hg = {...state.hueGradient};
-    hg.hue.rgb = rgb;
-    hg.hue.hex = RGBtoHex(rgb);
+    const hueGradient = {
+      rgb: rgb,
+      hex: RGBtoHex(rgb),
+      hue: RGBtoHSL(rgb).h
+    };
 
-    console.log('updateGradientHue', hg.hue);
-    return {...state, hueGradient: hg };
+    console.log('updateGradientHue', hueGradient);
+    return {...state, hueGradient };
   }
 });
 
-export const updateGradientDimensions = ({colorPicker, dimensions}) => ({
+export const updateGradientDimensions = (dimensions) => ({
   type: UPDATE_GRADIENT_DIMENSIONS,
   payload: (state) => {
-    const cp = {...state[colorPicker]};
+    const width = dimensions.width;
+    const height = dimensions.height;
 
-    cp.width = dimensions.width;
-    cp.height = dimensions.height;
-
-    console.log('updateGradientDimensions', cp.width, cp.height);
-    return {...state, [colorPicker]: cp };
+    console.log('updateGradientDimensions', width, height);
+    return {...state, width, height };
   }
 });

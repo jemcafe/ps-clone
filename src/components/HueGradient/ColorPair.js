@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 function ColorPair (props) {
   const { 
     color,
-    selectColor,
-    setCanvas
+    selectColor
    } = props;
 
   // styles
@@ -17,18 +16,12 @@ function ColorPair (props) {
   return (
     <div className="color-pair">
       <div className="color-block-wrapper">
-        <div className="color-block" 
-          style={style.bkgd} 
-          onMouseDown={() => selectColor('bkgd')}
-          onMouseUp={setCanvas}>
+        <div className="color-block" style={style.bkgd} onClick={() => selectColor('bkgd')}>
           <div><div style={{ background: color.bkgd.hex }}></div></div>
         </div>
       </div>
       <div className="color-block-wrapper">
-        <div className="color-block" 
-          style={style.frgd} 
-          onMouseDown={() => selectColor('frgd')}
-          onMouseUp={setCanvas}>
+        <div className="color-block" style={style.frgd} onClick={() => selectColor('frgd')}>
           <div><div style={{ background: color.frgd.hex }}></div></div>
         </div>
       </div>

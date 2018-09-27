@@ -5,7 +5,7 @@ import {
   newProject, 
   newLayer, 
   newId 
-} from '../../../helpers/projects';
+} from '../../../helpers/project';
 
 // Action Types
 export const 
@@ -34,7 +34,7 @@ export const createProject = (project, imgData) => ({
     // New project added to projects
     projects = [...projects, newProject({id, project, imgData})];
 
-    // console.log('Create project', projects, 'id', project.id);
+    // console.log('Create Project', projects);
     return {...state, projects, projectIndex };
   }
 });

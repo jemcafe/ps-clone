@@ -26,17 +26,22 @@ class Slider extends Component {
     const { min, max, onChange, value } = this.props;
 
     const style = {
-      input: { width: width-4 }  // -4 for border
+      input: { 
+        width: width-4,  // -4 for border
+        transform: `rotate(-90deg) translate(-${width}px, 0)`
+      }
     }
+
+    console.log('VALUE', value);
 
     return (
       <div ref="slider" id="color-slider">
-        <input type="range" 
+        <input 
+          type="range" 
           style={style.input} 
           min={min} 
           max={max} 
-          // value={value}
-          onClick={(e) => onChange(e.target.value)}
+          value={value}
           onChange={(e) => onChange(e.target.value)}/>
       </div>
     );

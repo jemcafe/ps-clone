@@ -9,9 +9,9 @@
     height: 20px; /* Specified height */
     border: 2px solid $darkgray;
     border-radius: 20px;
-    background: colorGradient(270deg);
+    background: colorGradient(90deg); // colorGradient(270deg);
     transform-origin: top left;
-    transform: rotate(90deg) translate(0, -30px);
+    transform: rotate(90deg) translate(0, -30px);  // This needed to be an inline style
   
     /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
     &::-webkit-slider-thumb {

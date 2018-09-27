@@ -1,29 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import tools from '../../constants/tools';
 
 function ToolMenu (props) {
   const { 
     isCollapsed,
     tools: t,
     color: c,
+    // colorPickers: cp
     selectTool,
     resetColors,
     swapColors,
     openWindow
   } = props;
-
-  const tools = [
-    { name: 'move', icon: 'icon-move' },
-    { name: 'eyedropper', icon: 'icon-eyedropper' },
-    { name: 'paintBrush', icon: 'icon-paint-brush' },
-    { name: 'eraser', icon: 'icon-eraser' },
-    { name: 'paintBucket', icon: 'icon-paint-bucket' },
-    { name: 'pen', icon: 'icon-pen' },
-    { name: 'shape', icon: 'icon-shape-circle' },
-    { name: 'magnify', icon: 'icon-magnify' },
-    { name: 'hand', icon: 'icon-hand' },
-    { name: 'ellipsis', icon: 'icon-ellipsis' }
-  ];
 
   const classNames = {
     tools: isCollapsed ? 'tools-collapsed' : 'tools',
@@ -31,21 +20,19 @@ function ToolMenu (props) {
     color: isCollapsed ? 'color-collapsed' : 'color'
   }
 
-  const listOfTools = tools.map((e, i) => (
-    <li key={i} className={`tool${classNames.tool(e)}`} title={e.name} onClick={() => selectTool(e.name)}>
-      <i className={e.icon}></i>
-    </li>
-  ));
-
   return (
     <div id="tool-menu">
       <ul className={classNames.tools}>
-        { listOfTools }
+        { tools.map((tool, i) => (
+          <li key={i} title={tool.name} className={`tool${classNames.tool(tool)}`} onClick={() => selectTool(tool.name)}>
+            <i className={tool.icon}></i>
+          </li>
+        )) }
       </ul>
       <div className={classNames.color}>
         <div>
-          <div className="reset" onClick={ resetColors }><i className="icon-undo"></i></div>
-          <div className="swap" onClick={ swapColors }><i className="icon-swap"></i></div>
+          <div className="reset" onClick={() => resetColors()}><i className="icon-undo"></i></div>
+          <div className="swap" onClick={() => swapColors()}><i className="icon-swap"></i></div>
         </div>
         <div className="colors">
           <div className="color-block">

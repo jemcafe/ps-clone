@@ -19,7 +19,7 @@ class CanvasArea extends Component {
     const {
       project: p,
       layers,
-      tools: t,
+      tools,
       focus,
       hasLayers,
       mouse,
@@ -29,6 +29,7 @@ class CanvasArea extends Component {
       engage,
       detectCanvas
     } = this.props;
+    const tool = tools[tools.tool];
 
     const style = {
       canvasArea: {
@@ -46,7 +47,7 @@ class CanvasArea extends Component {
     }
 
     const classNames = {
-      cursor: t[t.tool].cursor ? t[t.tool].cursor : ''
+      cursor: tool.cursor ? ` ${tool.cursor}` : ''
     }
 
     return (
@@ -72,7 +73,7 @@ class CanvasArea extends Component {
           )) }
 
           { (inCanvas || focus === 'canvas') && 
-          <BrushCursor tools={t} mouse={mouse} zIndex={0} /> }
+          <BrushCursor tools={tools} mouse={mouse} zIndex={0} /> }
 
           <canvas ref="touch" 
             className={`touch-overlay${classNames.cursor}`}

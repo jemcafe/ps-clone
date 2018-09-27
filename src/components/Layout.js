@@ -1,8 +1,8 @@
 import React from 'react';
 
 // constants
-import toolbarItems from '../content/toolbarItems';
-import tabGroups from '../content/tabGroups';
+import toolbarItems from '../constants/toolbarItems';
+import tabGroups from '../constants/tabGroups';
 
 // Components
 import ToolBar from '../containers/ToolBarCntr';
