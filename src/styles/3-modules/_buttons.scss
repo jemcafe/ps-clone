@@ -37,3 +37,10 @@
   &:hover { border-color: $gray; }
   &:active { background: $darkergray; }
 }
+
+.menu-btn {
+  padding: 3px 3px 2px 3px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  &:hover { border-color: $gray; }
+}

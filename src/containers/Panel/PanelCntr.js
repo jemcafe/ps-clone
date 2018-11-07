@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { updateOffset } from '../redux/reducer/focusLayer/actions';
+import { updateOffset } from '../../redux/reducer/focusLayer/actions';
+import { openWindow } from '../../redux/reducer/windows/actions';
+// import {  } from '../redux/reducer/projects/actions';
 
-import Panel from '../components/Panel/Panel';
+import Panel from '../../components/Panel/Panel';
 
 class PanelCntr extends Component {
   constructor (props) {
@@ -17,9 +19,9 @@ class PanelCntr extends Component {
 
   togglePanels = () => {
     this.setState(prev => ({ 
-      tabGroups: prev.tabGroups.map((e, i) => {
-        e.isHidden = true;
-        return e;
+      tabGroups: prev.tabGroups.map((tabGroup, i) => {
+        tabGroup.isHidden = true;
+        return tabGroup;
       }), 
       isCollapsed: !prev.isCollapsed 
     }));
@@ -27,29 +29,46 @@ class PanelCntr extends Component {
 
   togglePanel = (panelIndex) => {
     this.setState(prev => ({
-      tabGroups: prev.tabGroups.map((e, i) => {
-        if (panelIndex === i) e.isHidden = true;
-        return e;
+      tabGroups: prev.tabGroups.map((tabGroup, i) => {
+        if (panelIndex === i) tabGroup.isHidden = true;
+        return tabGroup;
+      })
+    }));
+  }
+
+  toggleMenu = (panelIndex, tabIndex) => {
+    this.setState(prev => ({
+      tabGroups: prev.tabGroups.map((tabGroup, i) => {
+        if ( panelIndex === i ) {
+          tabGroup.tabs.map((tab, j) => {
+            tab.optionsVisible = !tab.optionsVisible;
+            return tab;
+          });
+        } else {
+          tabGroup.tabs.map(tab => {
+            tab.optionsVisible = false;
+            return tab;
+          });
+        }
+        return tabGroup;
       })
     }));
   }
 
   changeTab = (panelIndex, tabIndex) => {
     this.setState(prev => ({ 
-      tabGroups: prev.tabGroups.map((e, i) => {
-
-        if ( i === panelIndex ) {
-          if ( e.tab === tabIndex ) {
-            e.isHidden = !e.isHidden;
+      tabGroups: prev.tabGroups.map((tabGroup, i) => {
+        if ( panelIndex === i ) {
+          if ( tabGroup.tabIndex === tabIndex ) {
+            tabGroup.isHidden = !tabGroup.isHidden;
           } else {
-            e.tab = tabIndex;
-            e.isHidden = false;
+            tabGroup.tabIndex = tabIndex;
+            tabGroup.isHidden = false;
           }
         } else {
-          e.isHidden = true;
+          tabGroup.isHidden = true;
         }
-        return e;
-
+        return tabGroup;
       })
     }));
   }
@@ -70,7 +89,14 @@ class PanelCntr extends Component {
     }
   }
 
+  handleAction = (option, panelIndex, tabIndex) => {
+    if (option.window) openWindow(option.window);
+    console.log(option);
+    this.toggleMenu(panelIndex, tabIndex);
+  }
+
   render () {
+    console.log('tabGroups', this.state.tabGroups);
     return (
       <Panel
         align={ this.props.align }
@@ -79,8 +105,10 @@ class PanelCntr extends Component {
         tabGroups={ this.state.tabGroups } 
         togglePanels={ this.togglePanels }
         togglePanel={ this.togglePanel }
+        toggleMenu={ this.toggleMenu }
         changeTab={ this.changeTab }
-        updateOffset={ this.updateOffset }/>
+        updateOffset={ this.updateOffset }
+        handleAction={ this.handleAction } />
     );
   }
 }

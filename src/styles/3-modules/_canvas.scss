@@ -1,20 +1,19 @@
 .touch-overlay,
 .focus-overlay {
+  z-index: 1;
   cursor: none;
 }
 
 .touch-overlay {
-  // z-index: 1;
   position: absolute;
-  // background: rgba(0, 255, 255, 0.3);
+  // background: rgba(0, 255, 255, 0.2);
 }
 
 .focus-overlay {
-  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(193, 218, 254, 0.3);
+  // background: rgba(193, 218, 254, 0.2);
 }

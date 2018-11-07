@@ -11,12 +11,15 @@ function Cursor (props) {
   const height = (r * 2) + (strokeWidth * 2);
   const cx = r + 2;
   const cy = r + 2;
-  const pos = { x: mouse.x - cx, y: mouse.y - cy };
+  const pos = { 
+    x: mouse.x - cx, 
+    y: mouse.y - cy 
+  };
 
   // styles
   const style = {
     brush: {
-      position: 'fixed',
+      position: 'absolute',
       top: pos.y,
       left: pos.x,
       zIndex: zIndex ? zIndex : null

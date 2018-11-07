@@ -22,60 +22,64 @@ class HueGradient extends Component {
     const { 
       hasColorPair = true, 
       hasSlider = true,
-      state:{ mouse, inCanvas },
+      state:{ color, mouse, inCanvas },
       focusLayer:{ focus },
       engage, 
       changeHue,
-      updateMousePosition,
       detectCanvas,
+      updateMousePosition,
       color: c,
-      selectColor
+      selectColor,
+      setCanvas
     } = this.props;
 
     const style = {
-      wrapper: { flex:'1', display:'flex' },
-      canvas: { position: 'absolute' }
+      wrapper: { 
+        flex:'1', 
+        display:'flex' 
+      },
+      canvas: { 
+        position: 'absolute' 
+      }
     }
-
-    console.log('COLOR', c[c.selected]);
 
     return (
       <div className="hue-gradient">
         { hasColorPair &&
           <ColorPair 
             color={c} 
-            selectColor={(frgd_bkgd) => selectColor(this.refs.canvas, frgd_bkgd)} /> }
+            selectColor={selectColor}
+            // selectColor={(frgd_bkgd) => selectColor({canvas: this.refs.canvas, frgd_bkgd})}
+            setCanvas={() => setCanvas({canvas: this.refs.canvas, hex: color.hue.hex})} /> }
         
-        <div ref="wrapper" 
-          className="gradient-wrapper" 
-          style={style.wrapper}>
+        <div ref="wrapper" className="gradient-wrapper" style={style.wrapper}>
 
           <canvas 
-            ref="canvas" 
-            className="color-canvas" 
+            ref="canvas"
+            className="color-canvas"
             style={style.canvas}/>
 
           { (inCanvas || focus === 'hueGradient') && 
-            <Cursor mouse={mouse} zIndex={0} /> }
+            <Cursor mouse={mouse} zIndex={1} /> }
           
           <canvas 
-            ref="touch" 
+            ref="touch"
             className="touch-overlay"
             onMouseDown={(e) => engage(this.refs.canvas, e)}
             onMouseMove={(e) => updateMousePosition(e)}
             onMouseOver={() => detectCanvas(true)}
             onMouseLeave={() => detectCanvas(false)}/>
-            
+
         </div>
 
         { hasSlider &&
           <Slider 
             min={0} 
-            max={360} 
+            max={359} 
             radius={20} 
             // horizontal={true}
             // length={100}
-            value={c[c.selected].hue.hue}
+            value={color.hue.hue}
             onChange={(value) => changeHue(this.refs.canvas, value)} /> }
       </div>
     );
@@ -87,6 +91,8 @@ HueGradient.propTypes = {
   initCanvas: PropTypes.func.isRequired,
   engage: PropTypes.func.isRequired,
   changeHue: PropTypes.func.isRequired,
+  updateMousePosition: PropTypes.func.isRequired,
+  setCanvas: PropTypes.func.isRequired,
   selectColor: PropTypes.func.isRequired
 }
 

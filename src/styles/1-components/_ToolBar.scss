@@ -18,44 +18,44 @@
         &:active { background: $themeColor; }
       }
 
-      .content {
-        display: none;
-        position: absolute;
-        z-index: 2;
-        border-radius: 0 0 4px 4px;
-        padding: 6px 0;
-        box-sizing: border-box;
-        background: $lightgray;
-        color: #000;
-        @extend %box-shadow;
+      // .menu {
+      //   display: none;
+      //   position: absolute;
+      //   z-index: 2;
+      //   border-radius: 0 0 4px 4px;
+      //   padding: 6px 0;
+      //   box-sizing: border-box;
+      //   background: $lightgray;
+      //   color: #000;
+      //   @extend %box-shadow;
 
-        .option { 
-          display: flex; 
-          text-align: left; }
-        .option-name { 
-          flex: 1; 
-          white-space: nowrap;
-          padding: 4px 12px; }
-        .arrow { 
-          @extend %center-content; 
-          padding: 0 6px; }
-        .option-content { 
-          transform: translate(0, -6px); }
-        .content { 
-          border-radius: 4px; }
+      //   .option { 
+      //     display: flex; 
+      //     text-align: left; }
+      //   .option-name { 
+      //     flex: 1; 
+      //     white-space: nowrap;
+      //     padding: 4px 12px; }
+      //   .arrow { 
+      //     @extend %center-content; 
+      //     padding: 0 6px; }
+      //   .option-menu { 
+      //     transform: translate(0, -6px); }
+      //   .menu { 
+      //     border-radius: 4px; }
 
-        .option:hover { 
-          background: $themeColor; 
-          > .option-name { color: #fff; }
-          > .arrow { color: #fff; }
-          > .option-content > .content { display: block; }
-        }
-      }
+      //   .option:hover { 
+      //     background: $themeColor; 
+      //     > .option-name { color: #fff; }
+      //     > .arrow { color: #fff; }
+      //     > .option-menu > .menu { display: block; }
+      //   }
+      // }
     }
 
     > .item:hover {
       .item-name { background: $themeColor; }
-      .item-content > .content { display: block; }
+      .item-menu > .menu { display: block; }
     }
   }
 }

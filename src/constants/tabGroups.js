@@ -9,37 +9,61 @@ import Layers from '../containers/Panel/LayersCntr';
 
 /* className property is optional */
 
+const properties = {
+  tabIndex: 0,
+  isHidden: true,
+  isRemoved: false
+};
+
 export default {
   '1': [
-    { id: 1,
+    { 
+      id: 1,
       tabs: [
         { 
-          name: 'History', 
-          content: <History />, 
-          menu: ['Step Forward', 'Step Backward'] 
+          name: 'History',
+          content: <History />,
+          options: [
+            { name: 'Step Forward',
+              action: 'step_forward'
+            },
+            { name: 'Step Backward',
+              action: 'step_backward'
+            }
+          ],
+          optionsVisible: false,
+          icon: 'icon-history'
         }
       ],
-      tab: 0,
-      isHidden: true,
-      isRemoved: false
+      ...properties
     },
     {
       id: 2,
       tabs: [
         { 
-          name: 'Character', 
-          content: <Character />, 
-          menu: ['Reset Character'] 
+          name: 'Character',
+          content: <Character />,
+          options: [
+            { name: 'Reset Character',
+              action: 'reset_character'
+            }
+          ],
+          optionsVisible: false,
+          icon: 'icon-character'
         },
         { 
-          name: 'Paragraph', 
-          content: <Paragraph />, 
-          menu: ['Reset Paragraph'] 
+          name: 'Paragraph',
+          content: <Paragraph />,
+          options: [
+            { name: 'Reset Paragraph',
+              action: 'reset_paragraph'
+            }
+          ],
+          optionsVisible: false,
+          icon: 'icon-paragraph'
         }
       ],
-      tab: 0,
-      isHidden: true,
-      isRemoved: false
+      ...properties
     }
   ],
   '2': [
@@ -47,32 +71,50 @@ export default {
       id: 3,
       tabs: [
         { 
-          name: 'Color', 
-          content: <Color />, 
-          menu: ['Hue Box'] 
+          name: 'Color',
+          content: <Color />,
+          options: [
+            { name: 'Hue Box' }
+          ],
+          optionsVisible: false,
+          icon: 'icon-color'
         },
         { 
-          name: 'Swatches', 
-          content: <Swatches />, 
-          menu: ['New Swatch...'] 
+          name: 'Swatches',
+          content: <Swatches />,
+          options: [
+            { name: 'New Swatch...',
+              action: 'new_swatch'
+            }
+          ],
+          optionsVisible: false,
+          icon: 'icon-swatches'
         }
       ],
-      tab: 0,
-      isHidden: true,
-      isRemoved: false
+      ...properties
     },
     {
       id: 4,
       tabs: [
-        { 
-          name: 'Layers', 
-          content: <Layers />, 
-          menu: ['New Layer...', 'Duplicate Layer', 'Delete Layer'] 
+        {
+          name: 'Layers',
+          content: <Layers />,
+          options: [
+            { name: 'New Layer...',
+              action: 'new_layer'
+            },
+            { name: 'Duplicate Layer',
+              action: 'duplicate_layer'
+            },
+            { name: 'Delete Layer',
+              action: 'delete_layer'
+            }
+          ],
+          optionsVisible: false,
+          icon: 'icon-layers'
         }
       ],
-      tab: 0,
-      isHidden: true,
-      isRemoved: false
+      ...properties
     }
   ]
 };

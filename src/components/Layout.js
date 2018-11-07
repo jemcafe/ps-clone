@@ -8,7 +8,7 @@ import tabGroups from '../constants/tabGroups';
 import ToolBar from '../containers/ToolBarCntr';
 import ToolSettings from '../containers/ToolSettingsCntr';
 import Projects from '../containers/ProjectsCntr';
-import Panel from '../containers/PanelCntr';
+import Panel from '../containers/Panel/PanelCntr';
 import Windows from '../containers/Windows/WindowsCntr';
 import FocusLayer from './FocusLayer/FocusLayer';
 

@@ -19,7 +19,7 @@ class SwatchesCntr extends Component {
     const { recentColors, colors } = nextProps.swatches;
     return {
       recentColors: [...recentColors],
-      color: [...colors],
+      colors: [...colors],
     };
   }
 

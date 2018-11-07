@@ -25,3 +25,6 @@ src/**/*.css
 
 # fontawesome
 src/styles/fontawesome/*
+
+# misc
+.env

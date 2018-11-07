@@ -9,6 +9,125 @@ const colorToHex = (c) => {
 }
 
 
+export const RGBtoHSV = (rgb) => {
+  // Default Value
+  for (let key in rgb) {
+    const value = rgb[key];
+    if (isNaN(value) || value > 255 || value < 0) {
+      return { h: 0, s: 0, v: 0 };
+    }
+  }
+
+  const R = rgb.r/255;
+  const G = rgb.g/255;
+  const B = rgb.b/255;
+  const min = Math.min(R, G, B);
+  const max = Math.max(R, G, B);
+  const delta_max = max - min;
+  let delta_R = 0;
+  let delta_G = 0;
+  let delta_B = 0;
+  let H = 0;
+  let S = 0;
+  let V = 0;
+
+  // Vibrance / Brightness
+  V = max;
+
+  // Hue and Saturation
+  if (delta_max === 0) {
+    H = 0;
+    S = 0;
+  } else {
+    S = delta_max / max;
+
+    delta_R = ( ((max - R)/6) + (max/2) )/max;
+    delta_G = ( ((max - G)/6) + (max/2) )/max;
+    delta_B = ( ((max - B)/6) + (max/2) )/max;
+
+    if      (R === max) H = delta_B - delta_G;
+    else if (G === max) H = (1/3) + delta_R - delta_B;
+    else if (B === max) H = (2/3) + delta_G - delta_R;
+
+    if (H < 0) H += 1;
+    if (H > 1) H -= 1;
+  }
+  
+  H = Math.round(H * 360);
+  S = Math.round(S * 100);
+  V = Math.round(V * 100);
+
+  return { h: H, s: S, v: V };
+}
+
+
+export const HSVtoRGB = ({h, s, v}) => {
+  // // Default value
+  if (
+    h > 360  || s > 100  || v > 100 || 
+    h < 0    || s < 0    || v < 0   ||
+    isNaN(h) || isNaN(s) || isNaN(v)
+  ) return { r: 0, g: 0, b: 0 };
+
+  const H = h / 360; 
+  const S = s * 0.01;
+  const V = v * 0.01;
+  let R = 0;
+  let G = 0;
+  let B = 0;
+  let temp_h = 0;
+  let temp_i = 0;
+  let temp_1 = 0;
+  let temp_2 = 0;
+  let temp_3 = 0;
+
+  if (s === 0) {
+    R =  Math.round(V * 255);
+    G =  Math.round(V * 255);
+    B =  Math.round(V * 255);
+  } else {
+    temp_h = H * 6;
+    if (temp_h === 6) temp_h = 0;
+    temp_i = Math.floor(temp_h);
+    temp_1 = V * (1 - S);
+    temp_2 = V * (1 - S * (temp_h - temp_i));
+    temp_3 = V * (1 - S * (1 - (temp_h - temp_i)));
+
+    if (temp_i === 0) {
+      R = V;
+      G = temp_3;
+      B = temp_1;
+    } else if (temp_i === 1) {
+      R = temp_2;
+      G = V;
+      B = temp_1;
+    } else if (temp_i === 2) {
+      R = temp_1;
+      G = V;
+      B = temp_3;
+    } else if (temp_i === 3) {
+      R = temp_1;
+      G = temp_2;
+      B = V;
+    } else if (temp_i === 4) {
+      R = temp_3;
+      G = temp_1;
+      B = V;
+    } else {
+      R = V;
+      G = temp_1;
+      B = temp_2;
+    }
+
+    R = Math.round(R * 255);
+    G = Math.round(G * 255);
+    B = Math.round(B * 255);
+  }
+
+  return { r: R, g: G, b: B };
+}
+
+
 export const RGBtoHSL = (rgb) => {
   // Default value
   for (let key in rgb) {
@@ -69,9 +188,7 @@ export const HSLtoRGB = ({h, s, l}) => {
     h > 360  || s > 100  || l > 100 || 
     h < 0    || s < 0    || l < 0   ||
     isNaN(h) || isNaN(s) || isNaN(l)
-  ) {
-    return { r: 0, g: 0, b: 0 };
-  }
+  ) return { r: 0, g: 0, b: 0 };
 
   // The HSL values are converted to deciamls
   const H = h / 360; 
@@ -96,9 +213,9 @@ export const HSLtoRGB = ({h, s, l}) => {
       return t1;
     }
 
-    RGB[0] = 255 * HuetoRGB(temp_1, temp_2, H + (1 / 3));
+    RGB[0] = 255 * HuetoRGB(temp_1, temp_2, H + (1/3));
     RGB[1] = 255 * HuetoRGB(temp_1, temp_2, H);
-    RGB[2] = 255 * HuetoRGB(temp_1, temp_2, H - (1 / 3));
+    RGB[2] = 255 * HuetoRGB(temp_1, temp_2, H - (1/3));
     RGB = RGB.map(e => Math.round(e));
   }
 
@@ -115,7 +232,6 @@ export const RGBtoCMYK = (rgb) => {
     }
   }
 
-  //
   let CMYK = [
     1 - (rgb.r/255),
     1 - (rgb.g/255),
@@ -149,9 +265,7 @@ export const CMYKtoRGB = ({c, m, y, k}) => {
     c > 100  || m > 100  || y > 100  || k > 100 || 
     c < 0    || m < 0    || y < 0    || k < 0   ||
     isNaN(c) || isNaN(m) || isNaN(y) || isNaN(k)
-  ) {
-    return { r: 0, g: 0, b: 0 };
-  }
+  ) return { r: 0, g: 0, b: 0 };
 
   // The CMYK values are converted to decimals
   const C = c * 0.01;
@@ -226,9 +340,7 @@ const LABtoXYZ = (L, a, b) => {
     L > 100 || a > 127  || b > 127  || 
     L < 0   || a < -128 || b < -128 ||
     isNaN(L) || isNaN(a) || isNaN(b)
-  ) {
-    return { x: 0, y: 0, z: 0 };
-  }
+  ) return { x: 0, y: 0, z: 0 };
 
   // XYZ
   let Y = (L + 16)/116;

@@ -37,7 +37,7 @@
         align-items: center;
         @extend %right-tab;
 
-        .menu {
+        .option-menu {
           @extend %center-content;
           margin: 0 8px;
 
@@ -45,16 +45,21 @@
             @extend %center-content;
           }
 
-          > select {  // overlaps the menu icon
-            position: absolute;
-            background: none;
-            border-color: transparent;
-            width: 20px;
-            text-indent: 10px;
-            text-overflow: '';
-            &:hover { border-color: gray; }
-            &:active { background: $darkgray; }
-          }
+          // > ul {
+          //   // display: none;
+          //   position: absolute;
+          // }
+
+          // > select {  // overlaps the menu icon
+          //   position: absolute;
+          //   background: none;
+          //   border-color: transparent;
+          //   width: 20px;
+          //   text-indent: 10px;
+          //   text-overflow: '';
+          //   &:hover { border-color: gray; }
+          //   &:active { background: $darkgray; }
+          // }
         }
       }
     }
@@ -62,8 +67,6 @@
     > .content {  // content
       flex: 1;
       display: flex;
-      // overflow-x: hidden;
-      // overflow-y: auto;
       border-left: 1px solid $darkergray;
       border-bottom: 1px solid $darkergray;
       border-right: 1px solid $darkergray;

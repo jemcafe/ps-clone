@@ -3,6 +3,7 @@
   display: flex;
   padding: 6px;
   overflow-x: hidden;
+  @include user-select(none);
 
   > .color-pair {
     padding: 4px; 

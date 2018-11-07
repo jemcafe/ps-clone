@@ -52,10 +52,10 @@ export default [
   },
   { name: 'Select', 
     options: [
-      { name: 'All', action: 'selectAll' },
+      { name: 'All', action: 'select_all' },
       { name: 'Deselect', action: 'deselect' },
       { name: 'Reselect', action: 'reselect' },
-      { name: 'Inverse', action: 'inverseSelect' }
+      { name: 'Inverse', action: 'inverse_select' }
     ] 
   },
   { name: 'Filter', 

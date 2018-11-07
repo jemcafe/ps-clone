@@ -1,4 +1,3 @@
-// Focus layer
 export const getMousePosition = ({e, offset}) => {
   let x = 0, y = 0;
 

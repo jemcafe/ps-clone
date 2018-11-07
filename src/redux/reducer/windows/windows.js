@@ -6,7 +6,9 @@ import {
 const initialState = {
   isOpen: false,
   newProject: false,
-  colorPicker: false
+  colorPicker: false,
+  newLayer: false,
+  duplicateLayer: false
 };
 
 // Reducer

@@ -32,7 +32,7 @@ class Slider extends Component {
       }
     }
 
-    console.log('VALUE', value);
+    // console.log('VALUE', value);
 
     return (
       <div ref="slider" id="color-slider">
@@ -41,7 +41,7 @@ class Slider extends Component {
           style={style.input} 
           min={min} 
           max={max} 
-          value={value}
+          defaultValue={value}
           onChange={(e) => onChange(e.target.value)}/>
       </div>
     );

@@ -18,10 +18,17 @@ class TabGroup extends Component {
   render () {
     const { 
       index,
-      tabGroup:{ className, tabs = [], tab = 0, isHidden = true },
+      tabGroup: { 
+        className, 
+        tabs = [], 
+        tabIndex = 0, 
+        isHidden = true 
+      },
       isCollapsed = false,
       togglePanel,
-      changeTab
+      toggleMenu,
+      changeTab,
+      handleAction
     } = this.props;
 
     const styles = {
@@ -39,70 +46,67 @@ class TabGroup extends Component {
       },
       content: isCollapsed ? {
         height: '274px'
+      } : null,
+      menu: tabs[tabIndex].optionsVisible ? {
+        display: 'block',
+        borderRadius: '4px'
       } : null
     }
 
     const classNames = {
-      panel: (
-        className ? ` ${className}` : ''
-      ),
+      panel: className ? ` ${className}` : '',
       tab: (index) => (
-        (tab === index) ? 'selected-tab' : 
-        (index < tab)   ? 'left-tab' : 
-        (index > tab)   ? 'right-tab' : ''
-      ),
-      icon: (tabName) => (
-        (tabName === 'Color')     ? 'icon-color' :
-        (tabName === 'Swatches')  ? 'icon-swatches' :
-        (tabName === 'Layers')    ? 'icon-layers' :
-        (tabName === 'History')   ? 'icon-history' :
-        (tabName === 'Character') ? 'icon-character' :
-        (tabName === 'Paragraph') ? 'icon-paragraph' : ''
+        (tabIndex === index) ? 'selected-tab' : 
+        (index < tabIndex)   ? 'left-tab' : 
+        (index > tabIndex)   ? 'right-tab' : ''
       ),
       selectedIcon: (index) => (
-        (!isHidden && (tab === index)) ? ' selected' : ''
+        (!isHidden && (tabIndex === index)) ? ' selected' : ''
       )
     }
 
-    const tabList = tabs.map((e, i) => (
-      <li key={i} className={ classNames.tab(i) } onClick={() => changeTab(index, i)}>{ e.name }</li>
+    const tabList = tabs.map((tab, i) => (
+      <li key={i} className={ classNames.tab(i) } onClick={() => changeTab(index, i)}>{ tab.name }</li>
     ));
 
-    const menuOptions = tabs[tab].menu.map((e, i) => (
-      <option key={i}>{ e }</option>
+    const options = tabs[tabIndex].options.map((option, i) => (
+      <li key={i} className="option" onClick={() => handleAction(option, index, tabIndex)}>{ option.name }</li>
     ));
 
-    const content = tabs[tab].content;
+    const content = tabs[tabIndex].content;
 
-    const iconList = tabs.map((e, i) => (
+    const iconList = tabs.map((tab, i) => (
       <li key={i} className={ classNames.selectedIcon(i) } onClick={() => changeTab(index, i)}>
-        <i className={ classNames.icon(e.name) }></i>
+        <i className={ tab.icon }></i>
       </li>
     ));
 
     return (
       <div ref="tab_group" className={`tab-group${ classNames.panel }`} style={ styles.panel }>
+
         { (!isHidden || !isCollapsed) &&
         <div className="container" style={ styles.container }>
           <nav>
             <ul className="tabs">{ tabList }</ul>
             <div>
               { isCollapsed && 
-              <div className="double-angle-btn" onClick={() => togglePanel(index)}><i className="icon-angle-double-right"></i></div> }
+              <div className="double-angle-btn" onClick={() => togglePanel(index)}>
+                <i className="icon-angle-double-right"></i>
+              </div> }
 
-              <div className="menu">
-                <div><i className="icon-bars"></i></div>
-                <select>
-                  { menuOptions }
-                  <optgroup label="Close">
-                    <option>Close</option>
-                    <option>Close Tab Group</option>
-                  </optgroup>
-                </select>
+              <div className="option-menu">
+                <div className="menu-btn" onClick={() => toggleMenu(index, tabIndex)} onBlur={() => toggleMenu(index, tabIndex)}>
+                  <i className="icon-bars"></i>
+                </div>
+                <ul className="menu" style={ styles.menu }>
+                  { options }
+                  <li className="option">Close</li>
+                  <li className="option">Close Tab Group</li>
+                </ul>
               </div>
             </div>
           </nav>
-          <div className="content" style={styles.content}>
+          <div className="content" style={ styles.content }>
             { content }
           </div>
         </div> }
@@ -110,8 +114,11 @@ class TabGroup extends Component {
         { isCollapsed &&
         <div className="icon-tabs">
           <div></div>
-          <ul>{ iconList }</ul>
+          <ul>
+            { iconList }
+          </ul>
         </div> }
+
       </div>
     );
   }

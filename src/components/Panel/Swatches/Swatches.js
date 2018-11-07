@@ -14,12 +14,6 @@ function Swatches (props) {
     colors,
     addRecentColor
   } = props;
-  
-  const swatches = colors.map((c, i) => (
-    <div key={i} 
-      className="swatch" 
-      style={{ backgroundColor: `rgb(${c.rgb.r},${c.rgb.g},${c.rgb.b})` }}></div>
-  ));
 
   return (
     <div id="swatches">
@@ -30,7 +24,13 @@ function Swatches (props) {
       </div>
       <ul className="swatch-list">
         {/* { swatches(100) } */}
-        { swatches }
+        { colors.map((color, i) => (
+          <div 
+            key={i} 
+            className="swatch" 
+            style={{ backgroundColor: `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b})` }}>
+          </div>
+        )) }
       </ul>
     </div>
   );

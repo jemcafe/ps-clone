@@ -1,30 +1,24 @@
 import { color } from '../helpers/color';
 
 const RGBcolors = [
-  {
-    name: 'RGB red',
-    color: color({ r: 255, g: 0, b: 0 })
+  { name: 'RGB red',
+    ...color({ r: 255, g: 0, b: 0 }) 
   },
-  {
-    name: 'RGB yellow',
-    color: color({ r: 255, g: 255, b: 0 })
+  { name: 'RGB yellow',
+    ...color({ r: 255, g: 255, b: 0 }) 
   },
-  {
-    name: 'RGB green',
-    color: color({ r: 0, g: 255, b: 0 })
+  { name: 'RGB green',
+    ...color({ r: 0, g: 255, b: 0 }) 
   },
-  {
-    name: 'RGB cyan',
-    color: color({ r: 0, g: 255, b: 255 })
+  { name: 'RGB cyan',
+    ...color({ r: 0, g: 255, b: 255 }) 
   },
-  {
-    name: 'RGB blue',
-    color: color({ r: 0, g: 0, b: 255 })
+  { name: 'RGB blue',
+    ...color({ r: 0, g: 0, b: 255 }) 
   },
-  {
-    name: 'RGB magenta',
-    color: color({ r: 255, g: 0, b: 255 })
-  },
+  { name: 'RGB magenta',
+    ...color({ r: 255, g: 0, b: 255 }) 
+  }
 ];
 
 const shades = (start, end, max) => {
@@ -52,7 +46,7 @@ const shades = (start, end, max) => {
       const percent = 100 - Math.round(i/max * 100);
       const name = value === 0 ? 'black' : value === 255 ? 'white' : `%${percent} gray`;
       const rgb = { r: value, g: value, b: value };
-      rgbValues.push({ name, color: color(rgb) });
+      rgbValues.push({ name, ...color(rgb) });
     }
   }
 

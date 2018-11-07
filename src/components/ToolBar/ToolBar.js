@@ -12,23 +12,21 @@ function Toolbar (props) {
   // Recursion for displaying the options
   function displayOptions (options) {
     if ( Array.isArray(options) ) {
-
       return options.map((option, i) => (
         <li key={i} className="option">
           <div className="option-name" onClick={() => handleAction(option)}>{option.name}</div>
-          { option.options && <Aux>
+          { option.options && 
+          <Aux>
             <div className="arrow"><i className="icon-angle-right"></i></div>
-            <div className="option-content">
-              <ul className="content">
+            <div className="option-menu">
+              <ul className="menu">
                 { displayOptions(option.options) }
               </ul>
-            </div></Aux> }
+            </div>
+          </Aux> }
         </li>
       ))
-
-    } else {
-      return console.log('Toolbar: options not an array');
-    }
+    } else console.log('Toolbar: options not an array');
   }
 
   return (
@@ -36,8 +34,8 @@ function Toolbar (props) {
       <ul className="items">
         { items.map((e, i) => (
           <li key={i} className="item">
-            <div className="item-content">
-              <ul className="content">
+            <div className="item-menu">
+              <ul className="menu">
                 { isActive && displayOptions(e.options) }
               </ul>
             </div>
