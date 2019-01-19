@@ -19,7 +19,6 @@ export const updateBrushRadius = (value) => ({
     const { tool } = state;
     const newObj = {...state[tool]};
     newObj.radius = value;
-
     return {...state, [tool]: newObj }
   }
 });
@@ -30,7 +29,6 @@ export const updateBrush = (value) => ({
     const { tool } = state;
     const newObj = {...state[tool]};
     newObj.brush = value;
-
     return {...state, [tool]: newObj }
   }
 });
@@ -41,7 +39,6 @@ export const updateOpacity = (value) => ({
     const { tool } = state;
     const newObj = {...state[tool]};
     newObj.opacity = value;
-
     return {...state, [tool]: newObj }
   }
 })
@@ -52,7 +49,6 @@ export const updateStrokeWidth = (value) => ({
     const { tool } = state;
     const newObj = {...state[tool]};
     newObj.strokeWidth = value;
-
     return {...state, [tool]: newObj }
   }
 });
@@ -63,7 +59,6 @@ export const zoom = (value) => ({  // value equals 'in' or 'out'
     const magnify = {...state.magnify};
     magnify.cursor = ` cursor-zoom-${value}`;
     magnify.zoom = value;
-    
     return {...state, magnify };
   }
 })

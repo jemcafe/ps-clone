@@ -96,7 +96,6 @@ class PanelCntr extends Component {
   }
 
   render () {
-    console.log('tabGroups', this.state.tabGroups);
     return (
       <Panel
         align={ this.props.align }

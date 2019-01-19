@@ -1,4 +1,6 @@
-import { color as c } from '../../../helpers/color';
+import { 
+  color as c
+} from '../../../helpers/color';
 
 import { 
   RGBtoHex, 
@@ -22,58 +24,54 @@ export const
 // Action Creators
 export const selectColor = (frgd_bkgd) => ({
   type: SELECT_COLOR,
-  payload: (state) => ({ ...state, selected: frgd_bkgd })
+  payload: (state) => ({
+    ...state, 
+    selected: frgd_bkgd
+  })
 });
 
 export const resetColors = () => ({
   type: RESET_COLORS,
-  payload: (state) => {
-    const frgd = c({ r: 0, g: 0, b: 0 });
-    const bkgd = c({ r: 255, g: 255, b: 255 });
-    return { ...state, frgd, bkgd };
-  }
+  payload: (state) => ({
+    ...state,
+    frgd: c({ r: 0, g: 0, b: 0 }),
+    bkgd: c({ r: 255, g: 255, b: 255 })
+  })
 });
 
 export const swapColors = () => ({
   type: SWAP_COLORS,
-  payload: (state) => {
-    const frgd = { ...state.bkgd }
-    const bkgd = { ...state.frgd }
-    return { ...state, frgd, bkgd }
-  }
+  payload: (state) => ({
+    ...state,
+    frgd: { ...state.bkgd },
+    bkgd: { ...state.frgd }
+  })
 });
 
 export const updateColor = ({rgb, hsv}) => ({
   type: UPDATE_COLOR,
   payload: (state) => {
     const { selected } = state;
-    let color = { ...state[state.selected] };
-    // console.log('updateColor hsv', hsv)
+    let selectedColor = { ...state[state.selected] };
 
     if (rgb) {
-
-      color = c(rgb);
-
+      selectedColor = c(rgb);
     } else if (hsv) {
+      selectedColor = c(HSVtoRGB({
+        h: hsv.h ? hsv.h : selectedColor.hsv.h,
+        s: hsv.s ? hsv.s : selectedColor.hsv.s,
+        v: hsv.v ? hsv.v : selectedColor.hsv.v
+      }));
 
-      color = c(
-        HSVtoRGB({
-          h: hsv.h ? hsv.h : color.hsv.h,
-          s: hsv.s ? hsv.s : color.hsv.s,
-          v: hsv.v ? hsv.v : color.hsv.v
-        })
-      );
-
-      if (color.hex === '#ffffff' || color.hex === '#000000') {
-        color.hue.hue = hsv.h ? hsv.h : color.hsv.h;
-        color.hue.rgb = HSVtoRGB({ h: color.hue.hue, s: 100, v: 100 });
-        color.hue.hex = RGBtoHex(color.hue.rgb);
-        console.log('updateColor hue', color.hue.hue)
+      if (selectedColor.hex === '#ffffff' || selectedColor.hex === '#000000') {
+        selectedColor.hue.hue = hsv.h ? hsv.h : selectedColor.hsv.h;
+        selectedColor.hue.rgb = HSVtoRGB({h: selectedColor.hue.hue, s: 100, v: 100 });
+        selectedColor.hue.hex = RGBtoHex(selectedColor.hue.rgb);
+        console.log('updateColor hue', selectedColor.hue.hue)
       }
+    }
 
-    } 
-    console.log('updateColor color', color)
-
-    return { ...state, [selected]: color };
+    console.log('updateColor color', selectedColor)
+    return { ...state, [selected]: selectedColor };
   }
 });

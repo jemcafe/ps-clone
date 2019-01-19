@@ -1,19 +1,25 @@
-// Color Converters
+import swatchColors from '../../../constants/swatchColors';
+
 import { 
-  RGBtoHex, 
-  // RGBtoCMYK, 
-  // RGBtoHSL, 
-  // RGBtoLAB, 
-  // CMYKtoRGB, 
-  // HSLtoRGB, 
-  // LABtoRGB 
+  color as c
+} from '../../../helpers/color';
+
+import { 
+  RGBtoHex,
+  // RGBtoCMYK,
+  // RGBtoHSL,
+  // RGBtoLAB,
+  // CMYKtoRGB,
+  // HSLtoRGB,
+  HSVtoRGB,
+  // LABtoRGB
 } from '../../../helpers/colorConversion';
 
 // Action Types
 export const 
   ADD_SWATCH = 'ADD_SWATCH',
   DELETE_SWATCH = 'DELETE_SWATCH',
-  ADD_RECENT_COLOR = 'ADD_RECENT_COLOR';
+  ADD_RECENT_SWATCH = 'ADD_RECENT_SWATCH';
 
 // Action Creators
 export const addSwatch = (name, rgb) => ({
@@ -38,34 +44,43 @@ export const deleteSwatch = (index) => ({
   }
 });
 
-export const addRecentColor = (color) => ({
-  type: ADD_RECENT_COLOR,
+export const addRecentSwatch = ({name, color, hsv}) => ({
+  type: ADD_RECENT_SWATCH,
   payload: (state) => {
     const recentColors = [...state.recentColors];
-    const colors = state.colors;
-    const name = '';
-    const hex = RGBtoHex(color.rgb);
-    let temp = null;
+    let rgb, hex;
+    
+    if (color) {
+      rgb = color.rgb;
+      hex = color.hex;
+    }
+
+    if (hsv) {
+      rgb = HSVtoRGB(hsv);
+      hex = RGBtoHex(rgb);
+    }
 
     // The color is moved to the front if it's already in the list
     for (let i = 0; i < recentColors.length; i++) {
       if (recentColors[i].hex === hex) {
-        temp = recentColors.splice(i, 1);
-        recentColors.unshift(temp);
-        return {...state, recentColors };
-      } else {
-        recentColors.unshift({});
+        recentColors.unshift(recentColors[i]);
+        recentColors.splice(i+1, 1);
         return {...state, recentColors };
       }
     }
 
     // New color is added to the list
-    // recentColors.unshift({
-    //   name: `swatch ${1}`,
-    //   hex: hex,
-    //   rgb: rgb
-    // });
+    if (recentColors.length <= 11) {
+      recentColors.unshift(c(rgb));
+    }
 
+    // Max of 12
+    if (recentColors.length > 11) {
+      recentColors.pop();
+      recentColors.unshift(c(rgb));
+    }
+
+    console.log('recentColors', recentColors)
     return {...state, recentColors };
   }
 });

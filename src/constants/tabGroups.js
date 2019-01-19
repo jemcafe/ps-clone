@@ -7,16 +7,8 @@ import Color from '../containers/Panel/ColorCntr';
 import Swatches from '../containers/Panel/SwatchesCntr';
 import Layers from '../containers/Panel/LayersCntr';
 
-/* className property is optional */
-
-const properties = {
-  tabIndex: 0,
-  isHidden: true,
-  isRemoved: false
-};
-
-export default {
-  '1': [
+const tabGroups = {
+  '1': setProperties([
     { 
       id: 1,
       tabs: [
@@ -31,11 +23,9 @@ export default {
               action: 'step_backward'
             }
           ],
-          optionsVisible: false,
           icon: 'icon-history'
         }
-      ],
-      ...properties
+      ]
     },
     {
       id: 2,
@@ -48,7 +38,6 @@ export default {
               action: 'reset_character'
             }
           ],
-          optionsVisible: false,
           icon: 'icon-character'
         },
         { 
@@ -59,14 +48,12 @@ export default {
               action: 'reset_paragraph'
             }
           ],
-          optionsVisible: false,
           icon: 'icon-paragraph'
         }
-      ],
-      ...properties
+      ]
     }
-  ],
-  '2': [
+  ]),
+  '2': setProperties([
     {
       id: 3,
       tabs: [
@@ -76,7 +63,6 @@ export default {
           options: [
             { name: 'Hue Box' }
           ],
-          optionsVisible: false,
           icon: 'icon-color'
         },
         { 
@@ -87,11 +73,9 @@ export default {
               action: 'new_swatch'
             }
           ],
-          optionsVisible: false,
           icon: 'icon-swatches'
         }
-      ],
-      ...properties
+      ]
     },
     {
       id: 4,
@@ -110,11 +94,70 @@ export default {
               action: 'delete_layer'
             }
           ],
-          optionsVisible: false,
           icon: 'icon-layers'
         }
-      ],
-      ...properties
+      ]
     }
-  ]
+  ])
 };
+
+// Default values for all the tab groups
+function setProperties (tabGroup) {
+  return tabGroup.map(group => {
+    group = {
+      ...group,
+      tabIndex: 0,
+      isHidden: true,
+      isRemoved: false
+    }
+    group.tabs = group.tabs.map(tab => {
+      tab.options = [
+        ...tab.options,
+        { name: 'Close',
+          action: 'close_tab' },
+        { name: 'Close Tab Group',
+          action: 'close_tab_group' }
+      ];
+      tab.optionsVisible = false;
+      return tab;
+    })
+    return group;
+  });
+}
+
+console.log('tabGroups', tabGroups)
+
+export default tabGroups;
+
+/*
+{
+  id: 1,
+  className: 'className' (optional)
+  tabIndex: 0,
+  isHidden: true,
+  isRemoved: false
+  tabs: [
+    {
+      name: 'name',
+      content: <Component />,
+      icon: 'icon'
+      optionsVisible: false
+      options: [
+        {
+          name: 'name',
+          action: 'action'
+        },
+        ...
+        { name: 'Close',
+          action: 'close_tab'
+        },
+        { name: 'Close Tab Group',
+          action: 'close_tab_group'
+        }
+      ],
+    },
+    ...
+  ]
+}
+*/
+

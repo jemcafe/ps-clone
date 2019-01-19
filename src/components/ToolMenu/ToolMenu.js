@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import tools from '../../constants/tools';
+import { toolIcons } from '../../constants/tools';
 
 function ToolMenu (props) {
   const { 
@@ -23,7 +23,7 @@ function ToolMenu (props) {
   return (
     <div id="tool-menu">
       <ul className={classNames.tools}>
-        { tools.map((tool, i) => (
+        { toolIcons.map((tool, i) => (
           <li key={i} title={tool.name} className={`tool${classNames.tool(tool)}`} onClick={() => selectTool(tool.name)}>
             <i className={tool.icon}></i>
           </li>

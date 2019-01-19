@@ -3,7 +3,7 @@ import swatchColors from '../../../constants/swatchColors';
 import { 
   ADD_SWATCH,
   DELETE_SWATCH,
-  ADD_RECENT_COLOR
+  ADD_RECENT_SWATCH
 } from './actions';
 
 const initialState = {
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
       return payload(state);
     case DELETE_SWATCH:
       return payload(state);
-    case ADD_RECENT_COLOR:
+    case ADD_RECENT_SWATCH:
       return payload(state);
     default:
       return state;

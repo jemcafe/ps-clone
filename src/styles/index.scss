@@ -7,10 +7,10 @@
 /*---------------------------*/
 /*   Helpers                 */
 /*---------------------------*/
-@import '4-helpers/variables';
-@import '4-helpers/functions';
-@import '4-helpers/mixins';
-@import '4-helpers/placeholders';
+@import '3-helpers/variables';
+@import '3-helpers/functions';
+@import '3-helpers/mixins';
+@import '3-helpers/placeholders';
 /*---------------------------*/
 /*   Base                    */
 /*---------------------------*/
@@ -22,7 +22,7 @@
 /*---------------------------*/
 /*   Modules                 */
 /*---------------------------*/
-@import '3-modules/all';
+@import '2-modules/all';
 /*---------------------------*/
 /*   Components              */
 /*---------------------------*/

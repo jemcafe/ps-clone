@@ -11,7 +11,8 @@
 
   .option { 
     display: flex; 
-    text-align: left; }
+    text-align: left;
+    @include user-select(none); }
   .option-name { 
     flex: 1; 
     white-space: nowrap;

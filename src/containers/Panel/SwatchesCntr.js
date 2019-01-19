@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 // redux
 import { connect } from 'react-redux';
-import { addRecentColor } from '../../redux/reducer/swatches/actions';
+import { updateColor } from '../../redux/reducer/color/actions';
+import { addRecentSwatch } from '../../redux/reducer/swatches/actions';
 
 import Swatches from '../../components/Panel/Swatches/Swatches';
 
@@ -27,24 +28,30 @@ class SwatchesCntr extends Component {
     // const ctx = canvas.getContext('2d');
   }
 
+  selectColor = (index, color) => {
+    this.props.updateColor({rgb: color.rgb});
+    this.props.addRecentSwatch({color});
+  }
+
   render () {
     // Max swatches history is 11
-
     return (
       <Swatches
         recentColors={ this.state.recentColors }
         colors={ this.state.colors }
-        addRecentColor={ this.props.addRecentColor} />
+        selectColor={ this.selectColor } />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
+  color: state.color,
   swatches: state.swatches
 });
 
 const mapDispatchToProps = {
-  addRecentColor
+  updateColor,
+  addRecentSwatch
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwatchesCntr);

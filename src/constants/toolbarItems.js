@@ -1,6 +1,6 @@
 /* Along with a name property, an option has a window, action, or options property */
 
-export default [
+const toolbarItems =  [
   { name: 'File', 
     options: [
       { name: 'New Project', window: 'newProject' },
@@ -95,3 +95,7 @@ export default [
     ] 
   }
 ]
+
+console.log('toolbarItems', toolbarItems);
+
+export default toolbarItems;

@@ -6,28 +6,36 @@ export const
 
 // Action Creators
 export const focusCanvas = ({ 
-  focus, 
-  onMouseMove, 
-  onMouseUp, 
+  focus,
+  onMouseMove,
+  onMouseUp,
   onMouseLeave
 }) => ({
   type: FOCUS_CANVAS,
   payload: (state) => {
-    console.log('FOCUS ', focus);
-    return {...state, focus, onMouseMove, onMouseUp, onMouseLeave };
+    console.log('FOCUS', focus);
+    return {
+      ...state,
+      focus,
+      onMouseMove,
+      onMouseUp,
+      onMouseLeave
+    };
   }
 });
 
 export const unfocusCanvas = () => ({
   type: UNFOCUS_CANVAS,
-  payload: (state) => {
-    return {...state, focus: null };
-  }
+  payload: (state) => ({
+    ...state,
+    focus: null
+  })
 });
 
 export const updateOffset = (offset) => ({
   type: UPDATE_OFFSET,
-  payload: (state) => {
-    return {...state, offset };
-  }
+  payload: (state) => ({
+    ...state,
+    offset
+  })
 });

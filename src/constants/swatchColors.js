@@ -21,6 +21,27 @@ const RGBcolors = [
   }
 ];
 
+const CMYKcolors = [
+  { name: 'CMYK red',
+    ...color({ r: 237, g: 28, b: 36 }) 
+  },
+  { name: 'CMYK yellow',
+    ...color({ r: 255, g: 242, b: 0 }) 
+  },
+  { name: 'CMYK green',
+    ...color({ r: 0, g: 166, b: 81 }) 
+  },
+  { name: 'CMYK cyan',
+    ...color({ r: 0, g: 174, b: 239 }) 
+  },
+  { name: 'CMYK blue',
+    ...color({ r: 46, g: 49, b: 146 }) 
+  },
+  { name: 'CMYK magenta',
+    ...color({ r: 236, g: 0, b: 140 }) 
+  }
+];
+
 const shades = (start, end, max) => {
   let rgbValues = [];
   let increment = 0;
@@ -56,9 +77,9 @@ const shades = (start, end, max) => {
 const colors = [
   ...RGBcolors,
   ...shades(11, 20, 20),
+  ...CMYKcolors,
   ...shades(0, 10, 20)
 ]
 
-console.log('swatches: ', colors);
-
+console.log('swatches', colors);
 export default colors;

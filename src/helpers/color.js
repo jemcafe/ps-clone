@@ -18,5 +18,5 @@ export const color = (rgb) => {
   hue.rgb = HSLtoRGB({h: hsl.h, s: 100, l: 50});
   hue.hex = RGBtoHex(hue.rgb);
   
-  return { hex, rgb, hsv, hsl, cmyk, lab, hue, };
+  return { hex, rgb, hsv, hsl, cmyk, lab, hue };
 }

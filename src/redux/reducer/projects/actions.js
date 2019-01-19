@@ -32,7 +32,10 @@ export const createProject = (project, imgData) => ({
     const id = newId([...projects].map(e => e.id));
 
     // New project added to projects
-    projects = [...projects, newProject({id, project, imgData})];
+    projects = [
+      ...projects, 
+      newProject({id, project, imgData})
+    ];
 
     // console.log('Create Project', projects);
     return {...state, projects, projectIndex };
@@ -62,12 +65,19 @@ export const removeProject = (index) => ({
 
 export const removeAllProjects = () => ({
   type: REMOVE_ALL_PROJECTS,
-  payload: (state) => ({...state, projectIndex: 0, projects: [] })
+  payload: (state) => ({
+    ...state,
+    projectIndex: 0,
+    projects: []
+  })
 });
 
 export const selectProject = (index) => ({
   type: SELECT_PROJECT,
-  payload: (state) => ({...state, projectIndex: index })
+  payload: (state) => ({
+    ...state,
+    projectIndex: index
+  })
 });
 
 export const updateScroll = (coordinates) => ({
@@ -87,9 +97,9 @@ export const addLayer = () => ({
   payload: (state) => {
     const { projects, projectIndex } = state;
     const project = projects[projectIndex];
-    let layerIndex = null;
-    let layers = null;
-    let id = null;
+    let layerIndex;
+    let layers;
+    let id;
 
     if (projects.length && project.layers) {
       layerIndex = project.layerIndex;
@@ -157,7 +167,7 @@ export const lockLayer = () => ({
   payload: (state) => {
     const { projects, projectIndex } = state;
     const project = projects[projectIndex];
-    let layer = null;
+    let layer;
 
     if (projects.length && project.layers.length) {
       layer = project.layers[project.layerIndex];

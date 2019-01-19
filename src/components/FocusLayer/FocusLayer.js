@@ -14,11 +14,12 @@ function FocusLayer (props) {
   } = props;
 
   const classNames = {
-    cursor: t[t.tool].cursor ? t[t.tool].cursor : ''
+    cursor: t[t.tool].cursor ? ` ${t[t.tool].cursor}` : ''
   }
   
   return (
-    <div>{ focus &&
+    <div className="focus-overlay-wrapper">
+      { focus &&
       <div className={`focus-overlay${classNames.cursor}`}
         onMouseMove={ onMouseMove }
         onMouseUp={ onMouseUp }

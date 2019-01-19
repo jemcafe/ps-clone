@@ -7,6 +7,7 @@ import { RGBtoHex, HSLtoRGB, HSVtoRGB } from '../helpers/colorConversion';
 // redux
 import { connect } from 'react-redux';
 import { selectColor, updateColor } from '../redux/reducer/color/actions';
+import { addRecentSwatch } from '../redux/reducer/swatches/actions';
 // import { updateGradientHue, updateGradientDimensions, updateColorPosition } from '../redux/reducer/colorPickers/actions';
 import { focusCanvas, unfocusCanvas } from '../redux/reducer/focusLayer/actions';
 
@@ -18,42 +19,25 @@ class HueGradientCntr extends Component {
     super(props);
     const { color: c } = this.props;
     this.state = {
-      // hue: {
-      //   hue: 0,
-      //   rgb: { r: 255, g: 0, b: 0 },
-      //   hex: '#ff0000',
-      // },
-      // hsv: { h: 0, s: 0, v: 0 },
-      // rgb: { r: 0, g: 0, b: 0 },
-      // x: 0,
-      // y: 0,
-      // width: 0,
-      // height: 0,
-      // ...cp.hueGradient,
-      color: c[c.selected],
-      // hue: c[selected],
-      // rgb: { r: 255, g: 0, b: 0 },
-      // hex: '#ff0000',
+      color: c,
+      selectedColor: c[c.selected],
       x: 0,
       y: 0,
       width: 0,
       height: 0,
-      mouse: { 
-        x: 0, 
-        y: 0 
-      },
+      mouse: { x: 0, y: 0 },
       dragging: false,
       inCanvas: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { color: c } = nextProps;
-    const color = { ...c[c.selected] };
-    const x = Math.round((color.hsv.s * prevState.width) * 0.01);
-    const y = Math.round(((100 - color.hsv.v) * prevState.height) * 0.01);
+    const { color } = nextProps;
+    const selectedColor = color[color.selected]
+    const x = Math.round((selectedColor.hsv.s * prevState.width) * 0.01);
+    const y = Math.round(((100 - selectedColor.hsv.v) * prevState.height) * 0.01);
 
-    return { color, x, y };
+    return { color, selectedColor, x, y };
   }
 
   initCanvas = (refs) => {
@@ -68,18 +52,11 @@ class HueGradientCntr extends Component {
       c.width = t.width;
       c.height = t.height;
 
-      // updateGradientDimensions({
-      //   width: c.width, 
-      //   height: c.height,
-      //   x: Math.round((color.hsv.s * c.width) * 0.01),
-      //   y: Math.round(((100 - color.hsv.v) * c.height) * 0.01),
-      // });
-
       this.setState(prev => ({
         width: c.width,
         height: c.height,
-        x: Math.round((prev.color.hsv.s * c.width) * 0.01),
-        y: Math.round(((100 - prev.color.hsv.v) * c.height) * 0.01)
+        x: Math.round((prev.selectedColor.hsv.s * c.width) * 0.01),
+        y: Math.round(((100 - prev.selectedColor.hsv.v) * c.height) * 0.01)
       }));
       
       this.setCanvas({ canvas: c });
@@ -87,30 +64,17 @@ class HueGradientCntr extends Component {
   }
 
   changeHue = (canvas, value) => {
-    const { color } = this.state;
-    const { updateColor } = this.props;
-    
+    const { selectedColor: sc } = this.state;
+    const { updateColor, addRecentSwatch } = this.props;
     value = +value
     const rgb = HSLtoRGB({ h: value, s: 100, l: 50 });
     const hex = RGBtoHex(rgb);
-    // const hsv = { ...color.hsv };
-    // hsv.h = value;
-    // console.log('changeHue', hsv)
 
-    updateColor({ 
-      hsv: { h: value }
-    });
+    updateColor({ hsv: { h: value } });
+    addRecentSwatch({ hsv: { h: value, s: sc.hsv.s, v: sc.hsv.v } });
 
     // The color and canvas are updated
-    // updateGradientHue(rgb);
-    // this.getColor({ canvas, fire: true });
     this.setCanvas({ canvas, hex });
-
-    // this.setState(prev => ({
-    //   hsv: { h: value, s: prev.hsv.s, b: prev.hsv.v },
-    //   rgb: HSVtoRGB({ h: value, s: prev.hsv.s, b: prev.hsv.v }),
-    //   hue: { hue: value, rgb, hex } 
-    // }));
   }
 
   engage = (canvas, e) => {
@@ -132,49 +96,18 @@ class HueGradientCntr extends Component {
   }
 
   getColor = ({canvas, e, fire}) => {
-    const { x, y, dragging } = this.state;
-    const { updateColor, focusLayer: fl } = this.props;
+    const { selectedColor, x, y, dragging } = this.state;
+    const { updateColor, addRecentSwatch, focusLayer } = this.props;
     const ctx = canvas.getContext('2d');
-    let pos = null;
+    let pos;
 
     if ( dragging || fire ) {
-      // // The canvas is updated so the circle changes position.
-      // this.setCanvas({ canvas, e });
-
-      // // Color position
-      // pos = this.canvasMousePosition({canvas, e, initial:{ x, y }, offset: fl.offset });
-      // console.log('canvasMousePosition', pos)
-      // // .getImageData(x, y, width, height) - This method returns an array of the rgb values [r,g,b,a,r,g,b,a,r...] for each pixel
-      // imgData = ctx.getImageData(pos.x, pos.y, 1, 1).data;
-      // rgb = { 
-      //   r: imgData[0], 
-      //   g: imgData[1], 
-      //   b: imgData[2] 
-      // };
-      // hue = { 
-      //   rgb: gradient.rgb, 
-      //   hex: gradient.hex, 
-      //   hue: gradient.hue 
-      // };
-
-      // this.setState(prev => {
-      //   const hsv = {
-      //     h: prev.hsv.h,
-      //     s: Math.ceil((pos.x * 100)/prev.width),
-      //     v: Math.round(100 - ((pos.y * 100)/prev.height))
-      //   }
-      //   const rgb = HSVtoRGB(hsv);
-      //   const x = Math.round((hsv.s * prev.width) * 0.01);
-      //   const y = Math.round(((100 - hsv.v) * prev.height) * 0.01);
-      //   return { hsv, rgb, x, y };
-      // });
-
       // Color position
       pos = this.canvasMousePosition({
         canvas,
         e,
         initial: { x, y },
-        offset: fl.offset
+        offset: focusLayer.offset
       });
 
       // Mouse position
@@ -183,16 +116,15 @@ class HueGradientCntr extends Component {
       this.setState(prev => {
         const s = Math.round((pos.x * 100)/prev.width);
         const v = Math.round(100 - ((pos.y * 100)/prev.height));
+        const x = Math.round((s * prev.width) * 0.01);
+        const y = Math.round(((100 - v) * prev.height) * 0.01);
 
-        updateColor({
-          hsv: { s, v }
-        });
+        updateColor({ hsv: { s, v } });
 
-        return {
-          x: Math.round((s * prev.width) * 0.01), 
-          y: Math.round(((100 - v) * prev.height) * 0.01)
-        }
+        return { x, y }
       });
+
+      addRecentSwatch({ color: selectedColor });
 
       // The canvas is updated so the circle changes position.
       this.setCanvas({ canvas, e });
@@ -200,13 +132,12 @@ class HueGradientCntr extends Component {
   }
 
   setCanvas = ({canvas, e, hex}) => {
-    console.log('setCanvas')
     this.setGradientColor(canvas, hex);
     this.drawCircle(canvas, e);
   }
 
   setGradientColor = (canvas, hex) => {  // The default hex color is the color stored in state. 
-    hex = hex || this.state.color.hue.hex;
+    hex = hex || this.state.selectedColor.hue.hex;
     const context = canvas.getContext('2d');
     // console.log('setGradientColor');
     
@@ -226,8 +157,8 @@ class HueGradientCntr extends Component {
   }
 
   drawCircle = (canvas, e) => {
-    const { x, y, color:{hue:{ hex }} } = this.state;
-    const { focusLayer: fl } = this.props;
+    const { x, y, selectedColor:{hue:{ hex }} } = this.state;
+    const { focusLayer } = this.props;
     const context = canvas.getContext('2d');
 
     // Arc values
@@ -235,7 +166,7 @@ class HueGradientCntr extends Component {
       canvas,
       e,
       initial: { x, y },
-      offset: fl.offset
+      offset: focusLayer.offset
     });
     const radius = 5;
     
@@ -295,39 +226,19 @@ class HueGradientCntr extends Component {
     }
   }
 
-  // selectColor = ({canvas, frgd_bkgd}) => {
-  //   this.props.selectColor(frgd_bkgd);
-  //   this.setCanvas({canvas});
-  // }
-
   render() {
-    // console.log('COLOR:', this.state.color.rgb);
-    // console.log('COLOR:', this.state.color);
-    // console.log('GRADIENT:', this.state.gradient);
-    // console.log('COLOR Initiated:', this.state.initiated);
-    // console.log('COLOR', this.props.color.frgd);
-    // console.log('COLOR', this.props.color.bkgd);
-    // console.log('STATE', this.state);
-    // console.log('HUE: ', this.state.hue);
-    // console.log('HSV: ', this.state.hsv);
-    // console.log('RGB: ', this.state.rgb);
-    // console.log('x: ', this.state.x);
-    // console.log('y: ', this.state.y);
-    // console.log('mouse: ', this.state.mouse);
-    // console.log('width: ', this.state.width);
-    // console.log('height: ', this.state.height);
-    // console.log('state HUE: ', this.state.hue);
-    
     return (
       <HueGradient
-        state={ this.state }
+        color={ this.state.color }
+        selectedColor={ this.state.selectedColor }
+        mouse={ this.state.mouse }
+        inCanvas={ this.state.inCanvas }
         initCanvas={ this.initCanvas }
         engage={ this.engage }
         changeHue={ this.changeHue }
         setCanvas={ this.setCanvas }
         updateMousePosition={ this.updateMousePosition }
         detectCanvas={ this.detectCanvas }
-        color={ this.props.color }
         selectColor={ this.props.selectColor }
         focusLayer={ this.props.focusLayer } />
     );
@@ -336,13 +247,15 @@ class HueGradientCntr extends Component {
 
 const mapStateToProps = (state) => ({
   color: state.color,
-  colorPickers: state.colorPickers,
+  swatches: state.swatches,
+  // colorPickers: state.colorPickers,
   focusLayer: state.focusLayer
 });
 
 const mapDispatchToProps = {
   selectColor,
   updateColor,
+  addRecentSwatch,
   // updateGradientHue,
   // updateGradientDimensions,
   focusCanvas,

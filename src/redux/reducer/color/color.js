@@ -1,5 +1,5 @@
 import { 
-  color 
+  color as c
 } from '../../../helpers/color';
 
 import { 
@@ -12,12 +12,12 @@ import {
 const initialState = {
   initiated: false,
   selected: 'frgd',
-  frgd: color({ 
+  frgd: c({ 
     r: 85, 
     b: 30, 
     g: 120 
   }),
-  bkgd: color({ 
+  bkgd: c({ 
     r: 255, 
     b: 45, 
     g: 25 

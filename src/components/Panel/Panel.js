@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import TabGroup from './TabGroup/TabGroup';
+import TabGroup from './TabGroup';
 import ToolMenu from '../../containers/ToolMenuCntr';
 
 function Panel (props) {

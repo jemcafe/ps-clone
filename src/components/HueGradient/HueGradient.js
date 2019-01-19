@@ -22,13 +22,15 @@ class HueGradient extends Component {
     const { 
       hasColorPair = true, 
       hasSlider = true,
-      state:{ color, mouse, inCanvas },
+      color,
+      selectedColor,
+      mouse,
+      inCanvas,
       focusLayer:{ focus },
       engage, 
       changeHue,
       detectCanvas,
       updateMousePosition,
-      color: c,
       selectColor,
       setCanvas
     } = this.props;
@@ -47,10 +49,10 @@ class HueGradient extends Component {
       <div className="hue-gradient">
         { hasColorPair &&
           <ColorPair 
-            color={c} 
+            color={color} 
             selectColor={selectColor}
             // selectColor={(frgd_bkgd) => selectColor({canvas: this.refs.canvas, frgd_bkgd})}
-            setCanvas={() => setCanvas({canvas: this.refs.canvas, hex: color.hue.hex})} /> }
+            setCanvas={() => setCanvas({canvas: this.refs.canvas, hex: selectedColor.hue.hex})} /> }
         
         <div ref="wrapper" className="gradient-wrapper" style={style.wrapper}>
 
@@ -79,7 +81,7 @@ class HueGradient extends Component {
             radius={20} 
             // horizontal={true}
             // length={100}
-            value={color.hue.hue}
+            value={selectedColor.hue.hue}
             onChange={(value) => changeHue(this.refs.canvas, value)} /> }
       </div>
     );
@@ -87,7 +89,10 @@ class HueGradient extends Component {
 }
 
 HueGradient.propTypes = {
-  state: PropTypes.object.isRequired,
+  color: PropTypes.object.isRequired,
+  selectedColor: PropTypes.object.isRequired,
+  mouse: PropTypes.object.isRequired,
+  inCanvas: PropTypes.bool.isRequired,
   initCanvas: PropTypes.func.isRequired,
   engage: PropTypes.func.isRequired,
   changeHue: PropTypes.func.isRequired,

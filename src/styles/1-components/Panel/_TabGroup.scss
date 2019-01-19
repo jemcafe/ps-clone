@@ -5,7 +5,8 @@
   background: #ade6d3;
   // background: $darkgray;
 
-  > .container {
+  > .container,
+  > .icon-tabs > div:nth-child(1) > .container {
     display: flex;
     flex-direction: column;
     z-index: 1;
@@ -38,33 +39,17 @@
         @extend %right-tab;
 
         .option-menu {
-          @extend %center-content;
+          display: flex;
+          justify-content: flex-end;
           margin: 0 8px;
-
-          > div:first-child {  // menu icon
-            @extend %center-content;
+          > .menu-btn { 
+            @extend %center-content; 
           }
-
-          // > ul {
-          //   // display: none;
-          //   position: absolute;
-          // }
-
-          // > select {  // overlaps the menu icon
-          //   position: absolute;
-          //   background: none;
-          //   border-color: transparent;
-          //   width: 20px;
-          //   text-indent: 10px;
-          //   text-overflow: '';
-          //   &:hover { border-color: gray; }
-          //   &:active { background: $darkgray; }
-          // }
         }
       }
     }
 
-    > .content {  // content
+    > .content {
       flex: 1;
       display: flex;
       border-left: 1px solid $darkergray;
@@ -78,7 +63,7 @@
     padding: 2px;
     background: $gray;
 
-    > div {
+    > .bar {
       background: $darkgray;
       height: 4px;
     }
